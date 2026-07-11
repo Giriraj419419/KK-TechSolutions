@@ -55,13 +55,11 @@ run('npm run lint');
 console.log("\n📦 Staging modified files...");
 run('git add .');
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+// Support non-interactive mode via --message argument or when stdin is not a TTY
+const msgArgIdx = process.argv.indexOf('--message');
+const cliMessage = msgArgIdx !== -1 ? process.argv[msgArgIdx + 1] : null;
 
-rl.question('💬 Enter a meaningful commit message (or press enter for default): ', (msg) => {
-  const commitMsg = msg.trim() || `Auto-sync: update codebase (${new Date().toLocaleString()})`;
+function doCommitAndPush(commitMsg) {
   run(`git commit -m "${commitMsg}"`);
 
   // 4. Pull remote changes and push to origin/main
@@ -84,6 +82,27 @@ rl.question('💬 Enter a meaningful commit message (or press enter for default)
   console.log(`📌 Commit Hash: ${hash}`);
   console.log(`🔗 Repository: ${repoUrl}`);
   console.log("==========================================");
-  
-  rl.close();
-});
+}
+
+if (cliMessage) {
+  // Non-interactive: use the provided message directly
+  doCommitAndPush(cliMessage);
+} else if (!process.stdin.isTTY) {
+  // Not a real terminal (e.g. piped/background): use auto message
+  const autoMsg = `Auto-sync: update codebase (${new Date().toLocaleString()})`;
+  console.log(`💬 Using default commit message: ${autoMsg}`);
+  doCommitAndPush(autoMsg);
+} else {
+  // Interactive terminal: ask the user
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+  rl.question('💬 Enter a meaningful commit message (or press enter for default): ', (msg) => {
+    const commitMsg = msg.trim() || `Auto-sync: update codebase (${new Date().toLocaleString()})`;
+    doCommitAndPush(commitMsg);
+    rl.close();
+  });
+}
+
