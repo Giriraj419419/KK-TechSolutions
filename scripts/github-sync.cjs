@@ -64,8 +64,14 @@ rl.question('💬 Enter a meaningful commit message (or press enter for default)
   const commitMsg = msg.trim() || `Auto-sync: update codebase (${new Date().toLocaleString()})`;
   run(`git commit -m "${commitMsg}"`);
 
-  // 4. Push to origin/main
-  console.log("\n☁️ Pushing changes to GitHub (origin/main)...");
+  // 4. Pull remote changes and push to origin/main
+  console.log("\n☁️ Synchronizing with GitHub (origin/main)...");
+  try {
+    runSilent('git pull origin main --rebase');
+  } catch (err) {
+    console.error("❌ Failed to pull remote changes. Please resolve manually.");
+    process.exit(1);
+  }
   run('git push -u origin main');
 
   // 5. After Push Details
