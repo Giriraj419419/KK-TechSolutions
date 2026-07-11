@@ -177,7 +177,6 @@ const industries = [
 // ANIMATED COUNTER
 // ============================================================
 function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
-  const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const started = useRef(false);
 
@@ -191,7 +190,9 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
           const controls = animate(0, value, {
             duration: 1.8,
             ease: 'easeOut',
-            onUpdate: (v) => setCount(Math.floor(v)),
+            onUpdate: (v) => {
+              if (el) el.innerText = `${Math.floor(v)}${suffix}`;
+            },
           });
           return () => controls.stop();
         }
@@ -200,12 +201,11 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [value]);
+  }, [value, suffix]);
 
   return (
     <div ref={ref} className="stat-number">
-      {count}
-      {suffix}
+      0{suffix}
     </div>
   );
 }
@@ -419,8 +419,10 @@ export default function Home() {
                 <div key={i} className="flex flex-col sm:flex-row items-center justify-center gap-3 px-8 py-5 rounded-2xl border border-white/10 bg-white hover:bg-gray-50 transition-all duration-300 group shadow-sm hover:shadow-md" style={{ minWidth: 200, height: 80 }}>
                   <img 
                     src={`/${p.toLowerCase()}.svg`} 
-                    className={`w-auto object-contain opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300 ${p === 'Corel' ? 'h-4 sm:h-5' : 'h-8 sm:h-9'}`} 
+                    className={`w-auto object-contain opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300 transform-gpu ${p === 'Corel' ? 'h-4 sm:h-5' : 'h-8 sm:h-9'}`} 
                     alt={p} 
+                    loading="lazy"
+                    decoding="async"
                   />
                   {p !== 'Corel' && (
                     <span className="text-[11px] font-bold uppercase tracking-widest text-gray-400 group-hover:text-gray-800 transition-colors hidden sm:block">
@@ -489,7 +491,9 @@ export default function Home() {
                   <img 
                     src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" 
                     alt="KK Tech Engineering Team"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transform-gpu"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </FloatingElement>

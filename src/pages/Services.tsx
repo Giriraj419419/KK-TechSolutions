@@ -316,7 +316,6 @@ export default function Services() {
               { step: '02', title: 'Architecture & Design', sub: 'Blueprint Design', desc: 'Custom blueprints balancing performance, cost, and high availability using modern cloud & hardware systems.', icon: TrendingUp, color: '#06B6D4' },
               { step: '03', title: 'Integration & Deployment', sub: 'Deploy & Integrate', desc: 'Agile implementation with minimal downtime, fully tested migration paths, and secure validation.', icon: Zap, color: '#7C3AED' },
               { step: '04', title: 'Continuous Management', sub: 'Optimize & Support', desc: 'Constant telemetry monitoring, patch management, SLA-based resolution, and continuous improvement.', icon: ShieldCheck, color: '#10B981' },
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             ].map((step, i) => (
               <StaggerItem key={step.title} direction="up">
                 <div className="relative text-center group">

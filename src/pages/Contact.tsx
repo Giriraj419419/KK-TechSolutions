@@ -44,6 +44,8 @@ export default function Contact() {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [leadId, setLeadId] = useState<string | null>(null);
   
   // New States for Simplified Step 1
   const [activeTab, setActiveTab] = useState<'services' | 'servers'>('services');
@@ -77,21 +79,38 @@ export default function Contact() {
 
     // Final Submit
     setIsSubmitting(true);
+    setSubmitError(null);
     try {
-      const res = await fetch('/api/schedule-consultation', {
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        service: formData.selectedOption,
+        budget: formData.budget,
+        projectDetails: formData.projectNotes,
+        priority: formData.priority,
+        timeline: formData.timeline
+      };
+
+      const res = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(payload)
       });
       
-      if (res.ok) {
+      const data = await res.json();
+      
+      if (res.ok && data.success) {
+        setLeadId(data.leadId);
         setIsSubmitted(true);
       } else {
-        console.error('Failed to submit form');
-        // Handle error
+        console.error('Failed to submit form', data.error);
+        setSubmitError(data.error || 'Something went wrong while submitting your request.');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
+      setSubmitError('Network error. Please try again or contact us directly.');
     } finally {
       setIsSubmitting(false);
     }
@@ -136,9 +155,17 @@ export default function Contact() {
             <Check className="w-12 h-12 text-cyan-400" />
           </motion.div>
           
-          <h3 className="text-3xl font-bold text-white mb-4">Consultation Requested</h3>
-          <p className="text-gray-400 max-w-lg mx-auto text-center text-lg leading-relaxed">
-            Your request for <strong className="text-white">{formData.selectedOption}</strong> has been received. Our experts will review your requirements and connect with you shortly.
+          <h3 className="text-3xl font-bold text-white mb-4">Thank You For Contacting KK Tech Solutions</h3>
+          <p className="text-gray-400 max-w-lg mx-auto text-center text-lg leading-relaxed mb-6">
+            Your consultation request has been submitted successfully.
+          </p>
+          <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl px-6 py-4 mb-6 text-center">
+            <span className="block text-sm text-blue-300 font-semibold mb-1">Reference ID:</span>
+            <span className="block text-xl text-white font-mono font-bold">[{leadId || 'KKT-PENDING'}]</span>
+          </div>
+          <p className="text-gray-400 max-w-lg mx-auto text-center leading-relaxed">
+            A confirmation email has been sent to your inbox.<br/>
+            Our team will contact you shortly.
           </p>
         </Reveal>
       );
@@ -532,6 +559,12 @@ export default function Contact() {
       case 4:
         return (
           <Reveal className="space-y-6 h-full flex flex-col justify-center max-w-4xl mx-auto">
+            {submitError && (
+              <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-6 py-4 rounded-xl text-center mb-4">
+                <p className="font-bold">Something went wrong while submitting your request.</p>
+                <p className="text-sm mt-1">{submitError}</p>
+              </div>
+            )}
             <div className="text-center mb-8">
               <h3 className="text-3xl font-bold text-white mb-3">Schedule Consultation</h3>
               <p className="text-base text-gray-400">Select a time to discuss your {formData.selectedOption} solution.</p>
@@ -618,7 +651,12 @@ export default function Contact() {
   const isNextDisabled = () => {
     if (step === 1 && !formData.selectedOption) return true;
     if (step === 2 && !formData.budget) return true;
-    if (step === 3 && (!formData.name || !formData.email || !formData.projectNotes)) return true;
+    if (step === 3) {
+      if (formData.name.trim().length < 2) return true;
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) return true;
+      if (formData.phone && !/^\+?[\d\s-]{7,15}$/.test(formData.phone)) return true;
+      if (!formData.projectNotes.trim()) return true;
+    }
     if (step === 4 && (!formData.date || !formData.time)) return true;
     return false;
   };
@@ -730,7 +768,7 @@ export default function Contact() {
                   >
                     {isSubmitting ? (
                       <>
-                        Processing...
+                        Submitting Request...
                         <Loader2 className="w-5 h-5 animate-spin" />
                       </>
                     ) : step === 4 ? (

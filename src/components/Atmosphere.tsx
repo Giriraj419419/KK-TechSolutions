@@ -93,7 +93,7 @@ export function SectionGlow({
 
   return (
     <motion.div
-      className="absolute pointer-events-none select-none rounded-full blur-[120px] z-0"
+      className="absolute pointer-events-none select-none rounded-full blur-[60px] z-0"
       style={{
         width: size,
         height: size,
@@ -136,8 +136,8 @@ export function FloatingCloud({ className = '' }: { className?: string }) {
   return (
     <div className={`relative select-none pointer-events-none ${className}`}>
       {/* Decorative ambient glows behind cloud */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] z-0 animate-pulse" />
-      <div className="absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-purple-500/10 rounded-full blur-[60px] z-0" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-500/10 rounded-full blur-[40px] z-0" />
+      <div className="absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-purple-500/10 rounded-full blur-[30px] z-0" />
       
       <motion.svg
         width="100%"
@@ -166,9 +166,6 @@ export function FloatingCloud({ className = '' }: { className?: string }) {
             <stop offset="40%" stopColor="#3B82F6" stopOpacity="0.6" />
             <stop offset="100%" stopColor="#06B6D4" stopOpacity="0.9" />
           </linearGradient>
-          <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-            <feDropShadow dx="0" dy="15" stdDeviation="25" floodColor="#06B6D4" floodOpacity="0.25" />
-          </filter>
         </defs>
 
         {/* Tech network connections */}
@@ -189,7 +186,7 @@ export function FloatingCloud({ className = '' }: { className?: string }) {
              A 110 110 0 0 0 150 450 
              Z"
           fill="url(#cloudGrad)"
-          filter="url(#shadow)"
+          style={{ filter: 'drop-shadow(0px 15px 25px rgba(6,182,212,0.25))' }}
         />
 
         {/* Glassmorphic border overlay */}

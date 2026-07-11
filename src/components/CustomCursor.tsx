@@ -5,6 +5,18 @@ export default function CustomCursor() {
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [ripples, setRipples] = useState<{ id: number, x: number, y: number }[]>([]);
+  const [isTouchDevice, setIsTouchDevice] = useState(() => 
+    typeof window !== 'undefined' ? window.matchMedia('(hover: none) and (pointer: coarse)').matches : false
+  );
+
+  useEffect(() => {
+    // Check if the device has a touch screen and no hover capability
+    const mediaQuery = window.matchMedia('(hover: none) and (pointer: coarse)');
+    
+    const handler = (e: MediaQueryListEvent) => setIsTouchDevice(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
 
   // Instant tracking for the inner dot
   const cursorX = useMotionValue(-100);
@@ -68,7 +80,9 @@ export default function CustomCursor() {
       clearTimeout(clickTimeout);
       if (rafId) cancelAnimationFrame(rafId);
     };
-  }, [cursorX, cursorY]);
+  }, [cursorX, cursorY, isTouchDevice]);
+
+  if (isTouchDevice) return null;
 
   return (
     <>
