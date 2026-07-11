@@ -1,0 +1,10 @@
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="adsk-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7fc14c" />
+      <stop offset="50%" stop-color="#0082c3" />
+      <stop offset="100%" stop-color="#2152a5" />
+    </linearGradient>
+  </defs>
+  <path fill="url(#adsk-grad)" d="m.129 20.202 14.7-9.136h7.625c.235 0 .445.188.445.445 0 .21-.092.305-.21.375l-7.222 4.323c-.47.283-.633.845-.633 1.265l-.008 2.725H24V4.362a.561.561 0 0 0-.585-.562h-8.752L0 12.893V20.2h.129z"/>
+</svg>

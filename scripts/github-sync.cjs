@@ -1,0 +1,83 @@
+const { execSync } = require('child_process');
+const readline = require('readline');
+
+function run(command) {
+  try {
+    execSync(command, { stdio: 'inherit' });
+  } catch (error) {
+    console.error(`\n❌ Error executing: ${command}`);
+    process.exit(1);
+  }
+}
+
+function runSilent(command) {
+  try {
+    return execSync(command, { stdio: 'pipe' }).toString().trim();
+  } catch (error) {
+    return null;
+  }
+}
+
+console.log("==========================================");
+console.log("🚀 KK Tech Solutions - GitHub Sync System");
+console.log("==========================================\n");
+
+// 1. Check Git Status
+console.log("🔍 Checking git status...");
+const status = runSilent('git status -s');
+if (!status) {
+  console.log("✅ No changes to commit. Everything is up to date.");
+  process.exit(0);
+}
+console.log(status);
+
+// 2. Before Push Checks
+console.log("\n⚙️ Running pre-push checks...");
+
+// Check for merge conflicts
+console.log("🔄 Checking for merge conflicts...");
+runSilent('git fetch origin main || true'); // Try to fetch, but don't fail if repo is empty
+const conflictCheck = runSilent('git diff --name-only --diff-filter=U');
+if (conflictCheck) {
+  console.error("❌ Merge conflicts detected! Please resolve them before syncing.");
+  process.exit(1);
+}
+
+// Verify Build
+console.log("🏗️ Verifying build (npm run build)...");
+run('npm run build');
+
+// Verify Lint / Critical Errors
+console.log("🧹 Checking for critical errors (npm run lint)...");
+run('npm run lint');
+
+// 3. Stage & Commit
+console.log("\n📦 Staging modified files...");
+run('git add .');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+rl.question('💬 Enter a meaningful commit message (or press enter for default): ', (msg) => {
+  const commitMsg = msg.trim() || `Auto-sync: update codebase (${new Date().toLocaleString()})`;
+  run(`git commit -m "${commitMsg}"`);
+
+  // 4. Push to origin/main
+  console.log("\n☁️ Pushing changes to GitHub (origin/main)...");
+  run('git push -u origin main');
+
+  // 5. After Push Details
+  console.log("\n==========================================");
+  console.log("✅ GitHub Synchronization Successful!");
+  
+  const hash = runSilent('git rev-parse HEAD');
+  const repoUrl = "https://github.com/Giriraj419419/KK-TechSolutions";
+  
+  console.log(`📌 Commit Hash: ${hash}`);
+  console.log(`🔗 Repository: ${repoUrl}`);
+  console.log("==========================================");
+  
+  rl.close();
+});
