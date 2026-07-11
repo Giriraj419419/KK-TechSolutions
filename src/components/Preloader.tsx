@@ -52,7 +52,7 @@ export default function Preloader() {
             >
               <img
                 src="/kk-logo-transparent.png"
-                className="h-24 sm:h-32 w-auto object-contain drop-shadow-md scale-[1.3] sm:scale-[1.6] origin-center"
+                className="h-20 sm:h-24 w-auto object-contain drop-shadow-md origin-center"
                 alt="KK Tech Solutions"
               />
             </motion.div>

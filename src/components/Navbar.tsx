@@ -384,7 +384,7 @@ export default function Navbar() {
             >
               <img
                 src="/kk-logo-transparent.png"
-                className="h-14 sm:h-[62px] w-auto object-contain relative z-10 drop-shadow-md scale-[1.35] sm:scale-[1.7] group-hover:scale-[1.4] sm:group-hover:scale-[1.75] transition-transform duration-300 origin-left"
+                className="h-8 sm:h-10 w-auto object-contain relative z-10 drop-shadow-md transition-transform duration-300 group-hover:scale-105 origin-left"
                 alt="KK Tech Solutions"
               />
             </Link>
