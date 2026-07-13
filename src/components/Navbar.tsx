@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+﻿/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useMotionValue, useSpring, useMotionTemplate } from 'framer-motion';
@@ -68,7 +68,7 @@ function MegaMenuItem({ d, loc, closeNav }: { d: any; loc: any; closeNav: () => 
     >
       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-white/20 rounded-r-full transition-all duration-300 group-hover:h-1/2 opacity-0 group-hover:opacity-100 mix-blend-overlay" />
       <motion.div
-        className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"
+        className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
         style={{
           background: useMotionTemplate`
             radial-gradient(
@@ -80,15 +80,15 @@ function MegaMenuItem({ d, loc, closeNav }: { d: any; loc: any; closeNav: () => 
         }}
       />
 
-      <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-0">
+      <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0">
         <div className="absolute -inset-1/2 bg-gradient-to-r from-transparent via-white/5 to-transparent w-full h-[200%] rotate-45 -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-[1200ms] ease-out" />
       </div>
 
-      <div className="relative z-10 shrink-0 w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:bg-white/10 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:-rotate-2">
-        <img src={d.logo} alt={d.label} className="w-5 h-5 object-contain drop-shadow-sm transition-all duration-500 group-hover:brightness-125" />
+      <div className="relative z-10 shrink-0 w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:bg-white/10 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:-rotate-2">
+        <img src={d.logo} alt={d.label} className="w-5 h-5 object-contain drop-shadow-sm transition-all duration-300 group-hover:brightness-125" />
       </div>
       
-      <div className="relative z-10 flex flex-col transition-transform duration-500 group-hover:translate-x-1">
+      <div className="relative z-10 flex flex-col transition-transform duration-300 group-hover:translate-x-1">
         <span className="text-sm font-semibold text-white/95 group-hover:text-white transition-colors duration-300">
           {d.label}
         </span>
@@ -137,7 +137,7 @@ function DesktopNavItem({ l, loc }: { l: any, loc: any }) {
               animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
               exit={{ opacity: 0, y: 15, scale: 0.96, filter: 'blur(8px)' }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className={`absolute top-[calc(100%+0.5rem)] ${l.label === 'Services' ? 'left-1/2 -translate-x-1/2 w-[700px] p-5' : l.label === 'Servers' ? 'left-1/2 -translate-x-1/2 w-[900px] p-5' : 'left-0 min-w-[200px] p-2'} rounded-2xl overflow-hidden`}
+              className={`absolute top-[calc(100%+0.5rem)] ${l.label === 'Services' ? 'left-1/2 -translate-x-1/2 w-[90vw] max-w-[700px] p-5' : l.label === 'Servers' ? 'left-1/2 -translate-x-1/2 w-[90vw] max-w-[900px] p-5' : 'left-0 min-w-[200px] p-2'} rounded-2xl overflow-hidden`}
               style={{
                 background: 'rgba(11, 18, 31, 0.88)',
                 backdropFilter: 'blur(30px)',
@@ -348,6 +348,17 @@ export default function Navbar() {
     setOpen(false);
   }, [loc.pathname]);
 
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [open]);
+
   return (
     <>
       <motion.header
@@ -382,7 +393,7 @@ export default function Navbar() {
                 setOpen(false);
               }}
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src="/kk-logo-transparent.png"
                 className="h-8 sm:h-10 w-auto object-contain relative z-10 drop-shadow-md transition-transform duration-300 group-hover:scale-105 origin-left"
                 alt="KK Tech Solutions"
@@ -422,11 +433,12 @@ export default function Navbar() {
             {/* Mobile Toggle */}
             <button
               onClick={() => setOpen(o => !o)}
-              className="lg:hidden p-2 rounded-lg transition-all duration-200"
+              className="lg:hidden h-11 w-11 flex items-center justify-center rounded-lg transition-all duration-200"
               style={{ color: 'rgba(255, 255, 255, 0.8)' }}
               aria-label="Toggle navigation menu"
+              aria-expanded={open}
             >
-              {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
@@ -473,7 +485,7 @@ export default function Navbar() {
                     setOpen(false);
                   }}
                 >
-                  <img
+                  <img loading="lazy" decoding="async"
                     src="/kk-logo-transparent.png"
                     className="h-8 sm:h-9 w-auto object-contain drop-shadow-md"
                     alt="KK Tech"
@@ -528,3 +540,6 @@ export default function Navbar() {
     </>
   );
 }
+
+
+

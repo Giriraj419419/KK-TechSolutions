@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   Mail, Calendar, FileText, Users, Shield, Cloud,
@@ -52,7 +52,7 @@ export default function Microsoft365() {
               </Reveal>
               <Reveal direction="up" delay={0.14}>
                 <p className="text-gray-400 text-lg leading-relaxed max-w-xl">
-                  Empower your organisation with Microsoft 365 — the complete productivity cloud
+                  Empower your organisation with Microsoft 365 â€” the complete productivity cloud
                   for modern enterprise teams.
                 </p>
               </Reveal>
@@ -69,12 +69,12 @@ export default function Microsoft365() {
               </Reveal>
             </div>
 
-            {/* Right Column — Animated MS365 Ecosystem */}
+            {/* Right Column â€” Animated MS365 Ecosystem */}
             <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full h-[500px]">
               <div className="relative w-full h-full max-w-md mx-auto">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-blue-600/10 blur-xl animate-pulse" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl premium-glass border border-blue-600/30 z-20">
-                  <img src="/microsoft.svg" alt="Microsoft Logo" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(37,99,235,0.5)]" />
+                  <img loading="lazy" decoding="async" src="/microsoft.svg" alt="Microsoft Logo" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(37,99,235,0.5)]" />
                 </div>
 
                 {/* Orbiting Tech Icons */}
@@ -191,3 +191,7 @@ export default function Microsoft365() {
     </div>
   );
 }
+
+
+
+

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+﻿/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence } from 'framer-motion';
@@ -15,7 +15,7 @@ import EnterpriseCTA from '../components/EnterpriseCTA';
 // =========================================================================
 // PREMIUM ADOBE CARD ENHANCEMENT (Isolated physics)
 // =========================================================================
-function AdobePremiumCard({ children, className, delayOffset = 0 }: { children: React.ReactNode, className?: string, delayOffset?: number }) {
+const AdobePremiumCard = React.memo(function AdobePremiumCard({ children, className, delayOffset = 0 }: { children: React.ReactNode, className?: string, delayOffset?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -27,6 +27,7 @@ function AdobePremiumCard({ children, className, delayOffset = 0 }: { children: 
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-4deg", "4deg"]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (typeof window !== 'undefined' && window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const width = rect.width;
@@ -55,7 +56,7 @@ function AdobePremiumCard({ children, className, delayOffset = 0 }: { children: 
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       animate={{ y: [0, floatValues.yOffset, 0] }}
       transition={{ repeat: Infinity, duration: floatValues.duration, ease: "easeInOut", delay: delayOffset }}
-      className={`relative group rounded-2xl border border-white/5 bg-white/[0.02] premium-glass transition-all duration-500 hover:shadow-[0_20px_40px_-10px_rgba(239,68,68,0.15)] hover:border-red-500/20 hover:bg-white/[0.04] ${className}`}
+      className={`relative group rounded-2xl border border-white/5 bg-white/[0.02] premium-glass will-change-transform transform-gpu transition-all duration-300 hover:shadow-[0_20px_40px_-10px_rgba(239,68,68,0.15)] hover:border-red-500/20 hover:bg-white/[0.04] ${className}`}
     >
       <motion.div 
         className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0 overflow-hidden"
@@ -70,7 +71,7 @@ function AdobePremiumCard({ children, className, delayOffset = 0 }: { children: 
       </div>
     </motion.div>
   );
-}
+});
 
 // =========================================================================
 // FAQ ACCORDION COMPONENT
@@ -103,7 +104,7 @@ function FAQItem({ question, answer }: { question: string, answer: string }) {
       </AnimatePresence>
     </div>
   );
-}
+} 
 
 // =========================================================================
 // DATA ARRAYS
@@ -238,7 +239,7 @@ export default function Adobe() {
               </Reveal>
             </div>
 
-            {/* Right Column — Animated Adobe Ecosystem */}
+            {/* Right Column â€” Animated Adobe Ecosystem */}
             <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full h-[500px]">
               <div className="relative w-full h-full max-w-md mx-auto">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-[#EF4444]/10 blur-xl animate-pulse" />
@@ -481,3 +482,8 @@ export default function Adobe() {
     </div>
   );
 }
+
+
+
+
+

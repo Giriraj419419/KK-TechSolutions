@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+﻿/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -39,16 +39,16 @@ const services = [
     id: 'telecom',
     icon: Wifi,
     title: 'Telecom & Networking',
-    desc: 'Structured cabling, Wi‑Fi, and SD‑WAN solutions for seamless, high-speed connectivity.',
-    points: ['Structured cabling', 'Wi‑Fi solutions', 'SD‑WAN deployment', 'High-speed connectivity'],
+    desc: 'Structured cabling, Wiâ€‘Fi, and SDâ€‘WAN solutions for seamless, high-speed connectivity.',
+    points: ['Structured cabling', 'Wiâ€‘Fi solutions', 'SDâ€‘WAN deployment', 'High-speed connectivity'],
     color: '#7C3AED',
   },
   {
     id: 'iot',
     icon: Cpu,
     title: 'IoT Solutions',
-    desc: 'Device connectivity and data/analytics for industrial, logistics, and smart‑city environments.',
-    points: ['Device connectivity', 'Data & analytics', 'Industrial & logistics', 'Smart‑city environments'],
+    desc: 'Device connectivity and data/analytics for industrial, logistics, and smartâ€‘city environments.',
+    points: ['Device connectivity', 'Data & analytics', 'Industrial & logistics', 'Smartâ€‘city environments'],
     color: '#F97316',
   },
 ];
@@ -82,7 +82,7 @@ export default function Services() {
           </Reveal>
           <Reveal direction="up" delay={0.08}>
             <h1 className="mt-5 text-4xl sm:text-5xl lg:text-[4rem] font-medium leading-[1.08] tracking-tight text-white">
-              <TextReveal text="End‑to‑End" delay={0.08} />{' '}
+              <TextReveal text="Endâ€‘toâ€‘End" delay={0.08} />{' '}
               <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent font-semibold">
                 Technology Solutions
               </span>
@@ -103,7 +103,7 @@ export default function Services() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-[1fr_1.4fr] gap-10 items-start">
 
-            {/* Left — Service Selector */}
+            {/* Left â€” Service Selector */}
             <Reveal direction="left">
               <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02]">
                 <div className="px-6 py-4 border-b border-white/5 bg-white/5">
@@ -177,7 +177,7 @@ export default function Services() {
               </div>
             </Reveal>
 
-            {/* Right — Service Detail */}
+            {/* Right â€” Service Detail */}
             <Reveal direction="right" delay={0.1} className="h-full">
               <TiltCard className="p-8 h-full min-h-[520px] flex flex-col justify-between relative overflow-hidden group">
                 <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl" 
@@ -356,3 +356,6 @@ export default function Services() {
     </div>
   );
 }
+
+
+

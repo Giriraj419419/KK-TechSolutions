@@ -1,14 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { motion, animate } from 'framer-motion';
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, HeartPulse, GraduationCap, Package, Building2, Truck, Globe, MessageCircle, Mail, Phone } from 'lucide-react';
 import { Reveal, StaggerContainer, StaggerItem, TextReveal, Eyebrow } from '../components/Section';
 import { CosmosField, GlowingOrbs, SectionGlow, FloatingElement, TiltCard } from '../components/Atmosphere';
-import { TechConstellation } from '../components/TechConstellation';
+import TechConstellation from '../components/TechConstellation';
 import InteractivePartnerCard from '../components/InteractivePartnerCard';
 import { isAppLoaded } from '../components/Preloader';
 import EnterpriseCTA from '../components/EnterpriseCTA';
+
+const MemoizedCosmosField = React.memo(CosmosField);
+const MemoizedGlowingOrbs = React.memo(GlowingOrbs);
+const MemoizedTechConstellation = React.memo(TechConstellation);
 
 // ============================================================
 // DATA & CONFIG
@@ -218,8 +222,8 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-transparent">
-      <CosmosField />
-      <GlowingOrbs />
+      <MemoizedCosmosField />
+      <MemoizedGlowingOrbs />
 
       {/* ===== 1. HERO SECTION ===== */}
       <motion.section 
@@ -238,7 +242,7 @@ export default function Home() {
               <Reveal delay={baseDelay}>
                 <span className="badge-blue">
                   <span className="pulse-dot shrink-0" />
-                  Enterprise IT Solutions · Ahmedabad, India
+                  Enterprise IT Solutions Â· Ahmedabad, India
                 </span>
               </Reveal>
 
@@ -288,7 +292,7 @@ export default function Home() {
 
             {/* Right side floating constellation graphic */}
             <Reveal direction="left" delay={baseDelay + 0.12} className="relative z-10 flex justify-center lg:justify-end">
-              <TechConstellation className="w-full max-w-[500px] aspect-square" />
+              <MemoizedTechConstellation className="w-full max-w-[500px] aspect-square" />
             </Reveal>
           </div>
         </div>
@@ -299,7 +303,7 @@ export default function Home() {
         <SectionGlow color="purple" position="top-left" opacity={0.1} size={400} />
         
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-16 items-start">
             
             {/* Left Sticky column */}
             <Reveal direction="right" className="lg:sticky lg:top-24 space-y-6">
@@ -316,7 +320,7 @@ export default function Home() {
 
               {/* Expert Engineering Team Visual */}
               <div className="relative mt-8 rounded-2xl overflow-hidden border border-white/5 aspect-video bg-gradient-to-br from-blue-900/10 to-purple-900/10 flex flex-col justify-end p-6 group">
-                <div className="absolute inset-0 bg-cover bg-center mix-blend-overlay opacity-30 transition-transform duration-500 group-hover:scale-105" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80")' }} />
+                <div className="absolute inset-0 bg-cover bg-center mix-blend-overlay opacity-30 transition-transform duration-300 group-hover:scale-105" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80")' }} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                 <div className="relative z-10">
                   <div className="flex -space-x-2.5 mb-3">
@@ -340,9 +344,9 @@ export default function Home() {
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
               {servicesList.map((service, i) => (
                 <StaggerItem key={service.title} direction="left">
-                  <div className="enterprise-card p-8 relative overflow-hidden group">
+                  <div className="enterprise-card p-6 sm:p-8 relative overflow-hidden group hardware-accelerated">
                     <div className="absolute -inset-px bg-gradient-to-r from-blue-500/10 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl" />
-                    <div className="relative z-10 flex flex-col sm:flex-row gap-6">
+                    <div className="relative z-10 flex flex-col sm:flex-row gap-4 sm:gap-6">
                       <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
                         <service.Icon />
                       </div>
@@ -582,7 +586,7 @@ export default function Home() {
               <StaggerItem direction="left">
                 <TiltCard className="h-full cursor-pointer group">
                   <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 flex items-center gap-5 transition-all duration-300 group-hover:bg-white/[0.06] group-hover:border-green-500/30 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                     <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 group-hover:bg-green-500/20 group-hover:border-green-500/50">
                       <MessageCircle className="w-7 h-7 text-green-400" />
                     </div>
@@ -599,7 +603,7 @@ export default function Home() {
               <StaggerItem direction="left">
                 <TiltCard className="h-full cursor-pointer group">
                   <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 flex items-center gap-5 transition-all duration-300 group-hover:bg-white/[0.06] group-hover:border-blue-500/30 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                     <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 group-hover:bg-blue-500/20 group-hover:border-blue-500/50">
                       <Mail className="w-7 h-7 text-blue-400" />
                     </div>
@@ -616,7 +620,7 @@ export default function Home() {
               <StaggerItem direction="left">
                 <TiltCard className="h-full cursor-pointer group">
                   <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 flex items-center gap-5 transition-all duration-300 group-hover:bg-white/[0.06] group-hover:border-purple-500/30 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                     <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 group-hover:bg-purple-500/20 group-hover:border-purple-500/50">
                       <Phone className="w-7 h-7 text-purple-400" />
                     </div>
@@ -637,3 +641,7 @@ export default function Home() {
     </div>
   );
 }
+
+
+
+

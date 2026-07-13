@@ -1,10 +1,10 @@
-import { useRef, ReactNode } from 'react';
+import React, { useRef, ReactNode } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, useReducedMotion } from 'framer-motion';
 
 // ============================================================
 // COSMOS FIELD — Dark atmospheric background
 // ============================================================
-export function CosmosField() {
+export const CosmosField = React.memo(function CosmosField() {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#0B121F]">
       {/* Subtle brand radial gradient from top */}
@@ -19,12 +19,12 @@ export function CosmosField() {
       <div className="absolute inset-0 grid-bg" />
     </div>
   );
-}
+});
 
 // ============================================================
 // GLOWING ORBS — Slow drifting ambient lights
 // ============================================================
-export function GlowingOrbs() {
+export const GlowingOrbs = React.memo(function GlowingOrbs() {
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
       <motion.div
@@ -51,12 +51,12 @@ export function GlowingOrbs() {
       />
     </div>
   );
-}
+});
 
 // ============================================================
 // SECTION GLOW — Configurable section ambient lights with Parallax
 // ============================================================
-export function SectionGlow({
+export const SectionGlow = React.memo(function SectionGlow({
   color = 'blue',
   position = 'top-right',
   opacity = 0.12,
@@ -106,7 +106,7 @@ export function SectionGlow({
       }}
     />
   );
-}
+});
 
 // ============================================================
 // FLOATING ELEMENT — Continuous ambient motion for floating UI

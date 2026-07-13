@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+﻿import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bot, X, Send, Paperclip, Smile, Mic, ChevronDown, Minus } from 'lucide-react';
 
@@ -173,7 +173,7 @@ export default function ChatBot() {
               <div className="absolute inset-0 bg-blue-500/5 blur-3xl" />
               <div className="flex items-center gap-3 relative z-10">
                 <div className="flex items-center justify-center shrink-0">
-                  <img src="/kk-logo-transparent.png" alt="KK Tech Solutions" className="h-7 w-auto object-contain drop-shadow-md" />
+                  <img loading="lazy" decoding="async" src="/kk-logo-transparent.png" alt="KK Tech Solutions" className="h-7 w-auto object-contain drop-shadow-md" />
                 </div>
                 <div className="flex flex-col justify-center">
                   <h3 className="text-[13px] font-bold text-white tracking-wide leading-tight">KK Tech AI Assistant</h3>
@@ -297,3 +297,4 @@ export default function ChatBot() {
     </>
   );
 }
+

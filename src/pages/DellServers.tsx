@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+﻿/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence } from 'framer-motion';
@@ -21,7 +21,7 @@ const DELL_PARTICLES = Array.from({ length: 6 }).map(() => ({
 // =========================================================================
 // PREMIUM AZURE CARD ENHANCEMENT (Isolated physics for Azure page only)
 // =========================================================================
-function DellServersPremiumCard({ children, className, delayOffset = 0 }: { children: React.ReactNode, className?: string, delayOffset?: number }) {
+const DellServersPremiumCard = React.memo(function DellServersPremiumCard({ children, className, delayOffset = 0 }: { children: React.ReactNode, className?: string, delayOffset?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -33,6 +33,7 @@ function DellServersPremiumCard({ children, className, delayOffset = 0 }: { chil
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-4deg", "4deg"]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (typeof window !== 'undefined' && window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const width = rect.width;
@@ -61,7 +62,7 @@ function DellServersPremiumCard({ children, className, delayOffset = 0 }: { chil
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       animate={{ y: [0, floatValues.yOffset, 0] }}
       transition={{ repeat: Infinity, duration: floatValues.duration, ease: "easeInOut", delay: delayOffset }}
-      className={`relative group rounded-2xl border border-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] bg-white/[0.02] premium-glass transition-all duration-500 hover:shadow-[0_20px_40px_-10px_rgba(0,120,212,0.2),inset_0_1px_0_rgba(255,255,255,0.15)] hover:border-[#0078D4]/30 hover:bg-white/[0.04] ${className}`}
+      className={`relative group rounded-2xl border border-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] bg-white/[0.02] premium-glass will-change-transform transform-gpu transition-all duration-300 hover:shadow-[0_20px_40px_-10px_rgba(0,120,212,0.2),inset_0_1px_0_rgba(255,255,255,0.15)] hover:border-[#0078D4]/30 hover:bg-white/[0.04] ${className}`}
     >
       <motion.div 
         className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0 overflow-hidden"
@@ -76,7 +77,7 @@ function DellServersPremiumCard({ children, className, delayOffset = 0 }: { chil
       </div>
     </motion.div>
   );
-}
+});
 
 // =========================================================================
 // FAQ ACCORDION COMPONENT
@@ -109,7 +110,7 @@ function FAQItem({ question, answer }: { question: string, answer: string }) {
       </AnimatePresence>
     </div>
   );
-}
+} 
 
 // =========================================================================
 // DATA ARRAYS
@@ -124,7 +125,7 @@ const reasons = [
 ];
 
 const solutions = [
-  { icon: Server, title: 'Sales – New & Refurbished Dell PowerEdge Servers', desc: 'Premium enterprise servers.' },
+  { icon: Server, title: 'Sales â€“ New & Refurbished Dell PowerEdge Servers', desc: 'Premium enterprise servers.' },
   { icon: ShieldCheck, title: 'Annual Maintenance Contract (AMC)', desc: 'Comprehensive support contracts.' },
   { icon: Settings, title: 'Installation & Configuration', desc: 'Expert deployment services.' },
   { icon: Activity, title: 'On-site & Remote Technical Support', desc: 'Rapid technical assistance.' },
@@ -133,7 +134,7 @@ const solutions = [
   { icon: Database, title: 'Data Migration Services', desc: 'Seamless data transition.' },
   { icon: Network, title: 'Server Rack Installation & Networking Setup', desc: 'Complete infrastructure setup.' },
   { icon: Lock, title: 'Warranty Assistance & Extended Warranty', desc: 'Long-term hardware protection.' },
-  { icon: HelpCircle, title: '24×7 Helpdesk Support', desc: 'Always-on enterprise assistance.' },
+  { icon: HelpCircle, title: '24Ã—7 Helpdesk Support', desc: 'Always-on enterprise assistance.' },
   { icon: CheckSquare, title: 'AMC Renewal & Preventive Maintenance Visits', desc: 'Proactive infrastructure care.' },
   { icon: Briefcase, title: 'Enterprise Server Consultation', desc: 'Strategic infrastructure planning.' }
 ];
@@ -156,7 +157,7 @@ const migrationSteps = [
   { title: 'Quotation & Configuration', desc: 'Design a customized Dell PowerEdge server configuration based on processor, memory, storage, RAID, networking, and performance requirements, then provide a transparent quotation.' },
   { title: 'Delivery & Installation', desc: 'Source, quality-test, deliver, rack, install, configure, and deploy the Dell PowerEdge server either on-site or remotely, ensuring a smooth implementation.' },
   { title: 'Testing & Handover', desc: 'Perform complete diagnostics, validate hardware performance, configure networking, conduct system testing, provide documentation, and complete customer handover with operational guidance.' },
-  { title: 'Ongoing Support & AMC', desc: 'Deliver long-term support through warranty coordination, AMC renewals, preventive maintenance, firmware updates, health monitoring, upgrades, and responsive 24×7 technical assistance.' }
+  { title: 'Ongoing Support & AMC', desc: 'Deliver long-term support through warranty coordination, AMC renewals, preventive maintenance, firmware updates, health monitoring, upgrades, and responsive 24Ã—7 technical assistance.' }
 ];
 
 const whyUs = [
@@ -202,6 +203,7 @@ function DellServerHeroAnimation() {
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-5deg", "5deg"]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (typeof window !== 'undefined' && window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const width = rect.width;
@@ -421,7 +423,7 @@ function DellServerHeroAnimation() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[50%] rounded-full bg-[#0078D4]/15 blur-[60px] pointer-events-none mix-blend-screen" />
           </motion.div>
 
-          <Server className={`w-16 h-16 relative z-10 transition-colors duration-1000 ${isReady ? 'text-blue-500 drop-shadow-[0_0_20px_rgba(0,120,212,0.6)]' : 'text-gray-600'}`} style={{ transform: 'translateZ(20px)' }} />
+          <Server className={`w-16 h-16 relative z-10 transition-colors duration-300 ${isReady ? 'text-blue-500 drop-shadow-[0_0_20px_rgba(0,120,212,0.6)]' : 'text-gray-600'}`} style={{ transform: 'translateZ(20px)' }} />
           
           {/* Boot-up Status LEDs */}
           <div className="absolute bottom-5 right-5 flex gap-1.5 z-10" style={{ transform: 'translateZ(25px)' }}>
@@ -520,7 +522,7 @@ export default function DellServers() {
               </Reveal>
             </div>
 
-            {/* Right Column — Premium Animated Hero Illustration */}
+            {/* Right Column â€” Premium Animated Hero Illustration */}
             <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center items-center w-full min-h-[500px]">
               <DellServerHeroAnimation />
             </Reveal>
@@ -569,13 +571,13 @@ export default function DellServers() {
               <StaggerItem key={f.title} direction="up" className="h-full">
                 <DellServersPremiumCard delayOffset={i * 0.15} className="p-8 h-full min-h-[300px] flex flex-col relative overflow-hidden group/card shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]">
                   {/* Subtle Hover Glow */}
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-[#0078D4]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-[#0078D4]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   
                   <div className="relative z-10 flex flex-col h-full items-start">
                     <motion.div 
-                      className="flex items-center justify-center mb-6 w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/10 group-hover/card:bg-[#0078D4]/15 group-hover/card:border-[#0078D4]/40 group-hover/card:shadow-[0_0_20px_rgba(0,120,212,0.25)] transition-all duration-500 group-hover/card:-translate-y-1"
+                      className="flex items-center justify-center mb-6 w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/10 group-hover/card:bg-[#0078D4]/15 group-hover/card:border-[#0078D4]/40 group-hover/card:shadow-[0_0_20px_rgba(0,120,212,0.25)] transition-all duration-300 group-hover/card:-translate-y-1"
                     >
-                      <f.icon className="w-6 h-6 text-[#0078D4] group-hover/card:scale-110 transition-transform duration-500" />
+                      <f.icon className="w-6 h-6 text-[#0078D4] group-hover/card:scale-110 transition-transform duration-300" />
                     </motion.div>
                     
                     <h3 className="text-xl font-bold text-white/95 group-hover/card:text-[#0078D4] transition-colors duration-300 mb-3 tracking-wide">
@@ -767,7 +769,7 @@ export default function DellServers() {
                     <div className="hidden lg:block flex-1" />
                     
                     {/* Center Icon */}
-                    <div className="w-16 h-16 shrink-0 rounded-2xl bg-[#0B121F] border border-white/10 flex items-center justify-center font-bold text-gray-400 group-hover:border-[#0078D4]/50 group-hover:text-[#0078D4] group-hover:shadow-[0_0_20px_rgba(0,120,212,0.3)] group-hover:scale-110 transition-all duration-500 relative z-10 overflow-hidden">
+                    <div className="w-16 h-16 shrink-0 rounded-2xl bg-[#0B121F] border border-white/10 flex items-center justify-center font-bold text-gray-400 group-hover:border-[#0078D4]/50 group-hover:text-[#0078D4] group-hover:shadow-[0_0_20px_rgba(0,120,212,0.3)] group-hover:scale-110 transition-all duration-300 relative z-10 overflow-hidden">
                       <div className="absolute inset-0 bg-[#0078D4]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       <span className="relative z-10 flex items-center justify-center">
                         {i === 0 && <Activity className="w-6 h-6" />}
@@ -894,3 +896,8 @@ export default function DellServers() {
     </div>
   );
 }
+
+
+
+
+

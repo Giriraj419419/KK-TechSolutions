@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+﻿/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useRef } from 'react';
 import { Send, ChevronRight, Check, Building2, Calendar, Clock, Loader2, CheckCircle2, Search, UploadCloud, X, Lock, File } from 'lucide-react';
 import { Reveal, Eyebrow, TextReveal } from '../components/Section';
@@ -10,13 +10,13 @@ const offices = [
   {
     id: 'ho',
     name: 'Ahmedabad, Gujarat (HO)',
-    address: '715, Shilp Arista\nSindhu Bhawan Road\nBodakdev\nAhmedabad, Gujarat – 380054',
+    address: '715, Shilp Arista\nSindhu Bhawan Road\nBodakdev\nAhmedabad, Gujarat â€“ 380054',
     mapQuery: 'Shilp Arista, Sindhu Bhawan Road, Bodakdev, Ahmedabad, Gujarat'
   },
   {
     id: 'delhi',
     name: 'Nehru Place, New Delhi',
-    address: '818, 8th Floor\nDevika Tower\nNehru Place\nNew Delhi – 110019',
+    address: '818, 8th Floor\nDevika Tower\nNehru Place\nNew Delhi â€“ 110019',
     mapQuery: '818, 8th Floor, Devika Tower, Nehru Place, New Delhi'
   }
 ];
@@ -117,10 +117,10 @@ export default function Contact() {
   };
 
   const budgets = [
-    'Below ₹50K',
-    '₹50K–₹2L',
-    '₹2L–₹10L',
-    '₹10L+',
+    'Below â‚¹50K',
+    'â‚¹50Kâ€“â‚¹2L',
+    'â‚¹2Lâ€“â‚¹10L',
+    'â‚¹10L+',
     'Custom'
   ];
 
@@ -250,7 +250,7 @@ export default function Contact() {
                           <div className="flex items-start justify-between">
                             <div className="flex items-center gap-4">
                               <div className="w-14 h-14 rounded-xl bg-white flex items-center justify-center p-2.5 shadow-inner border border-gray-100">
-                                <img src={item.logo} alt={item.vendor} className="w-full h-full object-contain" />
+                                <img loading="lazy" decoding="async" src={item.logo} alt={item.vendor} className="w-full h-full object-contain" />
                               </div>
                               <div>
                                 <span className="text-xs font-bold uppercase tracking-wider text-gray-500 block mb-1">{item.vendor}</span>
@@ -271,7 +271,7 @@ export default function Contact() {
                         </div>
                         
                         {/* Hover glass reflection */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                       </motion.button>
                     );
                   }) : (
@@ -703,8 +703,8 @@ export default function Contact() {
                 <div className="flex items-center justify-between max-w-3xl mx-auto">
                   {timelineSteps.map((s, i) => (
                     <div key={s.num} className="flex-1 relative flex items-center">
-                      <div className={`relative z-10 flex flex-col items-center gap-3 transition-colors duration-500 ${step >= s.num ? 'text-blue-400' : 'text-gray-600'}`}>
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 bg-[#0B121F] transition-all duration-500 ${step >= s.num ? 'border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.4)]' : 'border-white/10'}`}>
+                      <div className={`relative z-10 flex flex-col items-center gap-3 transition-colors duration-300 ${step >= s.num ? 'text-blue-400' : 'text-gray-600'}`}>
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 bg-[#0B121F] transition-all duration-300 ${step >= s.num ? 'border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.4)]' : 'border-white/10'}`}>
                           {step > s.num ? <Check className="w-5 h-5 text-blue-400" /> : <span className="text-sm font-bold">{s.num}</span>}
                         </div>
                         <span className="text-[10px] sm:text-xs uppercase font-bold tracking-widest hidden sm:block whitespace-nowrap">{s.title}</span>
@@ -808,7 +808,7 @@ export default function Contact() {
                     <motion.div
                       key={office.id}
                       onClick={() => setActiveOffice(office)}
-                      className={`relative p-6 rounded-2xl cursor-pointer transition-all duration-500 overflow-hidden group ${
+                      className={`relative p-6 rounded-2xl cursor-pointer transition-all duration-300 overflow-hidden group ${
                         isActive 
                           ? 'bg-blue-500/10 border-blue-500/30 shadow-[0_0_30px_-5px_rgba(59,130,246,0.3)]' 
                           : 'bg-white/[0.02] border-white/5 hover:bg-white/[0.04] hover:border-white/20'
@@ -867,7 +867,7 @@ export default function Contact() {
                      >
                        <iframe
                          src={`https://maps.google.com/maps?q=${encodeURIComponent(office.mapQuery)}&t=m&z=15&output=embed&iwloc=near`}
-                         className="w-full h-full border-0 filter grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+                         className="w-full h-full border-0 filter grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
                          allowFullScreen={false} 
                          loading="lazy" 
                          referrerPolicy="no-referrer-when-downgrade"
@@ -883,3 +883,8 @@ export default function Contact() {
     </div>
   );
 }
+
+
+
+
+

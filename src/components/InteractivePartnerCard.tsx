@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+﻿import React, { useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -37,6 +37,9 @@ export default function InteractivePartnerCard({ p, idx }: { p: Partner; idx: nu
   const logoY = useTransform(springY, [0, 1], [-6, 6]);
   
   const handleMouseMove = (e: React.MouseEvent) => {
+    // Bypass heavy 3D calculations on mobile/touch devices
+    if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
+    
     if (!cardRef.current) return;
     const clientX = e.clientX;
     const clientY = e.clientY;
@@ -141,11 +144,11 @@ export default function InteractivePartnerCard({ p, idx }: { p: Partner; idx: nu
         transformPerspective: 1200,
         transformStyle: 'preserve-3d',
       }}
-      className={`relative flex flex-col h-full grow rounded-2xl cursor-pointer will-change-transform ${isHovered ? 'z-20' : 'z-10'}`}
+      className={`relative flex flex-col h-full grow rounded-2xl cursor-pointer will-change-transform transform-gpu ${isHovered ? 'z-20' : 'z-10'}`}
     >
       {/* Dynamic Glass Container */}
       <div 
-        className="premium-glass p-8 relative overflow-hidden flex flex-col h-full grow w-full transition-colors duration-500 rounded-2xl"
+        className="premium-glass p-8 relative overflow-hidden flex flex-col h-full grow w-full transition-colors duration-300 rounded-2xl"
         style={{
           boxShadow: isHovered 
             ? `0 25px 50px -12px rgba(0,0,0,0.8), 0 0 25px -5px ${hoverShadowColor}`
@@ -160,7 +163,7 @@ export default function InteractivePartnerCard({ p, idx }: { p: Partner; idx: nu
       >
         {/* Brand Glow Background */}
         <motion.div 
-          className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-700 ease-in-out"
+          className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-300 ease-in-out"
           style={{
             ...glowStyle,
             opacity: isHovered ? 0.6 : 0.15,
@@ -196,7 +199,7 @@ export default function InteractivePartnerCard({ p, idx }: { p: Partner; idx: nu
             className="h-10 mb-6 flex items-center"
             style={{ x: isHovered ? logoX : 0, y: isHovered ? logoY : 0 }}
           >
-            <img 
+            <img loading="lazy" decoding="async" 
               src={p.logo} 
               alt={p.name} 
               className={`h-8 w-auto object-contain transition-all duration-300 ${['Autodesk Solutions', 'Autodesk', 'Adobe Solutions', 'Adobe', 'CorelDRAW Graphics'].includes(p.name) ? 'bg-white px-3 py-1.5 rounded-lg shadow-sm' : ''} ${isHovered ? 'brightness-110 drop-shadow-md' : 'brightness-90'}`} 
@@ -218,3 +221,5 @@ export default function InteractivePartnerCard({ p, idx }: { p: Partner; idx: nu
     </motion.div>
   );
 }
+
+

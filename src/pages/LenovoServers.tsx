@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+﻿/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence } from 'framer-motion';
@@ -21,7 +21,7 @@ const LENOVO_PARTICLES = Array.from({ length: 8 }).map(() => ({
 // =========================================================================
 // PREMIUM AZURE CARD ENHANCEMENT (Isolated physics for Azure page only)
 // =========================================================================
-function LenovoServersPremiumCard({ children, className, delayOffset = 0 }: { children: React.ReactNode, className?: string, delayOffset?: number }) {
+const LenovoServersPremiumCard = React.memo(function LenovoServersPremiumCard({ children, className, delayOffset = 0 }: { children: React.ReactNode, className?: string, delayOffset?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -33,6 +33,7 @@ function LenovoServersPremiumCard({ children, className, delayOffset = 0 }: { ch
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-4deg", "4deg"]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (typeof window !== 'undefined' && window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const width = rect.width;
@@ -61,7 +62,7 @@ function LenovoServersPremiumCard({ children, className, delayOffset = 0 }: { ch
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       animate={{ y: [0, floatValues.yOffset, 0] }}
       transition={{ repeat: Infinity, duration: floatValues.duration, ease: "easeInOut", delay: delayOffset }}
-      className={`relative group rounded-2xl border border-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] bg-white/[0.02] premium-glass transition-all duration-500 hover:shadow-[0_20px_40px_-10px_rgba(220,38,38,0.2),inset_0_1px_0_rgba(255,255,255,0.15)] hover:border-red-500/30 hover:bg-white/[0.04] ${className}`}
+      className={`relative group rounded-2xl border border-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] bg-white/[0.02] premium-glass will-change-transform transform-gpu transition-all duration-300 hover:shadow-[0_20px_40px_-10px_rgba(220,38,38,0.2),inset_0_1px_0_rgba(255,255,255,0.15)] hover:border-red-500/30 hover:bg-white/[0.04] ${className}`}
     >
       <motion.div 
         className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0 overflow-hidden"
@@ -76,7 +77,7 @@ function LenovoServersPremiumCard({ children, className, delayOffset = 0 }: { ch
       </div>
     </motion.div>
   );
-}
+});
 
 // =========================================================================
 // FAQ ACCORDION COMPONENT
@@ -109,7 +110,7 @@ function FAQItem({ question, answer }: { question: string, answer: string }) {
       </AnimatePresence>
     </div>
   );
-}
+} 
 
 // =========================================================================
 // DATA ARRAYS
@@ -124,7 +125,7 @@ const reasons = [
 ];
 
 const solutions = [
-  { icon: Server, title: 'Sales – New & Refurbished', desc: 'Premium enterprise servers.' },
+  { icon: Server, title: 'Sales â€“ New & Refurbished', desc: 'Premium enterprise servers.' },
   { icon: Settings, title: 'Installation & Configuration', desc: 'Expert deployment services.' },
   { icon: ShieldCheck, title: 'Annual Maintenance (AMC)', desc: 'Comprehensive support contracts.' },
   { icon: Activity, title: 'On-site Support', desc: 'Rapid technical assistance.' },
@@ -210,6 +211,7 @@ function LenovoHeroAnimation() {
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-4deg", "4deg"]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (typeof window !== 'undefined' && window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const width = rect.width;
@@ -426,7 +428,7 @@ function LenovoHeroAnimation() {
         <motion.div
           animate={isBooting ? { scale: [0.9, 1], opacity: [0, 1] } : { y: [0, -4, 0] }}
           transition={isBooting ? { duration: 1.2, ease: "easeOut" } : { repeat: Infinity, duration: 5, ease: "easeInOut" }}
-          className="relative group p-7 rounded-2xl premium-glass border border-red-500/30 bg-[#0B121F]/95 backdrop-blur-xl shadow-2xl transition-all duration-500 hover:shadow-[0_20px_50px_-10px_rgba(220,38,38,0.3)] hover:border-red-400/60 cursor-pointer overflow-hidden"
+          className="relative group p-7 rounded-2xl premium-glass border border-red-500/30 bg-[#0B121F]/95 backdrop-blur-xl shadow-2xl transition-all duration-300 hover:shadow-[0_20px_50px_-10px_rgba(220,38,38,0.3)] hover:border-red-400/60 cursor-pointer overflow-hidden"
         >
           {/* Glass Reflection Highlight */}
           <motion.div 
@@ -458,7 +460,7 @@ function LenovoHeroAnimation() {
              />
           )}
 
-          <Server className={`w-16 h-16 sm:w-20 sm:h-20 relative z-20 transition-all duration-500 ${isProcessing ? 'text-red-400' : (isReady ? 'text-red-500' : 'text-gray-600')}`} style={{ transform: 'translateZ(25px)', filter: isProcessing ? 'drop-shadow(0 0 30px rgba(220,38,38,0.6)) drop-shadow(0 0 10px rgba(220,38,38,0.8))' : (isReady ? 'drop-shadow(0 0 15px rgba(220,38,38,0.4))' : 'none') }} />
+          <Server className={`w-16 h-16 sm:w-20 sm:h-20 relative z-20 transition-all duration-300 ${isProcessing ? 'text-red-400' : (isReady ? 'text-red-500' : 'text-gray-600')}`} style={{ transform: 'translateZ(25px)', filter: isProcessing ? 'drop-shadow(0 0 30px rgba(220,38,38,0.6)) drop-shadow(0 0 10px rgba(220,38,38,0.8))' : (isReady ? 'drop-shadow(0 0 15px rgba(220,38,38,0.4))' : 'none') }} />
           
           {/* Core Activity Indicators */}
           <div className="absolute top-4 right-4 flex gap-1.5 z-20" style={{ transform: 'translateZ(30px)' }}>
@@ -600,13 +602,13 @@ export default function LenovoServers() {
               <StaggerItem key={f.title} direction="up" className="h-full">
                 <LenovoServersPremiumCard delayOffset={i * 0.15} className="p-8 h-full min-h-[300px] flex flex-col relative overflow-hidden group/card shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]">
                   {/* Subtle Hover Glow */}
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-red-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-red-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   
                   <div className="relative z-10 flex flex-col h-full items-start">
                     <motion.div 
-                      className="flex items-center justify-center mb-6 w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/10 group-hover/card:bg-red-500/15 group-hover/card:border-red-500/40 group-hover/card:shadow-[0_0_20px_rgba(239,68,68,0.25)] transition-all duration-500 group-hover/card:-translate-y-1"
+                      className="flex items-center justify-center mb-6 w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/10 group-hover/card:bg-red-500/15 group-hover/card:border-red-500/40 group-hover/card:shadow-[0_0_20px_rgba(239,68,68,0.25)] transition-all duration-300 group-hover/card:-translate-y-1"
                     >
-                      <f.icon className="w-6 h-6 text-red-500 group-hover/card:scale-110 transition-transform duration-500" />
+                      <f.icon className="w-6 h-6 text-red-500 group-hover/card:scale-110 transition-transform duration-300" />
                     </motion.div>
                     
                     <h3 className="text-xl font-bold text-white/95 group-hover/card:text-red-400 transition-colors duration-300 mb-3 tracking-wide">
@@ -925,3 +927,8 @@ export default function LenovoServers() {
     </div>
   );
 }
+
+
+
+
+

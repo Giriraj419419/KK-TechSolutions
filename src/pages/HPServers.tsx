@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+﻿/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence } from 'framer-motion';
@@ -28,7 +28,7 @@ const HP_PARTICLES = Array.from({ length: 12 }).map(() => ({
 // =========================================================================
 // PREMIUM AZURE CARD ENHANCEMENT (Isolated physics for Azure page only)
 // =========================================================================
-function HPServersPremiumCard({ children, className, delayOffset = 0 }: { children: React.ReactNode, className?: string, delayOffset?: number }) {
+const HPServersPremiumCard = React.memo(function HPServersPremiumCard({ children, className, delayOffset = 0 }: { children: React.ReactNode, className?: string, delayOffset?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -40,6 +40,7 @@ function HPServersPremiumCard({ children, className, delayOffset = 0 }: { childr
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-4deg", "4deg"]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (typeof window !== 'undefined' && window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const width = rect.width;
@@ -68,7 +69,7 @@ function HPServersPremiumCard({ children, className, delayOffset = 0 }: { childr
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       animate={{ y: [0, floatValues.yOffset, 0] }}
       transition={{ repeat: Infinity, duration: floatValues.duration, ease: "easeInOut", delay: delayOffset }}
-      className={`relative group rounded-2xl border border-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] bg-white/[0.02] premium-glass transition-all duration-500 hover:shadow-[0_20px_40px_-10px_rgba(34,197,94,0.2),inset_0_1px_0_rgba(255,255,255,0.15)] hover:border-green-500/30 hover:bg-white/[0.04] ${className}`}
+      className={`relative group rounded-2xl border border-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] bg-white/[0.02] premium-glass will-change-transform transform-gpu transition-all duration-300 hover:shadow-[0_20px_40px_-10px_rgba(34,197,94,0.2),inset_0_1px_0_rgba(255,255,255,0.15)] hover:border-green-500/30 hover:bg-white/[0.04] ${className}`}
     >
       <motion.div
         className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0 overflow-hidden"
@@ -83,7 +84,7 @@ function HPServersPremiumCard({ children, className, delayOffset = 0 }: { childr
       </div>
     </motion.div>
   );
-}
+});
 
 // =========================================================================
 // FAQ ACCORDION COMPONENT
@@ -116,7 +117,7 @@ function FAQItem({ question, answer }: { question: string, answer: string }) {
       </AnimatePresence>
     </div>
   );
-}
+} 
 
 // =========================================================================
 // DATA ARRAYS
@@ -142,7 +143,7 @@ const solutions = [
   { icon: Database, title: 'Data Migration Services', desc: 'Seamless, secure data transition with zero downtime.' },
   { icon: Network, title: 'Rack Installation & Networking', desc: 'Complete physical infrastructure and switch setup.' },
   { icon: Lock, title: 'Warranty Assistance', desc: 'Extended warranty and hardware protection services.' },
-  { icon: HelpCircle, title: '24×7 Enterprise Helpdesk', desc: 'Always-on enterprise-grade technical assistance.' },
+  { icon: HelpCircle, title: '24Ã—7 Enterprise Helpdesk', desc: 'Always-on enterprise-grade technical assistance.' },
   { icon: CheckSquare, title: 'Preventive Maintenance Visits', desc: 'Proactive infrastructure health checks.' },
   { icon: Briefcase, title: 'Enterprise Infrastructure Consultation', desc: 'Strategic IT planning and architecture design.' }
 ];
@@ -221,6 +222,7 @@ function HPHeroAnimation() {
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-4deg", "4deg"]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (typeof window !== 'undefined' && window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const width = rect.width;
@@ -432,7 +434,7 @@ function HPHeroAnimation() {
         <motion.div
           animate={isBooting ? { scale: [0.9, 1], opacity: [0, 1] } : { y: [0, -4, 0] }}
           transition={isBooting ? { duration: 1.2, ease: "easeOut" } : { repeat: Infinity, duration: 6, ease: "easeInOut" }}
-          className="relative group p-7 rounded-3xl premium-glass border border-green-500/30 bg-[#0B121F]/95 backdrop-blur-xl shadow-2xl transition-all duration-500 hover:shadow-[0_20px_50px_-10px_rgba(34,197,94,0.3)] hover:border-green-400/60 cursor-pointer"
+          className="relative group p-7 rounded-3xl premium-glass border border-green-500/30 bg-[#0B121F]/95 backdrop-blur-xl shadow-2xl transition-all duration-300 hover:shadow-[0_20px_50px_-10px_rgba(34,197,94,0.3)] hover:border-green-400/60 cursor-pointer"
         >
           {/* Glass Reflection */}
           <motion.div
@@ -455,7 +457,7 @@ function HPHeroAnimation() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[50%] rounded-full bg-green-500/15 blur-[60px] pointer-events-none mix-blend-screen" />
           </motion.div>
 
-          <Server className={`w-16 h-16 sm:w-20 sm:h-20 relative z-10 transition-colors duration-1000 ${isReady ? 'text-green-500 drop-shadow-[0_0_20px_rgba(34,197,94,0.6)]' : 'text-gray-600'}`} style={{ transform: 'translateZ(25px)' }} />
+          <Server className={`w-16 h-16 sm:w-20 sm:h-20 relative z-10 transition-colors duration-300 ${isReady ? 'text-green-500 drop-shadow-[0_0_20px_rgba(34,197,94,0.6)]' : 'text-gray-600'}`} style={{ transform: 'translateZ(25px)' }} />
 
           {/* Live Status Indicators */}
           <div className="absolute top-4 right-4 flex gap-1.5 z-10" style={{ transform: 'translateZ(30px)' }}>
@@ -642,13 +644,13 @@ export default function HPServers() {
               <StaggerItem key={b.title} direction="up" className="h-full">
                 <HPServersPremiumCard delayOffset={i * 0.15} className="p-8 h-full min-h-[300px] flex flex-col relative overflow-hidden group/card shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]">
                   {/* Subtle Hover Glow */}
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-green-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-green-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
                   <div className="relative z-10 flex flex-col h-full items-start">
                     <motion.div
-                      className="flex items-center justify-center mb-6 w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/10 group-hover/card:bg-green-500/15 group-hover/card:border-green-500/40 group-hover/card:shadow-[0_0_20px_rgba(34,197,94,0.25)] transition-all duration-500 group-hover/card:-translate-y-1"
+                      className="flex items-center justify-center mb-6 w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/10 group-hover/card:bg-green-500/15 group-hover/card:border-green-500/40 group-hover/card:shadow-[0_0_20px_rgba(34,197,94,0.25)] transition-all duration-300 group-hover/card:-translate-y-1"
                     >
-                      <b.icon className="w-6 h-6 text-green-500 group-hover/card:scale-110 transition-transform duration-500" />
+                      <b.icon className="w-6 h-6 text-green-500 group-hover/card:scale-110 transition-transform duration-300" />
                     </motion.div>
 
                     <h3 className="text-xl font-bold text-white/95 group-hover/card:text-green-400 transition-colors duration-300 mb-3 tracking-wide">
@@ -841,7 +843,7 @@ export default function HPServers() {
                     <div className="hidden lg:block flex-1" />
 
                     {/* Center Icon */}
-                    <div className="w-16 h-16 shrink-0 rounded-2xl bg-[#0B121F] border border-white/10 flex items-center justify-center font-bold text-gray-400 group-hover:border-green-500/50 group-hover:text-green-400 group-hover:shadow-[0_0_20px_rgba(34,197,94,0.3)] group-hover:scale-110 transition-all duration-500 relative z-10 overflow-hidden">
+                    <div className="w-16 h-16 shrink-0 rounded-2xl bg-[#0B121F] border border-white/10 flex items-center justify-center font-bold text-gray-400 group-hover:border-green-500/50 group-hover:text-green-400 group-hover:shadow-[0_0_20px_rgba(34,197,94,0.3)] group-hover:scale-110 transition-all duration-300 relative z-10 overflow-hidden">
                       <div className="absolute inset-0 bg-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       <span className="relative z-10 flex items-center justify-center">
                         {i === 0 && <Activity className="w-6 h-6" />}
@@ -910,7 +912,7 @@ export default function HPServers() {
                 </div>
 
                 {/* Floating verification badge */}
-                <div className="absolute -bottom-6 -right-6 p-6 rounded-2xl bg-[#0078D4] border border-blue-400 shadow-[0_10px_30px_rgba(0,120,212,0.4)] flex items-center gap-4 rotate-[-5deg] hover:rotate-0 transition-transform duration-500 cursor-default">
+                <div className="absolute -bottom-6 -right-6 p-6 rounded-2xl bg-[#0078D4] border border-blue-400 shadow-[0_10px_30px_rgba(0,120,212,0.4)] flex items-center gap-4 rotate-[-5deg] hover:rotate-0 transition-transform duration-300 cursor-default">
                   <Shield className="w-8 h-8 text-white" />
                   <div>
                     <div className="text-white font-bold text-lg leading-tight">Certified</div>
@@ -949,3 +951,8 @@ export default function HPServers() {
     </div>
   );
 }
+
+
+
+
+

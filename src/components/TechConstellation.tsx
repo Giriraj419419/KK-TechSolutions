@@ -100,7 +100,7 @@ function getIdleAnimation(motionType: string, index: number) {
   }
 }
 
-export function TechConstellation({ className = "" }: { className?: string }) {
+const TechConstellation = React.memo(({ className = "" }: { className?: string }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
@@ -262,10 +262,10 @@ export function TechConstellation({ className = "" }: { className?: string }) {
       })}
     </motion.div>
   );
-}
+});
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const TechPartnerItem = ({ partner, i, hoveredId, setHoveredId, shouldReduceMotion, smoothX, smoothY, pushX, pushY, durationX, durationY, durationRot, delay, navigate }: any) => {
+const TechPartnerItem = React.memo(({ partner, i, hoveredId, setHoveredId, shouldReduceMotion, smoothX, smoothY, pushX, pushY, durationX, durationY, durationRot, delay, navigate }: any) => {
   const idleAnim = useMemo(() => getIdleAnimation(partner.motion, i), [partner.motion, i]);
   const depthMagneticX = useTransform(smoothX, [-300, 300], [-25 * partner.depth, 25 * partner.depth], { clamp: false });
   const depthMagneticY = useTransform(smoothY, [-300, 300], [-25 * partner.depth, 25 * partner.depth], { clamp: false });
@@ -353,7 +353,7 @@ const TechPartnerItem = ({ partner, i, hoveredId, setHoveredId, shouldReduceMoti
                }
             >
               <div className={`relative w-full h-full rounded-[18px] flex items-center justify-center p-3 sm:p-4 lg:p-5
-                 backdrop-blur-[16px] border overflow-hidden transition-colors duration-500
+                 backdrop-blur-[16px] border overflow-hidden transition-colors duration-300
                  ${isHovered && !shouldReduceMotion ? 'bg-white/20 border-white/30' : 'bg-white/[0.04] border-white/[0.08]'}
               `}>
                  <div className="absolute inset-0 rounded-[18px] bg-gradient-to-br from-white/20 to-transparent opacity-40 pointer-events-none" />
@@ -367,10 +367,10 @@ const TechPartnerItem = ({ partner, i, hoveredId, setHoveredId, shouldReduceMoti
                    />
                  )}
 
-                 <img 
+                 <img loading="lazy" decoding="async" 
                    src={partner.icon} 
                    alt={partner.name}
-                   className={`w-full h-full object-contain filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)] transition-all duration-500 ${['Adobe', 'CorelDRAW Graphics'].includes(partner.name) ? 'bg-white/95 rounded-lg px-1.5 py-1.5' : ''}`}
+                   className={`w-full h-full object-contain filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)] transition-all duration-300 ${['Adobe', 'CorelDRAW Graphics'].includes(partner.name) ? 'bg-white/95 rounded-lg px-1.5 py-1.5' : ''}`}
                  />
               </div>
               
@@ -390,4 +390,7 @@ const TechPartnerItem = ({ partner, i, hoveredId, setHoveredId, shouldReduceMoti
             </motion.div>
           </motion.div>
         );
-};
+});
+
+export default TechConstellation;
+

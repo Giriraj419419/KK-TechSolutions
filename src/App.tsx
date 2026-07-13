@@ -30,6 +30,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Preloader />
+      <WhatsAppButton />
       <CustomCursor />
       <ScrollToTop />
       {/* Noise texture overlay */}

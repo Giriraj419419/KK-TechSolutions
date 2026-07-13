@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+﻿import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
 import {
@@ -12,7 +12,7 @@ import EnterpriseCTA from '../components/EnterpriseCTA';
 // =========================================================================
 // PREMIUM AWS CARD ENHANCEMENT (Isolated physics for AWS page only)
 // =========================================================================
-function AWSPremiumCard({ children, className, delayOffset = 0 }: { children: React.ReactNode, className?: string, delayOffset?: number }) {
+const AWSPremiumCard = React.memo(function AWSPremiumCard({ children, className, delayOffset = 0 }: { children: React.ReactNode, className?: string, delayOffset?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   
   const x = useMotionValue(0);
@@ -25,6 +25,7 @@ function AWSPremiumCard({ children, className, delayOffset = 0 }: { children: Re
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-4deg", "4deg"]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (typeof window !== 'undefined' && window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const width = rect.width;
@@ -56,7 +57,7 @@ function AWSPremiumCard({ children, className, delayOffset = 0 }: { children: Re
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       animate={{ y: [0, floatValues.yOffset, 0] }}
       transition={{ repeat: Infinity, duration: floatValues.duration, ease: "easeInOut", delay: delayOffset }}
-      className={`relative group rounded-2xl border border-white/5 bg-white/[0.02] premium-glass transition-all duration-500 hover:shadow-[0_20px_40px_-10px_rgba(249,115,22,0.12)] hover:border-orange-500/20 hover:bg-white/[0.03] ${className}`}
+      className={`relative group rounded-2xl border border-white/5 bg-white/[0.02] premium-glass will-change-transform transform-gpu transition-all duration-300 hover:shadow-[0_20px_40px_-10px_rgba(249,115,22,0.12)] hover:border-orange-500/20 hover:bg-white/[0.03] ${className}`}
     >
       {/* Subtle hover spotlight tracking mouse */}
       <motion.div 
@@ -72,7 +73,7 @@ function AWSPremiumCard({ children, className, delayOffset = 0 }: { children: Re
       </div>
     </motion.div>
   );
-}
+});
 
 // =========================================================================
 // DATA ARRAYS
@@ -141,12 +142,12 @@ export default function AWS() {
               </Reveal>
             </div>
 
-            {/* Right Column — Animated AWS Ecosystem */}
+            {/* Right Column â€” Animated AWS Ecosystem */}
             <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full h-[500px]">
               <div className="relative w-full h-full max-w-md mx-auto">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-orange-500/10 blur-xl animate-pulse" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl premium-glass border border-orange-500/30 z-20">
-                  <img src="/aws.svg" alt="AWS Logo" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]" />
+                  <img loading="lazy" decoding="async" src="/aws.svg" alt="AWS Logo" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]" />
                 </div>
 
                 {/* Orbiting Tech Icons */}
@@ -270,3 +271,9 @@ export default function AWS() {
     </div>
   );
 }
+
+
+
+
+
+

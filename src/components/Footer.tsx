@@ -37,7 +37,7 @@ export default function Footer() {
               className="inline-block cursor-pointer"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src="/kk-logo-transparent.png"
                 className="h-10 w-auto object-contain opacity-90 hover:opacity-100 hover:scale-105 transition-all duration-300 drop-shadow-md"
                 alt="KK Tech Solutions"
@@ -52,13 +52,15 @@ export default function Footer() {
               {[
                 { Icon: Facebook, label: 'Facebook', href: '#' },
                 { Icon: Twitter, label: 'Twitter', href: '#' },
-                { Icon: Linkedin, label: 'LinkedIn', href: '#' },
+                { Icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/company/kktechsolutions/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BUGmdLg3mTc2yfpNRPmOgow%3D%3D' },
                 { Icon: Instagram, label: 'Instagram', href: '#' },
               ].map(({ Icon, label, href }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 bg-white/5 hover:bg-blue-600 text-gray-400 hover:text-white border border-white/5"
                 >
                   <Icon className="w-4 h-4" />
@@ -139,11 +141,11 @@ export default function Footer() {
             href="https://maps.google.com/?q=715,+Shilp+Arista,+Sindhu+Bhavan+Road,+Bodakdev,+Ahmedabad,+Gujarat+380054"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Head Office — Opens Google Maps"
+            aria-label="Head Office â€” Opens Google Maps"
             className="group relative overflow-hidden bg-white/[0.02] border border-white/5 rounded-2xl p-6 hover:bg-white/[0.04] hover:-translate-y-1 hover:border-blue-500/50 hover:shadow-[0_8px_30px_rgba(59,130,246,0.15)] transition-all duration-300 block cursor-pointer active:scale-95"
           >
             {/* Glass highlight */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-300 ease-in-out pointer-events-none" />
             
             <div className="flex justify-between items-start">
               <h4 className="text-white font-bold mb-4 flex items-center gap-2">
@@ -155,7 +157,7 @@ export default function Footer() {
             <p className="text-sm text-gray-400 leading-relaxed">
               715, Shilp Arista<br/>
               Sindhu Bhavan Road, Bodakdev<br/>
-              Ahmedabad, Gujarat – 380054
+              Ahmedabad, Gujarat â€“ 380054
             </p>
           </a>
 
@@ -163,11 +165,11 @@ export default function Footer() {
             href="https://maps.google.com/?q=818,+8th+Floor,+Devika+Tower,+Nehru+Place,+New+Delhi+110019"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Branch Office — Opens Google Maps"
+            aria-label="Branch Office â€” Opens Google Maps"
             className="group relative overflow-hidden bg-white/[0.02] border border-white/5 rounded-2xl p-6 hover:bg-white/[0.04] hover:-translate-y-1 hover:border-blue-500/50 hover:shadow-[0_8px_30px_rgba(59,130,246,0.15)] transition-all duration-300 block cursor-pointer active:scale-95"
           >
             {/* Glass highlight */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-300 ease-in-out pointer-events-none" />
             
             <div className="flex justify-between items-start">
               <h4 className="text-white font-bold mb-4 flex items-center gap-2">
@@ -179,7 +181,7 @@ export default function Footer() {
             <p className="text-sm text-gray-400 leading-relaxed">
               818, 8th Floor<br/>
               Devika Tower, Nehru Place<br/>
-              New Delhi – 110019
+              New Delhi â€“ 110019
             </p>
           </a>
         </div>
@@ -189,7 +191,7 @@ export default function Footer() {
       <div className="border-t border-white/5 relative z-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 relative">
           <p className="text-sm text-gray-500">
-            © {new Date().getFullYear()} KK Techsolutions. All Rights Reserved.
+            Â© {new Date().getFullYear()} KK Techsolutions. All Rights Reserved.
           </p>
           <div className="flex items-center gap-6">
             <Link to="/privacy-policy" className="text-sm text-gray-500 hover:text-white transition-colors">Privacy Policy</Link>
@@ -209,3 +211,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+﻿import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, Cloud, Server, Users, Activity } from 'lucide-react';
@@ -135,7 +135,7 @@ export default function EnterpriseCTA({
           >
             {/* Inner Highlights */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/[0.08] to-transparent pointer-events-none" />
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none bg-[radial-gradient(circle_at_var(--mouse-x,_50%)_var(--mouse-y,_50%),rgba(37,99,235,0.1),transparent_50%)]" />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none bg-[radial-gradient(circle_at_var(--mouse-x,_50%)_var(--mouse-y,_50%),rgba(37,99,235,0.1),transparent_50%)]" />
             
             <div className="flex flex-col xl:flex-row items-center justify-between gap-12 xl:gap-16 relative z-10">
               
@@ -187,10 +187,10 @@ export default function EnterpriseCTA({
               >
                 <Link 
                   to={primaryButtonLink} 
-                  className="relative group/btn inline-flex items-center justify-center overflow-hidden rounded-full p-[1px] shadow-[0_10px_30px_rgba(37,99,235,0.2)] hover:shadow-[0_15px_40px_rgba(34,211,238,0.3)] transition-shadow duration-500"
+                  className="relative group/btn inline-flex items-center justify-center overflow-hidden rounded-full p-[1px] shadow-[0_10px_30px_rgba(37,99,235,0.2)] hover:shadow-[0_15px_40px_rgba(34,211,238,0.3)] transition-shadow duration-300"
                 >
                   {/* Animated Border Gradient */}
-                  <span className="absolute inset-0 bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-600 opacity-70 group-hover/btn:opacity-100 transition-all duration-700 ease-linear" style={{ backgroundSize: '200% auto', animation: 'gradient 3s linear infinite' }} />
+                  <span className="absolute inset-0 bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-600 opacity-70 group-hover/btn:opacity-100 transition-all duration-300 ease-linear" style={{ backgroundSize: '200% auto', animation: 'gradient 3s linear infinite' }} />
                   
                   {/* Button Inner */}
                   <span className="relative flex items-center justify-center gap-3 bg-[#0a111a] px-8 py-4 sm:px-10 sm:py-5 rounded-full transition-all duration-300 group-hover/btn:bg-opacity-0">
@@ -230,3 +230,4 @@ export default function EnterpriseCTA({
     </section>
   );
 }
+

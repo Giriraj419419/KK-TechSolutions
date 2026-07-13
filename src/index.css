@@ -547,3 +547,9 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-3px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
 }
+
+/* ========== MASKS ========== */
+.mask-image-bottom {
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+}

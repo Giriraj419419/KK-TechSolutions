@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -29,7 +29,7 @@ const metrics = [
   { value: '500+', label: 'Projects Delivered' },
   { value: '100+', label: 'Happy Clients' },
   { value: '15+', label: 'Years Experience' },
-  { value: '24×7', label: 'Technical Support' },
+  { value: '24Ã—7', label: 'Technical Support' },
 ];
 
 const testimonials = [
@@ -156,7 +156,7 @@ export default function Clients() {
               
               {/* KK Tech Logo in the center */}
               <div className="absolute z-10 p-3 sm:p-4 rounded-xl bg-white/5 border border-white/10 premium-glass shadow-[0_0_30px_rgba(59,130,246,0.3)] hover:scale-105 transition-transform duration-300 flex items-center justify-center">
-                <img src="/kk-logo-transparent.png" alt="KK Tech Solutions" className="h-8 sm:h-10 w-auto object-contain drop-shadow-md" />
+                <img loading="lazy" decoding="async" src="/kk-logo-transparent.png" alt="KK Tech Solutions" className="h-8 sm:h-10 w-auto object-contain drop-shadow-md" />
               </div>
 
               {/* Orbiting Ring */}
@@ -258,23 +258,19 @@ export default function Clients() {
           </div>
 
           <div className="relative overflow-hidden w-full flex py-4" style={{ maskImage: 'linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent)' }}>
-            <motion.div 
-              className="flex gap-4 shrink-0 px-2"
-              animate={{ x: ["-50%", "0%"] }}
-              transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
-            >
+            <div className="flex gap-4 shrink-0 px-2 w-max animate-marquee pause-on-hover will-change-transform transform-gpu motion-reduce:animate-none motion-reduce:flex-wrap motion-reduce:justify-center">
               {[...clientLogos, ...clientLogos, ...clientLogos, ...clientLogos].map((client, idx) => (
                 <div key={idx} className="w-[180px] shrink-0">
                   <TiltCard className="p-6 h-32 flex flex-col items-center justify-center text-center premium-glass group cursor-pointer hover:border-blue-500/30 transition-all duration-300">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
                     <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-lg font-bold text-gray-300 group-hover:text-blue-400 group-hover:scale-110 transition-all duration-300 mb-2 shadow-lg">
-                      <img src={client.image} alt={client.name} className="w-6 h-6 object-contain" />
+                      <img loading="lazy" decoding="async" src={client.image} alt={client.name} className="w-6 h-6 object-contain" />
                     </div>
                     <div className="text-xs font-medium text-gray-500 group-hover:text-gray-300 transition-colors">{client.name}</div>
                   </TiltCard>
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -407,3 +403,8 @@ export default function Clients() {
     </div>
   );
 }
+
+
+
+
+
