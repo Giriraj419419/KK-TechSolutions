@@ -1,4 +1,4 @@
-﻿/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence } from 'framer-motion';
@@ -11,6 +11,7 @@ import {
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
+import { BrandLogo } from '../components/BrandLogo';
 
 // =========================================================================
 // PREMIUM AZURE CARD ENHANCEMENT (Isolated physics for Azure page only)
@@ -224,23 +225,22 @@ export default function Azure() {
               <div className="relative w-full h-full max-w-md mx-auto">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-[#0078D4]/10 blur-xl animate-pulse" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl premium-glass border border-blue-500/30 z-20">
-                  <img loading="lazy" decoding="async" src="/azure.svg" alt="Azure Logo" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(0,120,212,0.5)]" />
+                  <BrandLogo iconName="microsoftazure" color="0089d6" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(0,120,212,0.5)]" />
                 </div>
 
                 {/* Orbiting Tech Icons */}
                 {[
-                  { icon: Server, label: 'Virtual Machines', delay: 0, angle: 0 },
-                  { icon: Database, label: 'SQL Database', delay: 1.5, angle: 60 },
-                  { icon: BrainCircuit, label: 'AI Services', delay: 3, angle: 120 },
-                  { icon: LayoutGrid, label: 'Kubernetes', delay: 4.5, angle: 180 },
-                  { icon: Network, label: 'Networking', delay: 6, angle: 240 },
-                  { icon: ShieldCheck, label: 'Security', delay: 7.5, angle: 300 }
+                  { brand: 'microsoftazure', fallbackIcon: Server, label: 'Virtual Machines', delay: 0, angle: 0 },
+                  { brand: 'microsoftazure', fallbackIcon: BrainCircuit, label: 'Azure AI', delay: 1.5, angle: 60 },
+                  { brand: 'microsoftazure', fallbackIcon: ShieldCheck, label: 'Security', delay: 3, angle: 120 },
+                  { brand: 'microsoftazure', fallbackIcon: Database, label: 'Backup', delay: 4.5, angle: 180 },
+                  { brand: 'microsoftazure', fallbackIcon: Network, label: 'Networking', delay: 6, angle: 240 },
+                  { brand: 'microsoftazure', fallbackIcon: LayoutGrid, label: 'Kubernetes', delay: 7.5, angle: 300 }
                 ].map((item, idx) => {
                   const radius = 160;
                   const radian = (item.angle * Math.PI) / 180;
                   const x = Math.cos(radian) * radius;
                   const y = Math.sin(radian) * radius;
-                  const Icon = item.icon;
 
                   return (
                     <motion.div
@@ -255,7 +255,7 @@ export default function Azure() {
                         transition={{ repeat: Infinity, duration: 4 + (idx % 3), ease: 'easeInOut', delay: item.delay * 0.2 }}
                         className="p-3 rounded-xl bg-white/[0.03] border border-white/10 premium-glass group cursor-default hover:border-blue-500/40 hover:bg-blue-500/10 transition-colors"
                       >
-                        <Icon className="w-6 h-6 text-blue-400 group-hover:scale-110 transition-transform" />
+                        <BrandLogo iconName={item.brand} fallbackIcon={item.fallbackIcon} className="w-6 h-6 text-blue-400 group-hover:scale-110 transition-transform" />
                       </motion.div>
                       <span className="mt-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider bg-[#0B121F]/80 px-2 py-0.5 rounded-full">{item.label}</span>
                     </motion.div>

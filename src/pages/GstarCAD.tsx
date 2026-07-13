@@ -1,4 +1,4 @@
-﻿/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence } from 'framer-motion';
@@ -13,6 +13,7 @@ import {
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
+import { BrandLogo } from '../components/BrandLogo';
 
 // =========================================================================
 // PREMIUM GSTARCAD CARD ENHANCEMENT (Isolated physics)
@@ -258,23 +259,21 @@ export default function GstarCAD() {
               <div className="relative w-full h-full max-w-md mx-auto">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-[#06B6D4]/10 blur-xl animate-pulse" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl premium-glass border border-cyan-500/30 z-20 flex items-center justify-center">
-                  <div className="flex items-center justify-center font-bold text-xl tracking-wide text-cyan-400 drop-shadow-[0_0_15px_rgba(6,182,212,0.5)]">GstarCAD</div>
+                  <BrandLogo 
+                    customSvg={<svg viewBox="0 0 40 40" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(6,182,212,0.5)] fill-cyan-400"><path d="M20,0 L40,20 L20,40 L0,20 Z" /><circle cx="20" cy="20" r="10" fill="#0B121F" /><circle cx="20" cy="20" r="5" fill="#22d3ee" /></svg>}
+                  />
                 </div>
 
                 {/* Orbiting Tech Icons */}
                 {[
-                  { icon: PenTool, label: 'Professional', delay: 0, angle: 0 },
-                  { icon: Settings, label: 'Mechanical', delay: 1.5, angle: 60 },
-                  { icon: Building2, label: 'Architecture', delay: 3, angle: 120 },
-                  { icon: Cloud, label: 'Collaboration', delay: 4.5, angle: 180 },
-                  { icon: Smartphone, label: 'Mobile', delay: 6, angle: 240 },
-                  { icon: Monitor, label: 'Viewer', delay: 7.5, angle: 300 }
+                  { brand: 'gstarcad', fallbackIcon: PenTool, label: 'CAD Drafting', delay: 0, angle: 0 },
+                  { brand: 'gstarcad', fallbackIcon: LayoutTemplate, label: '2D Design', delay: 2, angle: 120 },
+                  { brand: 'gstarcad', fallbackIcon: Box, label: '3D Modeling', delay: 4, angle: 240 }
                 ].map((item, idx) => {
                   const radius = 160;
                   const radian = (item.angle * Math.PI) / 180;
                   const x = Math.cos(radian) * radius;
                   const y = Math.sin(radian) * radius;
-                  const Icon = item.icon;
 
                   return (
                     <motion.div
@@ -289,9 +288,9 @@ export default function GstarCAD() {
                         transition={{ repeat: Infinity, duration: 4 + (idx % 3), ease: 'easeInOut', delay: item.delay * 0.2 }}
                         className="p-3 rounded-xl bg-white/[0.03] border border-white/10 premium-glass group cursor-default hover:border-cyan-500/40 hover:bg-cyan-500/10 transition-colors"
                       >
-                        <Icon className="w-6 h-6 text-cyan-400 group-hover:scale-110 transition-transform" />
+                        <BrandLogo iconName={item.brand} fallbackIcon={item.fallbackIcon} className="w-6 h-6 text-cyan-400 group-hover:scale-110 transition-transform" />
                       </motion.div>
-                      <span className="mt-2 text-[10px] font-bold text-gray-400 uppercase tracking-wider bg-[#0B121F]/80 px-2 py-0.5 rounded-full">{item.label}</span>
+                      <span className="mt-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider bg-[#0B121F]/80 px-2 py-0.5 rounded-full">{item.label}</span>
                     </motion.div>
                   );
                 })}

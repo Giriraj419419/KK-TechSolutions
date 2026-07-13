@@ -1,4 +1,4 @@
-﻿import React, { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
 import {
@@ -8,6 +8,7 @@ import {
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
+import { BrandLogo } from '../components/BrandLogo';
 
 // =========================================================================
 // PREMIUM AWS CARD ENHANCEMENT (Isolated physics for AWS page only)
@@ -147,23 +148,22 @@ export default function AWS() {
               <div className="relative w-full h-full max-w-md mx-auto">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-orange-500/10 blur-xl animate-pulse" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl premium-glass border border-orange-500/30 z-20">
-                  <img loading="lazy" decoding="async" src="/aws.svg" alt="AWS Logo" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]" />
+                  <BrandLogo iconName="amazonaws" color="ff9900" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]" />
                 </div>
 
                 {/* Orbiting Tech Icons */}
                 {[
-                  { icon: Server, label: 'EC2 Compute', delay: 0, angle: 0 },
-                  { icon: Database, label: 'S3 Storage', delay: 1.5, angle: 60 },
-                  { icon: Cloud, label: 'Lambda', delay: 3, angle: 120 },
-                  { icon: Globe, label: 'CloudFront', delay: 4.5, angle: 180 },
-                  { icon: ShieldCheck, label: 'IAM Security', delay: 6, angle: 240 },
-                  { icon: Gauge, label: 'RDS Database', delay: 7.5, angle: 300 }
+                  { brand: 'amazonec2', fallbackIcon: Server, label: 'EC2 Compute', delay: 0, angle: 0 },
+                  { brand: 'amazons3', fallbackIcon: Database, label: 'S3 Storage', delay: 1.5, angle: 60 },
+                  { brand: 'awslambda', fallbackIcon: Cloud, label: 'Lambda', delay: 3, angle: 120 },
+                  { brand: 'amazoncloudfront', fallbackIcon: Globe, label: 'CloudFront', delay: 4.5, angle: 180 },
+                  { brand: 'awsiam', fallbackIcon: ShieldCheck, label: 'IAM Security', delay: 6, angle: 240 },
+                  { brand: 'amazonrds', fallbackIcon: Gauge, label: 'RDS Database', delay: 7.5, angle: 300 }
                 ].map((item, idx) => {
                   const radius = 160;
                   const radian = (item.angle * Math.PI) / 180;
                   const x = Math.cos(radian) * radius;
                   const y = Math.sin(radian) * radius;
-                  const Icon = item.icon;
 
                   return (
                     <motion.div
@@ -178,7 +178,7 @@ export default function AWS() {
                         transition={{ repeat: Infinity, duration: 4 + (idx % 3), ease: 'easeInOut', delay: item.delay * 0.2 }}
                         className="p-3 rounded-xl bg-white/[0.03] border border-white/10 premium-glass group cursor-default hover:border-orange-500/40 hover:bg-orange-500/10 transition-colors"
                       >
-                        <Icon className="w-6 h-6 text-orange-400 group-hover:scale-110 transition-transform" />
+                        <BrandLogo iconName={item.brand} fallbackIcon={item.fallbackIcon} className="w-6 h-6 text-orange-400 group-hover:scale-110 transition-transform" />
                       </motion.div>
                       <span className="mt-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider bg-[#0B121F]/80 px-2 py-0.5 rounded-full">{item.label}</span>
                     </motion.div>

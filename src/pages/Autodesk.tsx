@@ -1,4 +1,4 @@
-﻿/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence } from 'framer-motion';
@@ -9,6 +9,7 @@ import { Building2, Factory, MonitorPlay, Hammer, Box, Lightbulb,
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
+import { BrandLogo } from '../components/BrandLogo';
 
 // =========================================================================
 // PREMIUM AUTODESK CARD ENHANCEMENT (Isolated physics for Autodesk page only)
@@ -231,23 +232,21 @@ export default function Autodesk() {
               <div className="relative w-full h-full max-w-md mx-auto">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-[#14B8A6]/10 blur-xl animate-pulse" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl premium-glass border border-teal-500/30 z-20 flex items-center justify-center">
-                  <div className="w-16 h-16 flex items-center justify-center font-bold text-3xl text-teal-400 drop-shadow-[0_0_15px_rgba(20,184,166,0.5)]">A</div>
+                  <BrandLogo iconName="autodesk" color="00a89d" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(20,184,166,0.5)]" />
                 </div>
 
                 {/* Orbiting Tech Icons */}
                 {[
-                  { icon: Compass, label: 'AutoCAD', delay: 0, angle: 0 },
-                  { icon: Building2, label: 'Revit', delay: 1.5, angle: 60 },
-                  { icon: Factory, label: 'Inventor', delay: 3, angle: 120 },
-                  { icon: Box, label: 'Fusion', delay: 4.5, angle: 180 },
-                  { icon: Ruler, label: 'Civil 3D', delay: 6, angle: 240 },
-                  { icon: MonitorPlay, label: 'Maya', delay: 7.5, angle: 300 }
+                  { brand: 'autocad', fallbackIcon: Compass, label: 'AutoCAD', delay: 0, angle: 0 },
+                  { brand: 'autodeskrevit', fallbackIcon: Building2, label: 'Revit', delay: 1.5, angle: 72 },
+                  { brand: 'autodesk', fallbackIcon: Factory, label: 'Inventor', delay: 3, angle: 144 },
+                  { brand: 'autodesk', fallbackIcon: Ruler, label: 'Civil 3D', delay: 4.5, angle: 216 },
+                  { brand: 'autodesk', fallbackIcon: Box, label: 'Fusion 360', delay: 6, angle: 288 }
                 ].map((item, idx) => {
                   const radius = 160;
                   const radian = (item.angle * Math.PI) / 180;
                   const x = Math.cos(radian) * radius;
                   const y = Math.sin(radian) * radius;
-                  const Icon = item.icon;
 
                   return (
                     <motion.div
@@ -262,7 +261,7 @@ export default function Autodesk() {
                         transition={{ repeat: Infinity, duration: 4 + (idx % 3), ease: 'easeInOut', delay: item.delay * 0.2 }}
                         className="p-3 rounded-xl bg-white/[0.03] border border-white/10 premium-glass group cursor-default hover:border-teal-500/40 hover:bg-teal-500/10 transition-colors"
                       >
-                        <Icon className="w-6 h-6 text-teal-400 group-hover:scale-110 transition-transform" />
+                        <BrandLogo iconName={item.brand} fallbackIcon={item.fallbackIcon} className="w-6 h-6 text-teal-400 group-hover:scale-110 transition-transform" />
                       </motion.div>
                       <span className="mt-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider bg-[#0B121F]/80 px-2 py-0.5 rounded-full">{item.label}</span>
                     </motion.div>

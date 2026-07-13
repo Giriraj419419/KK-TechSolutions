@@ -1,4 +1,4 @@
-﻿/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence } from 'framer-motion';
@@ -11,6 +11,7 @@ import {
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
+import { BrandLogo } from '../components/BrandLogo';
 
 const HP_LIGHTS = Array.from({ length: 3 }).map(() => ({
   height: Math.random() * 16 + 4,
@@ -207,7 +208,7 @@ function HPHeroAnimation() {
   useEffect(() => {
     if (!isReady) return;
     const interval = setInterval(() => {
-      setActiveModule((prev) => (prev + Math.floor(Math.random() * 3) + 1) % 8);
+      setActiveModule((prev) => (prev + Math.floor(Math.random() * 2) + 1) % 3);
     }, 3000); // Shift active connection every 3s
     return () => clearTimeout(interval);
   }, [isReady]);
@@ -239,14 +240,9 @@ function HPHeroAnimation() {
   };
 
   const modules = [
-    { icon: Network, label: 'Networking', angle: 0 },
-    { icon: HardDrive, label: 'Storage', angle: 45 },
-    { icon: ShieldCheck, label: 'Security', angle: 90 },
-    { icon: BrainCircuit, label: 'AI Services', angle: 135 },
-    { icon: Database, label: 'Database', angle: 180 },
-    { icon: Settings, label: 'Backup', angle: 225 },
-    { icon: Cloud, label: 'Cloud', angle: 270 },
-    { icon: Activity, label: 'Monitoring', angle: 315 }
+    { brand: 'hewlettpackardenterprise', fallbackIcon: Server, label: 'ProLiant DL', angle: 0 },
+    { brand: 'hewlettpackardenterprise', fallbackIcon: Database, label: 'ProLiant ML', angle: 120 },
+    { brand: 'hewlettpackardenterprise', fallbackIcon: LayoutGrid, label: 'Synergy', angle: 240 }
   ];
 
   const radiusPercent = 38; // 38% of container width/height
@@ -375,7 +371,6 @@ function HPHeroAnimation() {
         const radian = (item.angle * Math.PI) / 180;
         const xPos = Math.cos(radian) * radiusPercent;
         const yPos = Math.sin(radian) * radiusPercent;
-        const Icon = item.icon;
         const isActive = idx === activeModule;
 
         return (
@@ -403,7 +398,7 @@ function HPHeroAnimation() {
                     : 'bg-[#0B121F]/80 border-white/10 hover:border-green-500/30 hover:bg-green-500/5'
                   }`}
               >
-                <Icon className={`w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300
+                <BrandLogo iconName={item.brand} fallbackIcon={item.fallbackIcon} className={`w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300
                   ${isActive
                     ? 'text-green-400 drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]'
                     : 'text-gray-400 group-hover:text-green-300'
@@ -457,7 +452,7 @@ function HPHeroAnimation() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[50%] rounded-full bg-green-500/15 blur-[60px] pointer-events-none mix-blend-screen" />
           </motion.div>
 
-          <Server className={`w-16 h-16 sm:w-20 sm:h-20 relative z-10 transition-colors duration-300 ${isReady ? 'text-green-500 drop-shadow-[0_0_20px_rgba(34,197,94,0.6)]' : 'text-gray-600'}`} style={{ transform: 'translateZ(25px)' }} />
+          <BrandLogo iconName="hewlettpackardenterprise" className={`w-16 h-16 sm:w-20 sm:h-20 relative z-10 transition-colors duration-300 ${isReady ? 'text-green-500 drop-shadow-[0_0_20px_rgba(34,197,94,0.6)]' : 'text-gray-600'}`} color="01a982" style={{ transform: 'translateZ(25px)' }} />
 
           {/* Live Status Indicators */}
           <div className="absolute top-4 right-4 flex gap-1.5 z-10" style={{ transform: 'translateZ(30px)' }}>

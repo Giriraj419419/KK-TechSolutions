@@ -1,15 +1,17 @@
-﻿/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { motion, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence } from 'framer-motion';
-import {
-  Cloud, ShieldCheck, Server, Database, Globe, ArrowRight, Activity, Cpu, Network, CheckCircle, ChevronDown, 
-  HeartPulse, LineChart, Factory, ShoppingCart, GraduationCap, Building2,
-  Briefcase, TerminalSquare, BrainCircuit, LayoutGrid, Zap, Shield, HardDrive, Settings, Wrench
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { 
+  Server, Shield, Cloud, Lock, Settings, Rocket, HeadphonesIcon, 
+  Cpu, HardDrive, Network, Microchip, Clock, ChevronDown, CheckCircle2,
+  Database, BrainCircuit, LayoutGrid, ShieldCheck, ArrowRight, Activity, Zap, ShieldAlert, Wifi, TerminalSquare, Factory, HeartPulse, Building2, GraduationCap, Globe, ShoppingCart, Wrench,
+  CheckCircle, LineChart, Briefcase
 } from 'lucide-react';
-import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
+import { Link } from 'react-router-dom';
+import { SectionTitle, Reveal, StaggerContainer, StaggerItem, Eyebrow, TextReveal } from '../components/Section';
 import { CosmosField, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
+import { BrandLogo } from '../components/BrandLogo';
 
 const LENOVO_PARTICLES = Array.from({ length: 8 }).map(() => ({
   top: `${15 + Math.random() * 70}%`,
@@ -228,12 +230,9 @@ function LenovoHeroAnimation() {
   };
 
   const modules = [
-    { icon: BrainCircuit, label: 'AI Services', angle: 30 },
-    { icon: HardDrive, label: 'Storage', angle: 90 },
-    { icon: Cloud, label: 'Cloud', angle: 150 },
-    { icon: Database, label: 'Database', angle: 210 },
-    { icon: ShieldCheck, label: 'Security', angle: 270 },
-    { icon: Network, label: 'Networking', angle: 330 }
+    { brand: 'lenovo', fallbackIcon: Server, label: 'ThinkSystem (Rack)', angle: 30 },
+    { brand: 'lenovo', fallbackIcon: Database, label: 'ThinkSystem (Tower)', angle: 150 },
+    { brand: 'lenovo', fallbackIcon: LayoutGrid, label: 'ThinkEdge', angle: 270 }
   ];
 
   const radiusPercent = 36;
@@ -367,7 +366,6 @@ function LenovoHeroAnimation() {
         const radian = (item.angle * Math.PI) / 180;
         const xPos = Math.cos(radian) * radiusPercent;
         const yPos = Math.sin(radian) * radiusPercent;
-        const Icon = item.icon;
 
         return (
           <motion.div
@@ -396,7 +394,7 @@ function LenovoHeroAnimation() {
                 style={{ clipPath: hexClipPath }} // Hexagonal node shape
               >
                 <div className="p-2"> {/* Inner padding for the hexagon clip */}
-                  <Icon className={`w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300
+                  <BrandLogo iconName={item.brand} fallbackIcon={item.fallbackIcon} className={`w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300
                     ${isProcessing 
                       ? 'text-red-400 drop-shadow-[0_0_8px_rgba(220,38,38,0.8)]' 
                       : 'text-gray-400 group-hover:text-red-300'
@@ -460,7 +458,7 @@ function LenovoHeroAnimation() {
              />
           )}
 
-          <Server className={`w-16 h-16 sm:w-20 sm:h-20 relative z-20 transition-all duration-300 ${isProcessing ? 'text-red-400' : (isReady ? 'text-red-500' : 'text-gray-600')}`} style={{ transform: 'translateZ(25px)', filter: isProcessing ? 'drop-shadow(0 0 30px rgba(220,38,38,0.6)) drop-shadow(0 0 10px rgba(220,38,38,0.8))' : (isReady ? 'drop-shadow(0 0 15px rgba(220,38,38,0.4))' : 'none') }} />
+          <BrandLogo iconName="lenovo" color="e2231a" className={`w-16 h-16 sm:w-20 sm:h-20 relative z-20 transition-all duration-300 ${isProcessing ? 'text-red-400' : (isReady ? 'text-red-500' : 'text-gray-600')}`} style={{ transform: 'translateZ(25px)', filter: isProcessing ? 'drop-shadow(0 0 30px rgba(220,38,38,0.6)) drop-shadow(0 0 10px rgba(220,38,38,0.8))' : (isReady ? 'drop-shadow(0 0 15px rgba(220,38,38,0.4))' : 'none') }} />
           
           {/* Core Activity Indicators */}
           <div className="absolute top-4 right-4 flex gap-1.5 z-20" style={{ transform: 'translateZ(30px)' }}>

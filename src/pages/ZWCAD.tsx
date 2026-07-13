@@ -1,4 +1,4 @@
-﻿/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence } from 'framer-motion';
@@ -6,8 +6,7 @@ import {
   Building2, Factory, Hammer, LayoutTemplate, CheckCircle, ChevronDown, ArrowRight, HardDrive, Cpu, 
   Building, FileCode2, LayoutDashboard, Zap, 
   PenTool, Box, Layers, AppWindow, 
-  Code, Repeat,
-  
+  Code, Repeat, Cloud, Globe, Settings
 } from 'lucide-react';
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, SectionGlow } from '../components/Atmosphere';
@@ -115,6 +114,7 @@ const reasons = [
   { icon: Zap, title: 'Fast Performance', desc: 'Experience lightning-fast opening and processing speeds, even for large and complex drawings.' },
 ];
 import EnterpriseCTA from '../components/EnterpriseCTA';
+import { BrandLogo } from '../components/BrandLogo';
 
 const industries = [
   { icon: Building2, name: 'Architecture' },
@@ -222,23 +222,21 @@ export default function ZWCAD() {
               <div className="relative w-full h-full max-w-md mx-auto">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-[#3B82F6]/10 blur-xl animate-pulse" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl premium-glass border border-blue-500/30 z-20 flex items-center justify-center">
-                  <div className="w-16 h-16 flex items-center justify-center font-bold text-3xl text-blue-400 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]">ZW</div>
+                  <BrandLogo 
+                    customSvg={<svg viewBox="0 0 40 40" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)] fill-blue-400"><path d="M10,10 L30,10 L10,30 L30,30" stroke="currentColor" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+                  />
                 </div>
 
                 {/* Orbiting Tech Icons */}
                 {[
-                  { icon: PenTool, label: 'Drafting', delay: 0, angle: 0 },
-                  { icon: Box, label: 'Modeling', delay: 1.5, angle: 60 },
-                  { icon: FileCode2, label: 'DWG', delay: 3, angle: 120 },
-                  { icon: Layers, label: 'Layers', delay: 4.5, angle: 180 },
-                  { icon: Code, label: 'LISP', delay: 6, angle: 240 },
-                  { icon: AppWindow, label: 'Sheet Set', delay: 7.5, angle: 300 }
+                  { brand: 'zwcad', fallbackIcon: Building2, label: 'Architecture', delay: 0, angle: 0 },
+                  { brand: 'zwcad', fallbackIcon: Settings, label: 'Mechanical', delay: 2, angle: 120 },
+                  { brand: 'zwcad', fallbackIcon: Factory, label: 'MFG', delay: 4, angle: 240 }
                 ].map((item, idx) => {
                   const radius = 160;
                   const radian = (item.angle * Math.PI) / 180;
                   const x = Math.cos(radian) * radius;
                   const y = Math.sin(radian) * radius;
-                  const Icon = item.icon;
 
                   return (
                     <motion.div
@@ -253,7 +251,7 @@ export default function ZWCAD() {
                         transition={{ repeat: Infinity, duration: 4 + (idx % 3), ease: 'easeInOut', delay: item.delay * 0.2 }}
                         className="p-3 rounded-xl bg-white/[0.03] border border-white/10 premium-glass group cursor-default hover:border-blue-500/40 hover:bg-blue-500/10 transition-colors"
                       >
-                        <Icon className="w-6 h-6 text-blue-400 group-hover:scale-110 transition-transform" />
+                        <BrandLogo iconName={item.brand} fallbackIcon={item.fallbackIcon} className="w-6 h-6 text-blue-400 group-hover:scale-110 transition-transform" />
                       </motion.div>
                       <span className="mt-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider bg-[#0B121F]/80 px-2 py-0.5 rounded-full">{item.label}</span>
                     </motion.div>

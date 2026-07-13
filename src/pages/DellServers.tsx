@@ -1,4 +1,4 @@
-﻿/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence } from 'framer-motion';
@@ -11,6 +11,7 @@ import {
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
+import { BrandLogo } from '../components/BrandLogo';
 
 const DELL_PARTICLES = Array.from({ length: 6 }).map(() => ({
   x: (Math.random() - 0.5) * 40,
@@ -220,12 +221,9 @@ function DellServerHeroAnimation() {
   };
 
   const orbitNodes = [
-    { icon: Server, label: 'Virtual Machines', delay: 0, angle: 0 },
-    { icon: Database, label: 'SQL Database', delay: 1.5, angle: 60 },
-    { icon: BrainCircuit, label: 'AI Services', delay: 3, angle: 120 },
-    { icon: LayoutGrid, label: 'Kubernetes', delay: 4.5, angle: 180 },
-    { icon: Network, label: 'Networking', delay: 6, angle: 240 },
-    { icon: ShieldCheck, label: 'Security', delay: 7.5, angle: 300 }
+    { brand: 'dell', fallbackIcon: Server, label: 'Rack Servers', delay: 0, angle: 0 },
+    { brand: 'dell', fallbackIcon: Database, label: 'Tower Servers', delay: 2, angle: 120 },
+    { brand: 'dell', fallbackIcon: LayoutGrid, label: 'Modular', delay: 4, angle: 240 }
   ];
 
   const radiusPercent = 38;
@@ -345,12 +343,10 @@ function DellServerHeroAnimation() {
           </defs>
         </svg>
 
-        {/* Floating Infrastructure Icons */}
         {orbitNodes.map((item, idx) => {
           const radian = (item.angle * Math.PI) / 180;
           const xPos = Math.cos(radian) * radiusPercent;
           const yPos = Math.sin(radian) * radiusPercent;
-          const Icon = item.icon;
 
           return (
             <motion.div
@@ -377,7 +373,7 @@ function DellServerHeroAnimation() {
                     }}
                     className="p-3 rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/10 premium-glass group cursor-default hover:border-blue-500/50 hover:bg-blue-500/15 transition-all shadow-lg"
                   >
-                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400 group-hover:scale-110 group-hover:text-blue-300 group-hover:drop-shadow-[0_0_10px_rgba(59,130,246,0.5)] transition-all duration-300" />
+                    <BrandLogo iconName={item.brand} fallbackIcon={item.fallbackIcon} className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400 group-hover:scale-110 group-hover:text-blue-300 group-hover:drop-shadow-[0_0_10px_rgba(59,130,246,0.5)] transition-all duration-300" />
                   </motion.div>
                   <span className="mt-2 text-[9px] sm:text-[10px] font-semibold text-gray-300 uppercase tracking-wider bg-[#0B121F]/90 px-2.5 py-0.5 rounded-full border border-white/10 shadow-sm whitespace-nowrap">
                     {item.label}
@@ -423,7 +419,7 @@ function DellServerHeroAnimation() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[50%] rounded-full bg-[#0078D4]/15 blur-[60px] pointer-events-none mix-blend-screen" />
           </motion.div>
 
-          <Server className={`w-16 h-16 relative z-10 transition-colors duration-300 ${isReady ? 'text-blue-500 drop-shadow-[0_0_20px_rgba(0,120,212,0.6)]' : 'text-gray-600'}`} style={{ transform: 'translateZ(20px)' }} />
+          <BrandLogo iconName="dell" className={`w-16 h-16 relative z-10 transition-colors duration-300 ${isReady ? 'text-blue-500 drop-shadow-[0_0_20px_rgba(0,120,212,0.6)]' : 'text-gray-600'}`} color="007db8" />
           
           {/* Boot-up Status LEDs */}
           <div className="absolute bottom-5 right-5 flex gap-1.5 z-10" style={{ transform: 'translateZ(25px)' }}>

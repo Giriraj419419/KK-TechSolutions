@@ -1,4 +1,4 @@
-﻿/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence } from 'framer-motion';
@@ -12,6 +12,7 @@ import {
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
+import { BrandLogo } from '../components/BrandLogo';
 
 // =========================================================================
 // PREMIUM CORELDRAW CARD ENHANCEMENT (Isolated physics)
@@ -252,28 +253,25 @@ export default function CorelDRAW() {
               </Reveal>
             </div>
 
-            {/* Right Column â€” Animated Corel Ecosystem */}
+            {/* Right Column — Animated Corel Ecosystem */}
             <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full h-[500px]">
               <div className="relative w-full h-full max-w-md mx-auto">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-[#22C55E]/10 blur-xl animate-pulse" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl premium-glass border border-green-500/30 z-20 flex items-center justify-center">
-                  <div className="flex items-center justify-center font-bold text-xl tracking-wide text-green-400 drop-shadow-[0_0_15px_rgba(34,197,94,0.5)]">CorelDRAW</div>
+                  <BrandLogo iconName="coreldraw" color="18A558" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(34,197,94,0.5)]" />
                 </div>
 
                 {/* Orbiting Tech Icons */}
                 {[
-                  { icon: PenTool, label: 'CorelDRAW', delay: 0, angle: 0 },
-                  { icon: Image, label: 'PHOTO-PAINT', delay: 1.5, angle: 60 },
-                  { icon: Type, label: 'Font Manager', delay: 3, angle: 120 },
-                  { icon: Globe, label: 'Web', delay: 4.5, angle: 180 },
-                  { icon: Camera, label: 'CAPTURE', delay: 6, angle: 240 },
-                  { icon: Sparkles, label: 'Vector', delay: 7.5, angle: 300 }
+                  { brand: 'coreldraw', fallbackIcon: PenTool, label: 'CorelDRAW', delay: 0, angle: 0 },
+                  { brand: 'coreldraw', fallbackIcon: Image, label: 'PHOTO-PAINT', delay: 2, angle: 90 },
+                  { brand: 'coreldraw', fallbackIcon: Sparkles, label: 'Vector', delay: 4, angle: 180 },
+                  { brand: 'coreldraw', fallbackIcon: Type, label: 'Font Manager', delay: 6, angle: 270 }
                 ].map((item, idx) => {
                   const radius = 160;
                   const radian = (item.angle * Math.PI) / 180;
                   const x = Math.cos(radian) * radius;
                   const y = Math.sin(radian) * radius;
-                  const Icon = item.icon;
 
                   return (
                     <motion.div
@@ -288,9 +286,9 @@ export default function CorelDRAW() {
                         transition={{ repeat: Infinity, duration: 4 + (idx % 3), ease: 'easeInOut', delay: item.delay * 0.2 }}
                         className="p-3 rounded-xl bg-white/[0.03] border border-white/10 premium-glass group cursor-default hover:border-green-500/40 hover:bg-green-500/10 transition-colors"
                       >
-                        <Icon className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform" />
+                        <BrandLogo iconName={item.brand} fallbackIcon={item.fallbackIcon} className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform" />
                       </motion.div>
-                      <span className="mt-2 text-[10px] font-bold text-gray-400 uppercase tracking-wider bg-[#0B121F]/80 px-2 py-0.5 rounded-full">{item.label}</span>
+                      <span className="mt-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider bg-[#0B121F]/80 px-2 py-0.5 rounded-full">{item.label}</span>
                     </motion.div>
                   );
                 })}

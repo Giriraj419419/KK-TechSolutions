@@ -1,16 +1,18 @@
-﻿/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence } from 'framer-motion';
 import {
   Building2, Factory, CheckCircle, ChevronDown, ArrowRight, ShieldCheck, HardDrive, Cpu, 
   Building, 
-  Image, PenTool, Video, PlaySquare, FileText, BookOpen, MonitorSmartphone, Share2, Sparkles, Cloud, Lock, Users, Monitor,
-  FolderOpen, PenLine, FileSignature, Layers
+  Palette, PenTool, LayoutTemplate, Layers, PlaySquare, Video,
+  Type, Monitor, Smartphone, Film, Layout, CheckCircle2, Rocket, Shield, Server,
+  Cloud, Globe, Settings, Sparkles, Users, BookOpen, FileText, MonitorSmartphone, FolderOpen, PenLine, FileSignature, Share2, Image, Lock
 } from 'lucide-react';
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
+import { BrandLogo } from '../components/BrandLogo';
 
 // =========================================================================
 // PREMIUM ADOBE CARD ENHANCEMENT (Isolated physics)
@@ -244,23 +246,22 @@ export default function Adobe() {
               <div className="relative w-full h-full max-w-md mx-auto">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-[#EF4444]/10 blur-xl animate-pulse" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl premium-glass border border-red-500/30 z-20 flex items-center justify-center">
-                  <div className="flex items-center justify-center font-bold text-xl tracking-wide text-red-400 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]">Adobe</div>
+                  <BrandLogo iconName="adobe" color="ff0000" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]" />
                 </div>
 
                 {/* Orbiting Tech Icons */}
                 {[
-                  { icon: Image, label: 'Photoshop', delay: 0, angle: 0 },
-                  { icon: PenTool, label: 'Illustrator', delay: 1.5, angle: 60 },
-                  { icon: Video, label: 'Premiere Pro', delay: 3, angle: 120 },
-                  { icon: FileText, label: 'Acrobat', delay: 4.5, angle: 180 },
-                  { icon: PlaySquare, label: 'After Effects', delay: 6, angle: 240 },
-                  { icon: MonitorSmartphone, label: 'Adobe XD', delay: 7.5, angle: 300 }
+                  { brand: 'adobephotoshop', fallbackIcon: PenTool, label: 'Photoshop', delay: 0, angle: 0 },
+                  { brand: 'adobeillustrator', fallbackIcon: LayoutTemplate, label: 'Illustrator', delay: 1.5, angle: 60 },
+                  { brand: 'adobepremierepro', fallbackIcon: Video, label: 'Premiere Pro', delay: 3, angle: 120 },
+                  { brand: 'adobeacrobatreader', fallbackIcon: FileText, label: 'Acrobat', delay: 4.5, angle: 180 },
+                  { brand: 'adobeaftereffects', fallbackIcon: Film, label: 'After Effects', delay: 6, angle: 240 },
+                  { brand: 'adobexd', fallbackIcon: MonitorSmartphone, label: 'Adobe XD', delay: 7.5, angle: 300 }
                 ].map((item, idx) => {
                   const radius = 160;
                   const radian = (item.angle * Math.PI) / 180;
                   const x = Math.cos(radian) * radius;
                   const y = Math.sin(radian) * radius;
-                  const Icon = item.icon;
 
                   return (
                     <motion.div
@@ -275,9 +276,9 @@ export default function Adobe() {
                         transition={{ repeat: Infinity, duration: 4 + (idx % 3), ease: 'easeInOut', delay: item.delay * 0.2 }}
                         className="p-3 rounded-xl bg-white/[0.03] border border-white/10 premium-glass group cursor-default hover:border-red-500/40 hover:bg-red-500/10 transition-colors"
                       >
-                        <Icon className="w-6 h-6 text-red-400 group-hover:scale-110 transition-transform" />
+                        <BrandLogo iconName={item.brand} fallbackIcon={item.fallbackIcon} className="w-6 h-6 text-red-400 group-hover:scale-110 transition-transform" />
                       </motion.div>
-                      <span className="mt-2 text-[10px] font-bold text-gray-400 uppercase tracking-wider bg-[#0B121F]/80 px-2 py-0.5 rounded-full">{item.label}</span>
+                      <span className="mt-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider bg-[#0B121F]/80 px-2 py-0.5 rounded-full">{item.label}</span>
                     </motion.div>
                   );
                 })}
