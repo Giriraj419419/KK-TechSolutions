@@ -6,12 +6,13 @@ import {
   Cloud, ShieldCheck, Server, Database, Globe, ArrowRight, Activity, Cpu, 
   Lock, Network, Monitor, Code, CheckCircle, ChevronDown, 
   HeartPulse, LineChart, Factory, ShoppingCart, GraduationCap, Building2,
-  Briefcase, TerminalSquare, BrainCircuit, LayoutGrid
+  Briefcase, TerminalSquare, BrainCircuit, LayoutGrid, Users, HardDrive
 } from 'lucide-react';
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 import { BrandLogo } from '../components/BrandLogo';
+import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
 
 // =========================================================================
 // PREMIUM AZURE CARD ENHANCEMENT (Isolated physics for Azure page only)
@@ -220,53 +221,23 @@ export default function Azure() {
               </Reveal>
             </div>
 
-            {/* Right Column â€” Animated Azure Ecosystem */}
+            {/* Right Column — Animated Azure Ecosystem */}
             <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full h-[500px]">
-              <div className="relative w-full h-full max-w-md mx-auto">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-[#0078D4]/10 blur-xl animate-pulse" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl premium-glass border border-blue-500/30 z-20">
-                  <BrandLogo iconName="microsoftazure" color="0089d6" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(0,120,212,0.5)]" />
-                </div>
-
-                {/* Orbiting Tech Icons */}
-                {[
-                  { brand: 'microsoftazure', fallbackIcon: Server, label: 'Virtual Machines', delay: 0, angle: 0 },
-                  { brand: 'microsoftazure', fallbackIcon: BrainCircuit, label: 'Azure AI', delay: 1.5, angle: 60 },
-                  { brand: 'microsoftazure', fallbackIcon: ShieldCheck, label: 'Security', delay: 3, angle: 120 },
-                  { brand: 'microsoftazure', fallbackIcon: Database, label: 'Backup', delay: 4.5, angle: 180 },
-                  { brand: 'microsoftazure', fallbackIcon: Network, label: 'Networking', delay: 6, angle: 240 },
-                  { brand: 'microsoftazure', fallbackIcon: LayoutGrid, label: 'Kubernetes', delay: 7.5, angle: 300 }
-                ].map((item, idx) => {
-                  const radius = 160;
-                  const radian = (item.angle * Math.PI) / 180;
-                  const x = Math.cos(radian) * radius;
-                  const y = Math.sin(radian) * radius;
-
-                  return (
-                    <motion.div
-                      key={idx}
-                      className="absolute top-1/2 left-1/2 flex flex-col items-center justify-center z-10"
-                      initial={{ x: 0, y: 0, opacity: 0 }}
-                      animate={{ x, y, opacity: 1 }}
-                      transition={{ duration: 1.5, delay: 0.5 + item.delay * 0.1, ease: 'easeOut' }}
-                    >
-                      <motion.div
-                        animate={{ y: [0, -8, 0] }}
-                        transition={{ repeat: Infinity, duration: 4 + (idx % 3), ease: 'easeInOut', delay: item.delay * 0.2 }}
-                        className="p-3 rounded-xl bg-white/[0.03] border border-white/10 premium-glass group cursor-default hover:border-blue-500/40 hover:bg-blue-500/10 transition-colors"
-                      >
-                        <BrandLogo iconName={item.brand} fallbackIcon={item.fallbackIcon} className="w-6 h-6 text-blue-400 group-hover:scale-110 transition-transform" />
-                      </motion.div>
-                      <span className="mt-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider bg-[#0B121F]/80 px-2 py-0.5 rounded-full">{item.label}</span>
-                    </motion.div>
-                  );
-                })}
-                
-                {/* Connecting Lines (svg) */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20 z-0" style={{ transform: 'translate(50%, 50%)' }}>
-                  <circle cx="0" cy="0" r="160" stroke="#0078D4" strokeWidth="1" strokeDasharray="4 4" fill="none" />
-                </svg>
-              </div>
+              <AnimatedEcosystem 
+                centerBrand="microsoftazure"
+                centerColor="0089d6"
+                themeColorHex="#0078D4"
+                nodes={[
+                  { brand: 'microsoftazure', fallbackIcon: BrainCircuit, label: 'Azure AI' },
+                  { brand: 'microsoftazure', fallbackIcon: Server, label: 'Virtual Machines' },
+                  { brand: 'microsoftazure', fallbackIcon: ShieldCheck, label: 'Security Center' },
+                  { brand: 'microsoftazure', fallbackIcon: Network, label: 'Networking' },
+                  { brand: 'microsoftazure', fallbackIcon: Database, label: 'Backup' },
+                  { brand: 'microsoftazure', fallbackIcon: HardDrive, label: 'Storage' },
+                  { brand: 'microsoftazure', fallbackIcon: Users, label: 'Identity' },
+                  { brand: 'microsoftazure', fallbackIcon: Cloud, label: 'Cloud Services' }
+                ]}
+              />
             </Reveal>
           </div>
         </div>

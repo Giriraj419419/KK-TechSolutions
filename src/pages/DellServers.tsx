@@ -12,6 +12,7 @@ import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextRevea
 import { CosmosField, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 import { BrandLogo } from '../components/BrandLogo';
+import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
 
 const DELL_PARTICLES = Array.from({ length: 6 }).map(() => ({
   x: (Math.random() - 0.5) * 40,
@@ -175,272 +176,7 @@ const faqs = [
   { q: 'Can you help select the right server configuration?', a: 'Our enterprise specialists will assess your application workloads and business goals to design the perfect server specification.' }
 ];
 
-// =========================================================================
-// =========================================================================
-// PREMIUM HERO ANIMATION COMPONENT
-// =========================================================================
-function DellServerHeroAnimation() {
-  const [isBooting, setIsBooting] = useState(true);
-  const [isReady, setIsReady] = useState(false);
-
-  useEffect(() => {
-    // 2.5 second cinematic boot sequence
-    const timer = setTimeout(() => {
-      setIsBooting(false);
-      setIsReady(true);
-    }, 2500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // 3D Hover mechanics for the central server
-  const ref = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 });
-  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 });
-  
-  // Clamped rotation for premium realism (max 5 degrees)
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["5deg", "-5deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-5deg", "5deg"]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (typeof window !== 'undefined' && window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    x.set(mouseX / width - 0.5);
-    y.set(mouseY / height - 0.5);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  const orbitNodes = [
-    { brand: 'dell', fallbackIcon: Server, label: 'Rack Servers', delay: 0, angle: 0 },
-    { brand: 'dell', fallbackIcon: Database, label: 'Tower Servers', delay: 2, angle: 120 },
-    { brand: 'dell', fallbackIcon: LayoutGrid, label: 'Modular', delay: 4, angle: 240 }
-  ];
-
-  const radiusPercent = 38;
-
-  return (
-    <div className="relative w-full aspect-square max-w-[460px] mx-auto z-10" style={{ perspective: '1000px' }}>
-      
-      {/* Ambient Data Center Environment */}
-      <AnimatePresence>
-        {isReady && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 2 }}
-            className="absolute inset-0 pointer-events-none"
-          >
-            {DELL_PARTICLES.map((particle, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-2 h-2 bg-blue-500/30 rounded-full blur-[1px]"
-                style={{
-                  top: `${40 + i * 10}%`,
-                  left: `${30 + i * 15}%`,
-                }}
-                animate={{
-                  y: [0, -40, 0],
-                  x: [0, particle.x, 0],
-                  opacity: [0, 0.4, 0],
-                  scale: [0.5, 1.2, 0.5]
-                }}
-                transition={{
-                  duration: particle.duration,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: particle.delay
-                }}
-              />
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* ROTATING ORBIT SYSTEM */}
-      <motion.div
-        className="absolute inset-0 z-0 pointer-events-none"
-        animate={isReady ? { rotate: 360 } : { rotate: 0 }}
-        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-      >
-        
-        {/* SVG Connection Paths & Data Flow */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible" viewBox="-50 -50 100 100">
-          
-          {/* Main Orbit Ring */}
-          <motion.circle 
-            cx="0" cy="0" r={radiusPercent} 
-            stroke="#0078D4" strokeWidth="0.2" strokeDasharray="1 1.5" fill="none" 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isReady ? 0.2 : 0 }}
-            transition={{ duration: 1.5 }}
-          />
-          
-          {/* Enterprise Server Pulse */}
-          {isReady && (
-            <motion.circle
-              cx="0" cy="0" r="0"
-              stroke="#0078D4" strokeWidth="0.5" fill="none"
-              initial={{ r: 0, opacity: 0.6 }}
-              animate={{ r: 50, opacity: 0 }}
-              transition={{ duration: 4, repeat: Infinity, repeatDelay: 3, ease: "easeOut" }}
-            />
-          )}
-
-          {/* Radial lines and Data Packets */}
-          {orbitNodes.map((item, idx) => {
-            const radian = (item.angle * Math.PI) / 180;
-            const xPos = Math.cos(radian) * radiusPercent;
-            const yPos = Math.sin(radian) * radiusPercent;
-            
-            return (
-              <g key={idx}>
-                {/* Radial Connection Line */}
-                <motion.line
-                  x1="0" y1="0" x2={xPos} y2={yPos}
-                  stroke="url(#gradientPulse)" strokeWidth="0.3" strokeDasharray="1 1"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: isReady ? 1 : 0, opacity: isReady ? 0.3 : 0 }}
-                  transition={{ duration: 1.5, delay: isBooting ? 0 : 0.2 + item.delay * 0.1, ease: "easeInOut" }}
-                />
-                
-                {/* Animated Data Packet */}
-                {isReady && (
-                  <motion.circle
-                    cx="0" cy="0" r="0.8" fill="#00BCF2"
-                    animate={{
-                      cx: [0, xPos],
-                      cy: [0, yPos],
-                      opacity: [0, 1, 0]
-                    }}
-                    transition={{
-                      duration: 2.5 + (idx % 2),
-                      repeat: Infinity,
-                      delay: item.delay * 0.3,
-                      ease: "linear"
-                    }}
-                    style={{ filter: 'drop-shadow(0 0 1px rgba(0, 188, 242, 0.8))' }}
-                  />
-                )}
-              </g>
-            );
-          })}
-          
-          <defs>
-            <linearGradient id="gradientPulse" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#0078D4" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#00BCF2" stopOpacity="0.1" />
-            </linearGradient>
-          </defs>
-        </svg>
-
-        {orbitNodes.map((item, idx) => {
-          const radian = (item.angle * Math.PI) / 180;
-          const xPos = Math.cos(radian) * radiusPercent;
-          const yPos = Math.sin(radian) * radiusPercent;
-
-          return (
-            <motion.div
-              key={idx}
-              className="absolute pointer-events-auto z-10"
-              initial={{ left: "50%", top: "50%", opacity: 0 }}
-              animate={{ 
-                left: isReady ? `calc(50% + ${xPos}%)` : "50%", 
-                top: isReady ? `calc(50% + ${yPos}%)` : "50%", 
-                opacity: isReady ? 1 : 0 
-              }}
-              transition={{ duration: 1.2, delay: isBooting ? 0 : 0.2 + item.delay * 0.1, type: "spring", stiffness: 60, damping: 15 }}
-            >
-              <motion.div
-                animate={isReady ? { rotate: -360 } : { rotate: 0 }}
-                transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-              >
-                <div className="absolute flex flex-col items-center justify-center w-max" style={{ transform: 'translate(-50%, -50%)' }}>
-                  <motion.div
-                    animate={isReady ? { y: [0, -6 - (idx%3), 0], scale: [1, 1.05, 1] } : {}}
-                    transition={{ 
-                      y: { repeat: Infinity, duration: 4 + (idx % 3), ease: 'easeInOut', delay: item.delay * 0.2 },
-                      scale: { repeat: Infinity, duration: 3 + (idx % 2), ease: 'easeInOut', delay: item.delay * 0.3 }
-                    }}
-                    className="p-3 rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/10 premium-glass group cursor-default hover:border-blue-500/50 hover:bg-blue-500/15 transition-all shadow-lg"
-                  >
-                    <BrandLogo iconName={item.brand} fallbackIcon={item.fallbackIcon} className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400 group-hover:scale-110 group-hover:text-blue-300 group-hover:drop-shadow-[0_0_10px_rgba(59,130,246,0.5)] transition-all duration-300" />
-                  </motion.div>
-                  <span className="mt-2 text-[9px] sm:text-[10px] font-semibold text-gray-300 uppercase tracking-wider bg-[#0B121F]/90 px-2.5 py-0.5 rounded-full border border-white/10 shadow-sm whitespace-nowrap">
-                    {item.label}
-                  </span>
-                </div>
-              </motion.div>
-            </motion.div>
-          );
-        })}
-      </motion.div>
-
-      {/* Central Server with 3D Hover (STATIC relative to rotation) */}
-      <motion.div
-        ref={ref}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
-      >
-        <motion.div
-          animate={isBooting ? { scale: [0.9, 1], opacity: [0, 1] } : { y: [0, -6, 0] }}
-          transition={isBooting ? { duration: 1.2, ease: "easeOut" } : { repeat: Infinity, duration: 6, ease: "easeInOut" }}
-          className="relative group p-6 rounded-3xl premium-glass border border-blue-500/30 bg-[#0B121F]/90 backdrop-blur-xl shadow-2xl transition-all duration-300 hover:shadow-[0_20px_50px_-10px_rgba(0,120,212,0.4)] hover:border-blue-400/50 cursor-pointer"
-        >
-          {/* 3D Glass Reflection Overlay */}
-          <motion.div 
-            className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0 overflow-hidden"
-            style={{
-              background: useTransform(
-                () => `radial-gradient(250px circle at ${(x.get() + 0.5) * 100}% ${(y.get() + 0.5) * 100}%, rgba(255,255,255,0.12), transparent 60%)`
-              )
-            }}
-          />
-
-          {/* Central Blue Ambient Glow */}
-          <motion.div
-            animate={{ opacity: isReady ? 1 : 0.1, scale: isReady ? [1, 1.15, 1] : 0.8 }}
-            transition={{ opacity: { duration: 1.5 }, scale: { repeat: Infinity, duration: 5, ease: "easeInOut" } }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full bg-[#0078D4]/20 blur-xl"
-          >
-            {/* Soft Fog Glow & Midground Lighting */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] rounded-full bg-gradient-to-tr from-[#0078D4]/10 to-transparent blur-[80px] pointer-events-none mix-blend-screen" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[50%] rounded-full bg-[#0078D4]/15 blur-[60px] pointer-events-none mix-blend-screen" />
-          </motion.div>
-
-          <BrandLogo iconName="dell" className={`w-16 h-16 relative z-10 transition-colors duration-300 ${isReady ? 'text-blue-500 drop-shadow-[0_0_20px_rgba(0,120,212,0.6)]' : 'text-gray-600'}`} color="007db8" />
-          
-          {/* Boot-up Status LEDs */}
-          <div className="absolute bottom-5 right-5 flex gap-1.5 z-10" style={{ transform: 'translateZ(25px)' }}>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.3 }}
-              className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,1)]"
-            />
-            <motion.div
-              animate={isBooting ? { opacity: [0, 1, 0] } : { opacity: 0.9 }}
-              transition={isBooting ? { duration: 0.15, repeat: Infinity } : { duration: 1 }}
-              className={`w-1.5 h-1.5 rounded-full ${isReady ? 'bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,1)]' : 'bg-gray-400 shadow-none'}`}
-            />
-          </div>
-        </motion.div>
-      </motion.div>
-
-    </div>
-  );
-}
+// REMOVED Custom Hero Animation in favor of AnimatedEcosystem
 
 // MAIN PAGE
 // =========================================================================
@@ -518,9 +254,21 @@ export default function DellServers() {
               </Reveal>
             </div>
 
-            {/* Right Column â€” Premium Animated Hero Illustration */}
+            {/* Right Column — Premium Animated Hero Illustration */}
             <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center items-center w-full min-h-[500px]">
-              <DellServerHeroAnimation />
+              <AnimatedEcosystem 
+                centerBrand="dell"
+                centerColor="007db8"
+                themeColorHex="#0078D4"
+                nodes={[
+                  { brand: 'dell', fallbackIcon: Server, label: 'Rack Servers' },
+                  { brand: 'dell', fallbackIcon: Database, label: 'Tower Servers' },
+                  { brand: 'dell', fallbackIcon: LayoutGrid, label: 'Modular' },
+                  { brand: 'dell', fallbackIcon: HardDrive, label: 'Storage' },
+                  { brand: 'dell', fallbackIcon: ShieldCheck, label: 'Data Security' },
+                  { brand: 'dell', fallbackIcon: BrainCircuit, label: 'AI Infrastructure' }
+                ]}
+              />
             </Reveal>
           </div>
         </div>

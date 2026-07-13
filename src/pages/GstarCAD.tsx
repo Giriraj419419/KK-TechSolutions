@@ -11,9 +11,10 @@ import {
   FileCode2, MonitorSmartphone, Repeat
 } from 'lucide-react';
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
-import { CosmosField, GlowingOrbs, SectionGlow } from '../components/Atmosphere';
+import { CosmosField, SectionGlow, GlowingOrbs } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 import { BrandLogo } from '../components/BrandLogo';
+import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
 
 // =========================================================================
 // PREMIUM GSTARCAD CARD ENHANCEMENT (Isolated physics)
@@ -254,52 +255,19 @@ export default function GstarCAD() {
               </Reveal>
             </div>
 
-            {/* Right Column â€” Animated GstarCAD Ecosystem */}
-            <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full h-[500px]">
-              <div className="relative w-full h-full max-w-md mx-auto">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-[#06B6D4]/10 blur-xl animate-pulse" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl premium-glass border border-cyan-500/30 z-20 flex items-center justify-center">
-                  <BrandLogo 
-                    customSvg={<svg viewBox="0 0 40 40" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(6,182,212,0.5)] fill-cyan-400"><path d="M20,0 L40,20 L20,40 L0,20 Z" /><circle cx="20" cy="20" r="10" fill="#0B121F" /><circle cx="20" cy="20" r="5" fill="#22d3ee" /></svg>}
-                  />
-                </div>
-
-                {/* Orbiting Tech Icons */}
-                {[
-                  { brand: 'gstarcad', fallbackIcon: PenTool, label: 'CAD Drafting', delay: 0, angle: 0 },
-                  { brand: 'gstarcad', fallbackIcon: LayoutTemplate, label: '2D Design', delay: 2, angle: 120 },
-                  { brand: 'gstarcad', fallbackIcon: Box, label: '3D Modeling', delay: 4, angle: 240 }
-                ].map((item, idx) => {
-                  const radius = 160;
-                  const radian = (item.angle * Math.PI) / 180;
-                  const x = Math.cos(radian) * radius;
-                  const y = Math.sin(radian) * radius;
-
-                  return (
-                    <motion.div
-                      key={idx}
-                      className="absolute top-1/2 left-1/2 flex flex-col items-center justify-center z-10"
-                      initial={{ x: 0, y: 0, opacity: 0 }}
-                      animate={{ x, y, opacity: 1 }}
-                      transition={{ duration: 1.5, delay: 0.5 + item.delay * 0.1, ease: 'easeOut' }}
-                    >
-                      <motion.div
-                        animate={{ y: [0, -8, 0] }}
-                        transition={{ repeat: Infinity, duration: 4 + (idx % 3), ease: 'easeInOut', delay: item.delay * 0.2 }}
-                        className="p-3 rounded-xl bg-white/[0.03] border border-white/10 premium-glass group cursor-default hover:border-cyan-500/40 hover:bg-cyan-500/10 transition-colors"
-                      >
-                        <BrandLogo iconName={item.brand} fallbackIcon={item.fallbackIcon} className="w-6 h-6 text-cyan-400 group-hover:scale-110 transition-transform" />
-                      </motion.div>
-                      <span className="mt-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider bg-[#0B121F]/80 px-2 py-0.5 rounded-full">{item.label}</span>
-                    </motion.div>
-                  );
-                })}
-                
-                {/* Connecting Lines (svg) */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20 z-0" style={{ transform: 'translate(50%, 50%)' }}>
-                  <circle cx="0" cy="0" r="160" stroke="#06B6D4" strokeWidth="1" strokeDasharray="4 4" fill="none" />
-                </svg>
-              </div>
+            {/* Right Column — Animated GstarCAD Ecosystem */}
+            <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center items-center w-full min-h-[500px]">
+              <AnimatedEcosystem 
+                centerBrand="gstarcad"
+                centerColor="06B6D4"
+                themeColorHex="#06B6D4"
+                customCenterSvg={<svg viewBox="0 0 40 40" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(6,182,212,0.5)] fill-cyan-400"><path d="M20,0 L40,20 L20,40 L0,20 Z" /><circle cx="20" cy="20" r="10" fill="#0B121F" /><circle cx="20" cy="20" r="5" fill="#22d3ee" /></svg>}
+                nodes={[
+                  { brand: 'gstarcad', fallbackIcon: PenTool, label: 'CAD Drafting' },
+                  { brand: 'gstarcad', fallbackIcon: LayoutTemplate, label: '2D Design' },
+                  { brand: 'gstarcad', fallbackIcon: Box, label: '3D Modeling' }
+                ]}
+              />
             </Reveal>
           </div>
         </div>

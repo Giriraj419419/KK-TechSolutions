@@ -12,6 +12,7 @@ import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextRevea
 import { CosmosField, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 import { BrandLogo } from '../components/BrandLogo';
+import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
 
 const HP_LIGHTS = Array.from({ length: 3 }).map(() => ({
   height: Math.random() * 16 + 4,
@@ -187,308 +188,6 @@ const faqs = [
 // =========================================================================
 // MAIN PAGE
 // =========================================================================
-// =========================================================================
-// PREMIUM HP HERO ANIMATION COMPONENT
-// =========================================================================
-function HPHeroAnimation() {
-  const [isBooting, setIsBooting] = useState(true);
-  const [isReady, setIsReady] = useState(false);
-  const [activeModule, setActiveModule] = useState<number>(0);
-
-  useEffect(() => {
-    // 2.5 second cinematic boot sequence
-    const timer = setTimeout(() => {
-      setIsBooting(false);
-      setIsReady(true);
-    }, 2500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Infrastructure Synchronization Engine
-  useEffect(() => {
-    if (!isReady) return;
-    const interval = setInterval(() => {
-      setActiveModule((prev) => (prev + Math.floor(Math.random() * 2) + 1) % 3);
-    }, 3000); // Shift active connection every 3s
-    return () => clearTimeout(interval);
-  }, [isReady]);
-
-  // 3D Hover mechanics for the central server
-  const ref = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 });
-  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 });
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["4deg", "-4deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-4deg", "4deg"]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (typeof window !== 'undefined' && window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    x.set(mouseX / width - 0.5);
-    y.set(mouseY / height - 0.5);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  const modules = [
-    { brand: 'hewlettpackardenterprise', fallbackIcon: Server, label: 'ProLiant DL', angle: 0 },
-    { brand: 'hewlettpackardenterprise', fallbackIcon: Database, label: 'ProLiant ML', angle: 120 },
-    { brand: 'hewlettpackardenterprise', fallbackIcon: LayoutGrid, label: 'Synergy', angle: 240 }
-  ];
-
-  const radiusPercent = 38; // 38% of container width/height
-
-  return (
-    <div className="relative w-full aspect-square max-w-[480px] mx-auto z-10" style={{ perspective: '1000px' }}>
-
-      {/* 1. Intelligent Network Grid Activation */}
-      <AnimatePresence>
-        {isReady && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 2 }}
-            className="absolute inset-0 z-0 pointer-events-none"
-          >
-            {/* SVG Grid Pattern */}
-            <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <pattern id="hpGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(34, 197, 94, 0.05)" strokeWidth="1" />
-                </pattern>
-                <radialGradient id="gridFade" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="white" stopOpacity="1" />
-                  <stop offset="100%" stopColor="white" stopOpacity="0" />
-                </radialGradient>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#hpGrid)" mask="url(#gridMask)" />
-              <mask id="gridMask">
-                <rect width="100%" height="100%" fill="url(#gridFade)" />
-              </mask>
-            </svg>
-
-            {/* Ambient Holographic Dots */}
-            {HP_PARTICLES.map((particle, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-green-400 rounded-full blur-[1px]"
-                style={{
-                  top: particle.top,
-                  left: particle.left,
-                }}
-                animate={{
-                  y: [0, -30, 0],
-                  opacity: [0, 0.8, 0],
-                  scale: [0.5, 1.5, 0.5]
-                }}
-                transition={{
-                  duration: particle.duration,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: particle.delay
-                }}
-              />
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* 2. Enterprise Signal Waves & Connection Lines */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible" viewBox="-50 -50 100 100">
-
-        {/* Signal Waves */}
-        {isReady && (
-          <motion.circle
-            cx="0" cy="0" r="0"
-            stroke="#22C55E" strokeWidth="0.3" fill="none"
-            initial={{ r: 0, opacity: 0.8 }}
-            animate={{ r: 60, opacity: 0 }}
-            transition={{ duration: 6, repeat: Infinity, repeatDelay: 1, ease: "easeOut" }}
-          />
-        )}
-
-        {/* Connections */}
-        {modules.map((item, idx) => {
-          const radian = (item.angle * Math.PI) / 180;
-          const xPos = Math.cos(radian) * radiusPercent;
-          const yPos = Math.sin(radian) * radiusPercent;
-          const isActive = idx === activeModule;
-
-          return (
-            <g key={`connection-${idx}`}>
-              {/* Static Line */}
-              <motion.line
-                x1="0" y1="0" x2={xPos} y2={yPos}
-                stroke={isActive ? "url(#hpActivePulse)" : "rgba(34, 197, 94, 0.15)"}
-                strokeWidth={isActive ? "0.4" : "0.2"}
-                strokeDasharray="1 1"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: isReady ? 1 : 0, opacity: isReady ? 1 : 0 }}
-                transition={{ duration: 1.5, delay: isBooting ? 0 : 0.2 + idx * 0.1 }}
-              />
-
-              {/* Data Transmission Pulse */}
-              {isReady && isActive && (
-                <motion.circle
-                  r="0.8" fill="#22C55E"
-                  initial={{ cx: 0, cy: 0, opacity: 0 }}
-                  animate={{
-                    cx: [0, xPos, 0],
-                    cy: [0, yPos, 0],
-                    opacity: [0, 1, 1, 0]
-                  }}
-                  transition={{
-                    duration: 2.5,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                  style={{ filter: 'drop-shadow(0 0 1.5px rgba(34, 197, 94, 0.8))' }}
-                />
-              )}
-            </g>
-          );
-        })}
-
-        <defs>
-          <linearGradient id="hpActivePulse" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#22C55E" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#10B981" stopOpacity="0.2" />
-          </linearGradient>
-        </defs>
-      </svg>
-
-      {/* 3. Floating Enterprise Modules */}
-      {modules.map((item, idx) => {
-        const radian = (item.angle * Math.PI) / 180;
-        const xPos = Math.cos(radian) * radiusPercent;
-        const yPos = Math.sin(radian) * radiusPercent;
-        const isActive = idx === activeModule;
-
-        return (
-          <motion.div
-            key={`module-${idx}`}
-            className="absolute pointer-events-auto z-10"
-            initial={{ left: "50%", top: "50%", opacity: 0 }}
-            animate={{
-              left: isReady ? `calc(50% + ${xPos}%)` : "50%",
-              top: isReady ? `calc(50% + ${yPos}%)` : "50%",
-              opacity: isReady ? 1 : 0
-            }}
-            transition={{ duration: 1.2, delay: isBooting ? 0 : 0.2 + idx * 0.1, type: "spring", stiffness: 60, damping: 15 }}
-          >
-            <div className="absolute flex flex-col items-center justify-center w-max" style={{ transform: 'translate(-50%, -50%)' }}>
-              <motion.div
-                animate={isReady ? { y: [0, -4 - (idx % 3), 0], scale: isActive ? [1, 1.1, 1] : [1, 1.02, 1] } : {}}
-                transition={{
-                  y: { repeat: Infinity, duration: 4 + (idx % 3), ease: 'easeInOut', delay: idx * 0.2 },
-                  scale: { repeat: Infinity, duration: isActive ? 1.5 : 3 + (idx % 2), ease: 'easeInOut' }
-                }}
-                className={`p-3 rounded-xl border premium-glass group transition-all shadow-lg backdrop-blur-md cursor-default
-                  ${isActive
-                    ? 'bg-green-500/10 border-green-500/50 shadow-[0_0_15px_rgba(34,197,94,0.3)]'
-                    : 'bg-[#0B121F]/80 border-white/10 hover:border-green-500/30 hover:bg-green-500/5'
-                  }`}
-              >
-                <BrandLogo iconName={item.brand} fallbackIcon={item.fallbackIcon} className={`w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300
-                  ${isActive
-                    ? 'text-green-400 drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]'
-                    : 'text-gray-400 group-hover:text-green-300'
-                  }`}
-                />
-              </motion.div>
-              <span className={`mt-2 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full border shadow-sm whitespace-nowrap transition-colors duration-300
-                ${isActive
-                  ? 'bg-green-500/20 border-green-500/30 text-green-300'
-                  : 'bg-[#0B121F]/90 border-white/10 text-gray-400'
-                }`}
-              >
-                {item.label}
-              </span>
-            </div>
-          </motion.div>
-        );
-      })}
-
-      {/* 4. Enterprise Infrastructure Core (Center HP Server) */}
-      <motion.div
-        ref={ref}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
-      >
-        <motion.div
-          animate={isBooting ? { scale: [0.9, 1], opacity: [0, 1] } : { y: [0, -4, 0] }}
-          transition={isBooting ? { duration: 1.2, ease: "easeOut" } : { repeat: Infinity, duration: 6, ease: "easeInOut" }}
-          className="relative group p-7 rounded-3xl premium-glass border border-green-500/30 bg-[#0B121F]/95 backdrop-blur-xl shadow-2xl transition-all duration-300 hover:shadow-[0_20px_50px_-10px_rgba(34,197,94,0.3)] hover:border-green-400/60 cursor-pointer"
-        >
-          {/* Glass Reflection */}
-          <motion.div
-            className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0 overflow-hidden"
-            style={{
-              background: useTransform(
-                () => `radial-gradient(200px circle at ${(x.get() + 0.5) * 100}% ${(y.get() + 0.5) * 100}%, rgba(34,197,94,0.15), transparent 60%)`
-              )
-            }}
-          />
-
-          {/* Central Green Ambient Glow */}
-          <motion.div
-            animate={{ opacity: isReady ? 1 : 0.1, scale: isReady ? [1, 1.1, 1] : 0.8 }}
-            transition={{ opacity: { duration: 1.5 }, scale: { repeat: Infinity, duration: 4, ease: "easeInOut" } }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full bg-green-500/15 blur-xl"
-          >
-            {/* Soft Fog Glow & Midground Lighting */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] rounded-full bg-gradient-to-tr from-green-500/10 to-transparent blur-[80px] pointer-events-none mix-blend-screen" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[50%] rounded-full bg-green-500/15 blur-[60px] pointer-events-none mix-blend-screen" />
-          </motion.div>
-
-          <BrandLogo iconName="hewlettpackardenterprise" className={`w-16 h-16 sm:w-20 sm:h-20 relative z-10 transition-colors duration-300 ${isReady ? 'text-green-500 drop-shadow-[0_0_20px_rgba(34,197,94,0.6)]' : 'text-gray-600'}`} color="01a982" style={{ transform: 'translateZ(25px)' }} />
-
-          {/* Live Status Indicators */}
-          <div className="absolute top-4 right-4 flex gap-1.5 z-10" style={{ transform: 'translateZ(30px)' }}>
-            <motion.div
-              animate={isBooting ? { opacity: [0, 1, 0] } : { opacity: [1, 0.4, 1] }}
-              transition={isBooting ? { duration: 0.15, repeat: Infinity } : { duration: 1.5, repeat: Infinity, repeatDelay: 2 }}
-              className={`w-1.5 h-1.5 rounded-full ${isReady ? 'bg-green-400 shadow-[0_0_8px_rgba(74,222,128,1)]' : 'bg-gray-500'}`}
-            />
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: isReady ? 1 : 0 }}
-              transition={{ delay: 0.5 }}
-              className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,1)]"
-            />
-          </div>
-
-          {/* Activity Lights */}
-          <div className="absolute bottom-5 right-5 flex gap-1 z-10" style={{ transform: 'translateZ(30px)' }}>
-            {HP_LIGHTS.map((light, i) => (
-              <motion.div
-                key={i}
-                className="w-1 bg-green-500 rounded-sm"
-                style={{ filter: 'drop-shadow(0 0 5px rgba(34, 197, 94, 0.8))', height: '12px' }}
-                animate={isReady ? { height: [12, light.height, 12] } : { opacity: 0 }}
-                transition={{ duration: light.duration, repeat: Infinity, repeatType: "mirror", delay: light.delay }}
-              />
-            ))}
-          </div>
-
-        </motion.div>
-      </motion.div>
-
-    </div>
-  );
-}
-
 
 export default function HPServers() {
   const { scrollY } = useScroll();
@@ -566,7 +265,19 @@ export default function HPServers() {
 
             {/* Right Column - HP Hero Animation */}
             <Reveal direction='left' delay={0.12} className='relative z-10 flex justify-center items-center w-full min-h-[500px]'>
-              <HPHeroAnimation />
+              <AnimatedEcosystem 
+                centerBrand="hewlettpackardenterprise"
+                centerColor="01a982"
+                themeColorHex="#22C55E"
+                nodes={[
+                  { brand: 'hewlettpackardenterprise', fallbackIcon: Server, label: 'ProLiant DL' },
+                  { brand: 'hewlettpackardenterprise', fallbackIcon: Database, label: 'ProLiant ML' },
+                  { brand: 'hewlettpackardenterprise', fallbackIcon: LayoutGrid, label: 'Synergy' },
+                  { brand: 'hewlettpackardenterprise', fallbackIcon: HardDrive, label: 'Data Storage' },
+                  { brand: 'hewlettpackardenterprise', fallbackIcon: Network, label: 'Networking' },
+                  { brand: 'hewlettpackardenterprise', fallbackIcon: ShieldCheck, label: 'OneView' }
+                ]}
+              />
             </Reveal>
           </div>
         </div>

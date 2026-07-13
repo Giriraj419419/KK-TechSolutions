@@ -105,40 +105,6 @@ const TechConstellation = React.memo(({ className = "" }: { className?: string }
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
   const navigate = useNavigate();
-
-  // Mouse tracking for Layer 5 (Magnetic Cursor)
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  
-  const springConfig = { damping: 50, stiffness: 100, mass: 0.8 };
-  const smoothX = useSpring(mouseX, springConfig);
-  const smoothY = useSpring(mouseY, springConfig);
-  
-  const rafRef = useRef<number | null>(null);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (shouldReduceMotion || !containerRef.current) return;
-    const clientX = e.clientX;
-    const clientY = e.clientY;
-    
-    if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    
-    rafRef.current = requestAnimationFrame(() => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const x = clientX - rect.left - rect.width / 2;
-      const y = clientY - rect.top - rect.height / 2;
-      
-      mouseX.set(x);
-      mouseY.set(y);
-    });
-  };
-  
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-    setHoveredId(null);
-  };
   
   // Layer 9: Scroll Parallax setup
   const { scrollYProgress } = useScroll({
@@ -152,8 +118,6 @@ const TechConstellation = React.memo(({ className = "" }: { className?: string }
     <motion.div 
       ref={containerRef}
       className={`relative ${className} flex items-center justify-center perspective-[1000px]`}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       style={{ y: shouldReduceMotion ? 0 : scrollParallaxY }}
     >
       {/* Layer 8: Ambient Background Glow (expanding/contracting) */}
@@ -215,7 +179,6 @@ const TechConstellation = React.memo(({ className = "" }: { className?: string }
 
       {/* Logos */}
       {PARTNERS.map((partner, i) => {
-        
         const isOtherHovered = hoveredId !== null && hoveredId !== partner.id;
         
         // Push logic when another node is focused
@@ -248,8 +211,6 @@ const TechConstellation = React.memo(({ className = "" }: { className?: string }
             hoveredId={hoveredId}
             setHoveredId={setHoveredId}
             shouldReduceMotion={shouldReduceMotion}
-            smoothX={smoothX}
-            smoothY={smoothY}
             pushX={pushX}
             pushY={pushY}
             durationX={durationX}
@@ -265,12 +226,8 @@ const TechConstellation = React.memo(({ className = "" }: { className?: string }
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const TechPartnerItem = React.memo(({ partner, i, hoveredId, setHoveredId, shouldReduceMotion, smoothX, smoothY, pushX, pushY, durationX, durationY, durationRot, delay, navigate }: any) => {
+const TechPartnerItem = React.memo(({ partner, i, hoveredId, setHoveredId, shouldReduceMotion, pushX, pushY, durationX, durationY, durationRot, delay, navigate }: any) => {
   const idleAnim = useMemo(() => getIdleAnimation(partner.motion, i), [partner.motion, i]);
-  const depthMagneticX = useTransform(smoothX, [-300, 300], [-25 * partner.depth, 25 * partner.depth], { clamp: false });
-  const depthMagneticY = useTransform(smoothY, [-300, 300], [-25 * partner.depth, 25 * partner.depth], { clamp: false });
-  const xOffsetStr = useTransform(depthMagneticX, val => `calc(-50% + ${val}px)`);
-  const yOffsetStr = useTransform(depthMagneticY, val => `calc(-50% + ${val}px)`);
   const isHovered = hoveredId === partner.id;
 
         return (
@@ -282,8 +239,8 @@ const TechPartnerItem = React.memo(({ partner, i, hoveredId, setHoveredId, shoul
               top: `${partner.y}%`,
               width: partner.size,
               height: partner.size,
-              x: shouldReduceMotion ? '-50%' : xOffsetStr,
-              y: shouldReduceMotion ? '-50%' : yOffsetStr,
+              x: '-50%',
+              y: '-50%',
             }}
             onMouseEnter={() => setHoveredId(partner.id)}
             onFocus={() => setHoveredId(partner.id)}

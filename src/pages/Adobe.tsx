@@ -13,6 +13,7 @@ import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextRevea
 import { CosmosField, GlowingOrbs, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 import { BrandLogo } from '../components/BrandLogo';
+import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
 
 // =========================================================================
 // PREMIUM ADOBE CARD ENHANCEMENT (Isolated physics)
@@ -241,53 +242,21 @@ export default function Adobe() {
               </Reveal>
             </div>
 
-            {/* Right Column â€” Animated Adobe Ecosystem */}
+            {/* Right Column — Animated Adobe Ecosystem */}
             <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full h-[500px]">
-              <div className="relative w-full h-full max-w-md mx-auto">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-[#EF4444]/10 blur-xl animate-pulse" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl premium-glass border border-red-500/30 z-20 flex items-center justify-center">
-                  <BrandLogo iconName="adobe" color="ff0000" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]" />
-                </div>
-
-                {/* Orbiting Tech Icons */}
-                {[
-                  { brand: 'adobephotoshop', fallbackIcon: PenTool, label: 'Photoshop', delay: 0, angle: 0 },
-                  { brand: 'adobeillustrator', fallbackIcon: LayoutTemplate, label: 'Illustrator', delay: 1.5, angle: 60 },
-                  { brand: 'adobepremierepro', fallbackIcon: Video, label: 'Premiere Pro', delay: 3, angle: 120 },
-                  { brand: 'adobeacrobatreader', fallbackIcon: FileText, label: 'Acrobat', delay: 4.5, angle: 180 },
-                  { brand: 'adobeaftereffects', fallbackIcon: Film, label: 'After Effects', delay: 6, angle: 240 },
-                  { brand: 'adobexd', fallbackIcon: MonitorSmartphone, label: 'Adobe XD', delay: 7.5, angle: 300 }
-                ].map((item, idx) => {
-                  const radius = 160;
-                  const radian = (item.angle * Math.PI) / 180;
-                  const x = Math.cos(radian) * radius;
-                  const y = Math.sin(radian) * radius;
-
-                  return (
-                    <motion.div
-                      key={idx}
-                      className="absolute top-1/2 left-1/2 flex flex-col items-center justify-center z-10"
-                      initial={{ x: 0, y: 0, opacity: 0 }}
-                      animate={{ x, y, opacity: 1 }}
-                      transition={{ duration: 1.5, delay: 0.5 + item.delay * 0.1, ease: 'easeOut' }}
-                    >
-                      <motion.div
-                        animate={{ y: [0, -8, 0] }}
-                        transition={{ repeat: Infinity, duration: 4 + (idx % 3), ease: 'easeInOut', delay: item.delay * 0.2 }}
-                        className="p-3 rounded-xl bg-white/[0.03] border border-white/10 premium-glass group cursor-default hover:border-red-500/40 hover:bg-red-500/10 transition-colors"
-                      >
-                        <BrandLogo iconName={item.brand} fallbackIcon={item.fallbackIcon} className="w-6 h-6 text-red-400 group-hover:scale-110 transition-transform" />
-                      </motion.div>
-                      <span className="mt-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider bg-[#0B121F]/80 px-2 py-0.5 rounded-full">{item.label}</span>
-                    </motion.div>
-                  );
-                })}
-                
-                {/* Connecting Lines (svg) */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20 z-0" style={{ transform: 'translate(50%, 50%)' }}>
-                  <circle cx="0" cy="0" r="160" stroke="#EF4444" strokeWidth="1" strokeDasharray="4 4" fill="none" />
-                </svg>
-              </div>
+              <AnimatedEcosystem 
+                centerBrand="adobe"
+                centerColor="ff0000"
+                themeColorHex="#EF4444"
+                nodes={[
+                  { brand: 'adobephotoshop', fallbackIcon: Image, label: 'Photoshop' },
+                  { brand: 'adobeillustrator', fallbackIcon: PenTool, label: 'Illustrator' },
+                  { brand: 'adobepremierepro', fallbackIcon: Video, label: 'Premiere Pro' },
+                  { brand: 'adobeaftereffects', fallbackIcon: Film, label: 'After Effects' },
+                  { brand: 'adobeacrobatreader', fallbackIcon: FileText, label: 'Acrobat' },
+                  { brand: 'adobexd', fallbackIcon: MonitorSmartphone, label: 'XD' }
+                ]}
+              />
             </Reveal>
           </div>
         </div>

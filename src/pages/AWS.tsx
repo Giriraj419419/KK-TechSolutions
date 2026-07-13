@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
 import {
   Cloud, ShieldCheck, Gauge, Server, Database, Lock,
-  ArrowRight, Globe
+  ArrowRight, Globe, Activity
 } from 'lucide-react';
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 import { BrandLogo } from '../components/BrandLogo';
+import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
 
 // =========================================================================
 // PREMIUM AWS CARD ENHANCEMENT (Isolated physics for AWS page only)
@@ -143,53 +144,22 @@ export default function AWS() {
               </Reveal>
             </div>
 
-            {/* Right Column â€” Animated AWS Ecosystem */}
+            {/* Right Column — Animated AWS Ecosystem */}
             <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full h-[500px]">
-              <div className="relative w-full h-full max-w-md mx-auto">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-orange-500/10 blur-xl animate-pulse" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl premium-glass border border-orange-500/30 z-20">
-                  <BrandLogo iconName="amazonaws" color="ff9900" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]" />
-                </div>
-
-                {/* Orbiting Tech Icons */}
-                {[
-                  { brand: 'amazonec2', fallbackIcon: Server, label: 'EC2 Compute', delay: 0, angle: 0 },
-                  { brand: 'amazons3', fallbackIcon: Database, label: 'S3 Storage', delay: 1.5, angle: 60 },
-                  { brand: 'awslambda', fallbackIcon: Cloud, label: 'Lambda', delay: 3, angle: 120 },
-                  { brand: 'amazoncloudfront', fallbackIcon: Globe, label: 'CloudFront', delay: 4.5, angle: 180 },
-                  { brand: 'awsiam', fallbackIcon: ShieldCheck, label: 'IAM Security', delay: 6, angle: 240 },
-                  { brand: 'amazonrds', fallbackIcon: Gauge, label: 'RDS Database', delay: 7.5, angle: 300 }
-                ].map((item, idx) => {
-                  const radius = 160;
-                  const radian = (item.angle * Math.PI) / 180;
-                  const x = Math.cos(radian) * radius;
-                  const y = Math.sin(radian) * radius;
-
-                  return (
-                    <motion.div
-                      key={idx}
-                      className="absolute top-1/2 left-1/2 flex flex-col items-center justify-center z-10"
-                      initial={{ x: 0, y: 0, opacity: 0 }}
-                      animate={{ x, y, opacity: 1 }}
-                      transition={{ duration: 1.5, delay: 0.5 + item.delay * 0.1, ease: 'easeOut' }}
-                    >
-                      <motion.div
-                        animate={{ y: [0, -8, 0] }}
-                        transition={{ repeat: Infinity, duration: 4 + (idx % 3), ease: 'easeInOut', delay: item.delay * 0.2 }}
-                        className="p-3 rounded-xl bg-white/[0.03] border border-white/10 premium-glass group cursor-default hover:border-orange-500/40 hover:bg-orange-500/10 transition-colors"
-                      >
-                        <BrandLogo iconName={item.brand} fallbackIcon={item.fallbackIcon} className="w-6 h-6 text-orange-400 group-hover:scale-110 transition-transform" />
-                      </motion.div>
-                      <span className="mt-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider bg-[#0B121F]/80 px-2 py-0.5 rounded-full">{item.label}</span>
-                    </motion.div>
-                  );
-                })}
-                
-                {/* Connecting Lines (svg) */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20 z-0" style={{ transform: 'translate(50%, 50%)' }}>
-                  <circle cx="0" cy="0" r="160" stroke="#F97316" strokeWidth="1" strokeDasharray="4 4" fill="none" />
-                </svg>
-              </div>
+              <AnimatedEcosystem 
+                centerBrand="amazonwebservices"
+                centerColor="ff9900"
+                themeColorHex="#F97316"
+                nodes={[
+                  { brand: 'amazonec2', fallbackIcon: Server, label: 'EC2' },
+                  { brand: 'amazons3', fallbackIcon: Database, label: 'S3' },
+                  { brand: 'awslambda', fallbackIcon: Cloud, label: 'Lambda' },
+                  { brand: 'amazonrds', fallbackIcon: Database, label: 'RDS' },
+                  { brand: 'amazoncloudfront', fallbackIcon: Globe, label: 'CloudFront' },
+                  { fallbackIcon: ShieldCheck, label: 'Security' },
+                  { fallbackIcon: Activity, label: 'Monitoring' }
+                ]}
+              />
             </Reveal>
           </div>
         </div>

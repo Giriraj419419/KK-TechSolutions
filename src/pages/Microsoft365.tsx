@@ -8,6 +8,7 @@ import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextRevea
 import { CosmosField, GlowingOrbs, TiltCard, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 import { BrandLogo } from '../components/BrandLogo';
+import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
 
 const features = [
   { icon: Mail, title: 'Business Email', desc: 'Professional email with custom domains, large mailboxes, and advanced security.' },
@@ -70,54 +71,23 @@ export default function Microsoft365() {
               </Reveal>
             </div>
 
-            {/* Right Column â€” Animated MS365 Ecosystem */}
+            {/* Right Column — Animated MS365 Ecosystem */}
             <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full h-[500px]">
-              <div className="relative w-full h-full max-w-md mx-auto">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-blue-600/10 blur-xl animate-pulse" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl premium-glass border border-blue-600/30 z-20">
-                  <BrandLogo iconName="microsoft" color="00a4ef" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(37,99,235,0.5)]" />
-                </div>
-
-                {/* Orbiting Tech Icons */}
-                {[
-                  { brand: 'microsoftoutlook', label: 'Outlook', delay: 0, angle: 0 },
-                  { brand: 'microsoftteams', label: 'Teams', delay: 1, angle: 51.4 },
-                  { brand: 'microsoftsharepoint', label: 'SharePoint', delay: 2, angle: 102.8 },
-                  { brand: 'microsoftonedrive', label: 'OneDrive', delay: 3, angle: 154.3 },
-                  { brand: 'microsoftexcel', label: 'Excel', delay: 4, angle: 205.7 },
-                  { brand: 'microsoftword', label: 'Word', delay: 5, angle: 257.1 },
-                  { brand: 'microsoftpowerpoint', label: 'PowerPoint', delay: 6, angle: 308.6 }
-                ].map((item, idx) => {
-                  const radius = 160;
-                  const radian = (item.angle * Math.PI) / 180;
-                  const x = Math.cos(radian) * radius;
-                  const y = Math.sin(radian) * radius;
-
-                  return (
-                    <motion.div
-                      key={idx}
-                      className="absolute top-1/2 left-1/2 flex flex-col items-center justify-center z-10"
-                      initial={{ x: 0, y: 0, opacity: 0 }}
-                      animate={{ x, y, opacity: 1 }}
-                      transition={{ duration: 1.5, delay: 0.5 + item.delay * 0.1, ease: 'easeOut' }}
-                    >
-                      <motion.div
-                        animate={{ y: [0, -8, 0] }}
-                        transition={{ repeat: Infinity, duration: 4 + (idx % 3), ease: 'easeInOut', delay: item.delay * 0.2 }}
-                        className="p-3 rounded-xl bg-white/[0.03] border border-white/10 premium-glass group cursor-default hover:border-blue-600/40 hover:bg-blue-600/10 transition-colors"
-                      >
-                        <BrandLogo iconName={item.brand} className="w-6 h-6 group-hover:scale-110 transition-transform" />
-                      </motion.div>
-                      <span className="mt-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider bg-[#0B121F]/80 px-2 py-0.5 rounded-full">{item.label}</span>
-                    </motion.div>
-                  );
-                })}
-                
-                {/* Connecting Lines (svg) */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20 z-0" style={{ transform: 'translate(50%, 50%)' }}>
-                  <circle cx="0" cy="0" r="160" stroke="#2563EB" strokeWidth="1" strokeDasharray="4 4" fill="none" />
-                </svg>
-              </div>
+              <AnimatedEcosystem 
+                centerBrand="microsoft"
+                centerColor="00a4ef"
+                themeColorHex="#2563EB"
+                nodes={[
+                  { brand: 'microsoftoutlook', label: 'Outlook' },
+                  { brand: 'microsoftteams', label: 'Teams' },
+                  { brand: 'microsoftsharepoint', label: 'SharePoint' },
+                  { brand: 'microsoftonedrive', label: 'OneDrive' },
+                  { brand: 'microsoftexcel', label: 'Excel' },
+                  { brand: 'microsoftword', label: 'Word' },
+                  { brand: 'microsoftpowerpoint', label: 'PowerPoint' },
+                  { brand: 'microsoftexchange', label: 'Exchange' }
+                ]}
+              />
             </Reveal>
           </div>
         </div>

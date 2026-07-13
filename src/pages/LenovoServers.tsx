@@ -12,6 +12,7 @@ import { SectionTitle, Reveal, StaggerContainer, StaggerItem, Eyebrow, TextRevea
 import { CosmosField, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 import { BrandLogo } from '../components/BrandLogo';
+import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
 
 const LENOVO_PARTICLES = Array.from({ length: 8 }).map(() => ({
   top: `${15 + Math.random() * 70}%`,
@@ -174,309 +175,6 @@ const faqs = [
 // =========================================================================
 // MAIN PAGE
 // =========================================================================
-// =========================================================================
-// PREMIUM LENOVO HERO ANIMATION COMPONENT
-// =========================================================================
-function LenovoHeroAnimation() {
-  const [isBooting, setIsBooting] = useState(true);
-  const [isReady, setIsReady] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);
-
-  useEffect(() => {
-    // 2.5 second cinematic boot sequence
-    const timer = setTimeout(() => {
-      setIsBooting(false);
-      setIsReady(true);
-    }, 2500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // AI Processing Cycle (triggers every 8s, lasts 2s)
-  useEffect(() => {
-    if (!isReady) return;
-    const interval = setInterval(() => {
-      setIsProcessing(true);
-      setTimeout(() => setIsProcessing(false), 2000);
-    }, 8000);
-    return () => clearInterval(interval);
-  }, [isReady]);
-
-  // 3D Hover mechanics for the central AI core
-  const ref = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 });
-  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 });
-  
-  // Clamped rotation for premium realism (max 4 degrees)
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["4deg", "-4deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-4deg", "4deg"]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (typeof window !== 'undefined' && window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    x.set(mouseX / width - 0.5);
-    y.set(mouseY / height - 0.5);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  const modules = [
-    { brand: 'lenovo', fallbackIcon: Server, label: 'ThinkSystem (Rack)', angle: 30 },
-    { brand: 'lenovo', fallbackIcon: Database, label: 'ThinkSystem (Tower)', angle: 150 },
-    { brand: 'lenovo', fallbackIcon: LayoutGrid, label: 'ThinkEdge', angle: 270 }
-  ];
-
-  const radiusPercent = 36;
-
-  // Hexagon shape for background particles
-  const hexClipPath = 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)';
-
-  return (
-    <div className="relative w-full aspect-square max-w-[480px] mx-auto z-10" style={{ perspective: '1000px' }}>
-      
-      {/* 1. Ambient Technology Environment (Fog & Particles) */}
-      <AnimatePresence>
-        {isReady && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 2 }}
-            className="absolute inset-0 z-0 pointer-events-none"
-          >
-            {/* Hexagonal Floating Particles */}
-            {LENOVO_PARTICLES.map((particle, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-2 h-2 bg-red-500/30"
-                style={{
-                  top: particle.top,
-                  left: particle.left,
-                  clipPath: hexClipPath
-                }}
-                animate={{
-                  y: [0, -40, 0],
-                  rotate: [0, 180, 360],
-                  opacity: [0, 0.4, 0],
-                  scale: [0.5, 1.2, 0.5]
-                }}
-                transition={{
-                  duration: particle.duration,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: particle.delay
-                }}
-              />
-            ))}
-            
-            {/* Soft Fog Glow & Midground Lighting */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] rounded-full bg-gradient-to-tr from-red-500/10 to-transparent blur-[80px] pointer-events-none mix-blend-screen" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[50%] rounded-full bg-red-600/15 blur-[60px] pointer-events-none mix-blend-screen" />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* 2. Dynamic Compute Rings & AI Data Streams */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible" viewBox="-50 -50 100 100">
-        
-        <defs>
-          <linearGradient id="lenovoActiveStream" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#DC2626" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#0078D4" stopOpacity="0.8" />
-          </linearGradient>
-          <linearGradient id="lenovoIdleStream" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#DC2626" stopOpacity="0.15" />
-            <stop offset="100%" stopColor="#0078D4" stopOpacity="0.15" />
-          </linearGradient>
-        </defs>
-
-        {/* Dynamic Compute Rings */}
-        <g style={{ transformOrigin: '0px 0px' }}>
-          {/* Inner Ring */}
-          <motion.circle
-            cx="0" cy="0" r="18"
-            stroke={isProcessing ? "#DC2626" : "rgba(220, 38, 38, 0.2)"} strokeWidth="0.2" fill="none"
-            strokeDasharray="4 2"
-            animate={isReady ? { rotate: 360, strokeOpacity: isProcessing ? 0.8 : 0.3 } : { rotate: 0 }}
-            transition={{ rotate: { duration: isProcessing ? 10 : 30, repeat: Infinity, ease: "linear" }, strokeOpacity: { duration: 0.5 } }}
-          />
-          {/* Middle Ring */}
-          <motion.circle
-            cx="0" cy="0" r="23"
-            stroke={isProcessing ? "#0078D4" : "rgba(0, 120, 212, 0.2)"} strokeWidth="0.15" fill="none"
-            strokeDasharray="1 3"
-            animate={isReady ? { rotate: -360, strokeOpacity: isProcessing ? 0.8 : 0.2 } : { rotate: 0 }}
-            transition={{ rotate: { duration: isProcessing ? 15 : 45, repeat: Infinity, ease: "linear" }, strokeOpacity: { duration: 0.5 } }}
-          />
-          {/* Outer Ring */}
-          <motion.circle
-            cx="0" cy="0" r="28"
-            stroke="rgba(255, 255, 255, 0.1)" strokeWidth="0.1" fill="none"
-            strokeDasharray="10 5"
-            animate={isReady ? { rotate: 360 } : { rotate: 0 }}
-            transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-          />
-        </g>
-        
-        {/* Data Streams */}
-        {modules.map((item, idx) => {
-          const radian = (item.angle * Math.PI) / 180;
-          const xPos = Math.cos(radian) * radiusPercent;
-          const yPos = Math.sin(radian) * radiusPercent;
-          
-          return (
-            <g key={`stream-${idx}`}>
-              {/* Background idle line */}
-              <motion.line
-                x1="0" y1="0" x2={xPos} y2={yPos}
-                stroke="url(#lenovoIdleStream)"
-                strokeWidth="0.3"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: isReady ? 1 : 0 }}
-                transition={{ duration: 1.5, delay: isBooting ? 0 : 0.2 + idx * 0.1 }}
-              />
-              
-              {/* Animated Data Stream (Active during Processing) */}
-              {isReady && (
-                <motion.line
-                  x1="0" y1="0" x2={xPos} y2={yPos}
-                  stroke="url(#lenovoActiveStream)"
-                  strokeWidth="0.5"
-                  strokeDasharray="5 15"
-                  animate={isProcessing ? { strokeDashoffset: [20, 0], opacity: 1 } : { strokeDashoffset: 0, opacity: 0 }}
-                  transition={{ strokeDashoffset: { duration: 0.8, repeat: Infinity, ease: "linear" }, opacity: { duration: 0.3 } }}
-                  style={{ filter: 'drop-shadow(0 0 2px rgba(220, 38, 38, 0.6))' }}
-                />
-              )}
-            </g>
-          );
-        })}
-      </svg>
-
-      {/* 3. Smart Infrastructure Nodes (Hexagonal Network) */}
-      {modules.map((item, idx) => {
-        const radian = (item.angle * Math.PI) / 180;
-        const xPos = Math.cos(radian) * radiusPercent;
-        const yPos = Math.sin(radian) * radiusPercent;
-
-        return (
-          <motion.div
-            key={`node-${idx}`}
-            className="absolute pointer-events-auto z-10"
-            initial={{ left: "50%", top: "50%", opacity: 0 }}
-            animate={{ 
-              left: isReady ? `calc(50% + ${xPos}%)` : "50%", 
-              top: isReady ? `calc(50% + ${yPos}%)` : "50%", 
-              opacity: isReady ? 1 : 0 
-            }}
-            transition={{ duration: 1.2, delay: isBooting ? 0 : 0.2 + idx * 0.1, type: "spring", stiffness: 60, damping: 15 }}
-          >
-            <div className="absolute flex flex-col items-center justify-center w-max" style={{ transform: 'translate(-50%, -50%)' }}>
-              <motion.div
-                animate={isReady ? { y: [0, -5 - (idx%2), 0], scale: isProcessing ? [1, 1.1, 1] : [1, 1.02, 1] } : {}}
-                transition={{ 
-                  y: { repeat: Infinity, duration: 4 + (idx % 3), ease: 'easeInOut', delay: idx * 0.3 },
-                  scale: { repeat: Infinity, duration: isProcessing ? 1 : 3 + (idx % 2), ease: 'easeInOut' }
-                }}
-                className={`p-3 border premium-glass group transition-all shadow-lg backdrop-blur-md cursor-default
-                  ${isProcessing 
-                    ? 'bg-red-600/10 border-red-500/50 shadow-[0_0_15px_rgba(220,38,38,0.3)]' 
-                    : 'bg-[#0B121F]/80 border-white/10 hover:border-red-500/30 hover:bg-red-500/5'
-                  }`}
-                style={{ clipPath: hexClipPath }} // Hexagonal node shape
-              >
-                <div className="p-2"> {/* Inner padding for the hexagon clip */}
-                  <BrandLogo iconName={item.brand} fallbackIcon={item.fallbackIcon} className={`w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300
-                    ${isProcessing 
-                      ? 'text-red-400 drop-shadow-[0_0_8px_rgba(220,38,38,0.8)]' 
-                      : 'text-gray-400 group-hover:text-red-300'
-                    }`} 
-                  />
-                </div>
-              </motion.div>
-              <span className={`mt-2 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-sm border shadow-sm whitespace-nowrap transition-colors duration-300
-                ${isProcessing
-                  ? 'bg-red-900/40 border-red-500/30 text-red-300'
-                  : 'bg-[#0B121F]/90 border-white/10 text-gray-400'
-                }`}
-              >
-                {item.label}
-              </span>
-            </div>
-          </motion.div>
-        );
-      })}
-
-      {/* 4. AI Digital Core (Center Lenovo Server) */}
-      <motion.div
-        ref={ref}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
-      >
-        <motion.div
-          animate={isBooting ? { scale: [0.9, 1], opacity: [0, 1] } : { y: [0, -4, 0] }}
-          transition={isBooting ? { duration: 1.2, ease: "easeOut" } : { repeat: Infinity, duration: 5, ease: "easeInOut" }}
-          className="relative group p-7 rounded-2xl premium-glass border border-red-500/30 bg-[#0B121F]/95 backdrop-blur-xl shadow-2xl transition-all duration-300 hover:shadow-[0_20px_50px_-10px_rgba(220,38,38,0.3)] hover:border-red-400/60 cursor-pointer overflow-hidden"
-        >
-          {/* Glass Reflection Highlight */}
-          <motion.div 
-            className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
-            style={{
-              background: useTransform(
-                () => `radial-gradient(180px circle at ${(x.get() + 0.5) * 100}% ${(y.get() + 0.5) * 100}%, rgba(220,38,38,0.2), transparent 60%)`
-              )
-            }}
-          />
-
-          {/* AI Processor Internal Glow */}
-          <motion.div
-            animate={{ 
-              opacity: isProcessing ? 0.8 : (isReady ? 0.3 : 0), 
-              scale: isProcessing ? 1.2 : 1 
-            }}
-            transition={{ duration: isProcessing ? 0.5 : 2 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-red-600/30 blur-2xl rounded-full mix-blend-screen"
-          />
-
-          {/* Holographic Scan Effect */}
-          {isReady && (
-             <motion.div 
-               animate={{ top: ['-20%', '120%'] }}
-               transition={{ duration: 3, repeat: Infinity, repeatDelay: 4, ease: "linear" }}
-               className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-50 z-10"
-               style={{ boxShadow: '0 0 10px rgba(220, 38, 38, 0.8)' }}
-             />
-          )}
-
-          <BrandLogo iconName="lenovo" color="e2231a" className={`w-16 h-16 sm:w-20 sm:h-20 relative z-20 transition-all duration-300 ${isProcessing ? 'text-red-400' : (isReady ? 'text-red-500' : 'text-gray-600')}`} style={{ transform: 'translateZ(25px)', filter: isProcessing ? 'drop-shadow(0 0 30px rgba(220,38,38,0.6)) drop-shadow(0 0 10px rgba(220,38,38,0.8))' : (isReady ? 'drop-shadow(0 0 15px rgba(220,38,38,0.4))' : 'none') }} />
-          
-          {/* Core Activity Indicators */}
-          <div className="absolute top-4 right-4 flex gap-1.5 z-20" style={{ transform: 'translateZ(30px)' }}>
-            <motion.div
-              animate={isProcessing ? { opacity: [1, 0, 1] } : { opacity: [1, 0.5, 1] }}
-              transition={{ duration: isProcessing ? 0.2 : 1.5, repeat: Infinity }}
-              className={`w-1.5 h-1.5 rounded-full ${isReady ? 'bg-red-500 shadow-[0_0_8px_rgba(220,38,38,1)]' : 'bg-gray-500'}`}
-            />
-          </div>
-
-        </motion.div>
-      </motion.div>
-
-    </div>
-  );
-}
-
-
 export default function LenovoServers() {
   const { scrollY } = useScroll();
   const yParallax = useTransform(scrollY, [0, 1000], [0, 150]);
@@ -553,7 +251,19 @@ export default function LenovoServers() {
 
             {/* Right Column - Lenovo Hero Animation */}
             <Reveal direction='left' delay={0.12} className='relative z-10 flex justify-center items-center w-full min-h-[500px]'>
-              <LenovoHeroAnimation />
+              <AnimatedEcosystem 
+                centerBrand="lenovo"
+                centerColor="e2231a"
+                themeColorHex="#DC2626"
+                nodes={[
+                  { brand: 'lenovo', fallbackIcon: Server, label: 'ThinkSystem Rack' },
+                  { brand: 'lenovo', fallbackIcon: Database, label: 'ThinkSystem Tower' },
+                  { brand: 'lenovo', fallbackIcon: LayoutGrid, label: 'ThinkAgile' },
+                  { brand: 'lenovo', fallbackIcon: Network, label: 'Networking' },
+                  { brand: 'lenovo', fallbackIcon: ShieldCheck, label: 'Security' },
+                  { brand: 'lenovo', fallbackIcon: HardDrive, label: 'Storage' }
+                ]}
+              />
             </Reveal>
           </div>
         </div>

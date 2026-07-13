@@ -1,4 +1,4 @@
-﻿import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bot, X, Send, Paperclip, Smile, Mic, ChevronDown, Minus } from 'lucide-react';
 
@@ -166,7 +166,7 @@ export default function ChatBot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.95 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed bottom-28 right-6 z-50 w-[calc(100vw-3rem)] sm:w-[400px] h-[600px] max-h-[80vh] flex flex-col rounded-3xl premium-glass border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.5),0_0_80px_rgba(37,99,235,0.15)] overflow-hidden bg-[#0B121F]/95 backdrop-blur-xl"
+            className="fixed bottom-24 right-6 z-50 w-[calc(100vw-3rem)] sm:w-[400px] h-[600px] max-h-[80vh] flex flex-col rounded-3xl premium-glass border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.5),0_0_80px_rgba(37,99,235,0.15)] overflow-hidden bg-[#0B121F]/95 backdrop-blur-xl"
           >
             {/* Header Section */}
             <div className="px-5 py-4 flex items-center justify-between border-b border-white/10 bg-gradient-to-r from-blue-900/20 to-transparent relative overflow-hidden shrink-0">

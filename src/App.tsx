@@ -6,8 +6,6 @@ import ScrollToTop from './components/ScrollToTop';
 import WhatsAppButton from './components/WhatsAppButton';
 import ChatBot from './components/ChatBot';
 import Preloader from './components/Preloader';
-import CustomCursor from './components/CustomCursor';
-
 // Lazy-loaded Pages
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
@@ -31,7 +29,6 @@ export default function App() {
     <BrowserRouter>
       <Preloader />
       <WhatsAppButton />
-      <CustomCursor />
       <ScrollToTop />
       {/* Noise texture overlay */}
       <div className="noise" />

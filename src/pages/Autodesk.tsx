@@ -10,6 +10,7 @@ import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextRevea
 import { CosmosField, GlowingOrbs, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 import { BrandLogo } from '../components/BrandLogo';
+import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
 
 // =========================================================================
 // PREMIUM AUTODESK CARD ENHANCEMENT (Isolated physics for Autodesk page only)
@@ -227,52 +228,20 @@ export default function Autodesk() {
               </Reveal>
             </div>
 
-            {/* Right Column â€” Animated Autodesk Ecosystem */}
+            {/* Right Column — Animated Autodesk Ecosystem */}
             <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full h-[500px]">
-              <div className="relative w-full h-full max-w-md mx-auto">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-[#14B8A6]/10 blur-xl animate-pulse" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl premium-glass border border-teal-500/30 z-20 flex items-center justify-center">
-                  <BrandLogo iconName="autodesk" color="00a89d" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(20,184,166,0.5)]" />
-                </div>
-
-                {/* Orbiting Tech Icons */}
-                {[
-                  { brand: 'autocad', fallbackIcon: Compass, label: 'AutoCAD', delay: 0, angle: 0 },
-                  { brand: 'autodeskrevit', fallbackIcon: Building2, label: 'Revit', delay: 1.5, angle: 72 },
-                  { brand: 'autodesk', fallbackIcon: Factory, label: 'Inventor', delay: 3, angle: 144 },
-                  { brand: 'autodesk', fallbackIcon: Ruler, label: 'Civil 3D', delay: 4.5, angle: 216 },
-                  { brand: 'autodesk', fallbackIcon: Box, label: 'Fusion 360', delay: 6, angle: 288 }
-                ].map((item, idx) => {
-                  const radius = 160;
-                  const radian = (item.angle * Math.PI) / 180;
-                  const x = Math.cos(radian) * radius;
-                  const y = Math.sin(radian) * radius;
-
-                  return (
-                    <motion.div
-                      key={idx}
-                      className="absolute top-1/2 left-1/2 flex flex-col items-center justify-center z-10"
-                      initial={{ x: 0, y: 0, opacity: 0 }}
-                      animate={{ x, y, opacity: 1 }}
-                      transition={{ duration: 1.5, delay: 0.5 + item.delay * 0.1, ease: 'easeOut' }}
-                    >
-                      <motion.div
-                        animate={{ y: [0, -8, 0] }}
-                        transition={{ repeat: Infinity, duration: 4 + (idx % 3), ease: 'easeInOut', delay: item.delay * 0.2 }}
-                        className="p-3 rounded-xl bg-white/[0.03] border border-white/10 premium-glass group cursor-default hover:border-teal-500/40 hover:bg-teal-500/10 transition-colors"
-                      >
-                        <BrandLogo iconName={item.brand} fallbackIcon={item.fallbackIcon} className="w-6 h-6 text-teal-400 group-hover:scale-110 transition-transform" />
-                      </motion.div>
-                      <span className="mt-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider bg-[#0B121F]/80 px-2 py-0.5 rounded-full">{item.label}</span>
-                    </motion.div>
-                  );
-                })}
-                
-                {/* Connecting Lines (svg) */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20 z-0" style={{ transform: 'translate(50%, 50%)' }}>
-                  <circle cx="0" cy="0" r="160" stroke="#14B8A6" strokeWidth="1" strokeDasharray="4 4" fill="none" />
-                </svg>
-              </div>
+              <AnimatedEcosystem 
+                centerBrand="autodesk"
+                centerColor="00a89d"
+                themeColorHex="#14B8A6"
+                nodes={[
+                  { brand: 'autocad', fallbackIcon: Compass, label: 'AutoCAD' },
+                  { brand: 'autodeskrevit', fallbackIcon: Building2, label: 'Revit' },
+                  { brand: 'autodesk', fallbackIcon: Factory, label: 'Inventor' },
+                  { brand: 'autodesk', fallbackIcon: Ruler, label: 'Civil 3D' },
+                  { brand: 'autodesk', fallbackIcon: Box, label: 'Fusion 360' }
+                ]}
+              />
             </Reveal>
           </div>
         </div>
