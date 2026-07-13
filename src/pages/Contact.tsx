@@ -1,6 +1,6 @@
-﻿/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useRef } from 'react';
-import { Send, ChevronRight, Check, Building2, Calendar, Clock, Loader2, CheckCircle2, Search, UploadCloud, X, Lock, File } from 'lucide-react';
+import { Send, ChevronRight, Check, Building2, Calendar, Clock, Loader2, CheckCircle2, Search, UploadCloud, X, Lock, File, Rocket, TrendingUp, Globe, Sparkles } from 'lucide-react';
 import { Reveal, Eyebrow, TextReveal } from '../components/Section';
 import { SectionGlow } from '../components/Atmosphere';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -93,11 +93,28 @@ export default function Contact() {
         timeline: formData.timeline
       };
 
-      const res = await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
+      let res;
+      try {
+        res = await fetch('/api/leads', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (fetchError) {
+        console.error('Fetch Error:', fetchError);
+        setSubmitError('Server unavailable. Please check your connection.');
+        setIsSubmitting(false);
+        return;
+      }
+      
+      const contentType = res.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const textError = await res.text();
+        console.error('Server returned non-JSON:', res.status, textError);
+        setSubmitError(`Server Error (${res.status}). Please try again later.`);
+        setIsSubmitting(false);
+        return;
+      }
       
       const data = await res.json();
       
@@ -105,23 +122,23 @@ export default function Contact() {
         setLeadId(data.leadId);
         setIsSubmitted(true);
       } else {
-        console.error('Failed to submit form', data.error);
-        setSubmitError(data.error || 'Something went wrong while submitting your request.');
+        console.error('Failed to submit form:', data.error);
+        setSubmitError(data.error || 'Configuration error or server issue.');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      setSubmitError('Network error. Please try again or contact us directly.');
+      setSubmitError('Application error during submission.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const budgets = [
-    'Below â‚¹50K',
-    'â‚¹50Kâ€“â‚¹2L',
-    'â‚¹2Lâ€“â‚¹10L',
-    'â‚¹10L+',
-    'Custom'
+    { value: 'Below ₹50K', label: 'Starter', icon: Rocket },
+    { value: '₹50K–₹2L', label: 'Growth', icon: TrendingUp },
+    { value: '₹2L–₹10L', label: 'Business', icon: Building2 },
+    { value: '₹10L+', label: 'Enterprise', icon: Globe },
+    { value: 'Custom', label: 'Tailored Solution', icon: Sparkles }
   ];
 
   const timeSlots = [
@@ -287,31 +304,76 @@ export default function Contact() {
       }
       case 2: {
         return (
-          <Reveal className="space-y-6 h-full flex flex-col justify-center max-w-2xl mx-auto">
-            <div className="text-center">
-              <h3 className="text-3xl font-bold text-white mb-3">Customize Your Solution</h3>
-              <p className="text-base text-gray-400 mb-10">Select an estimated budget for your <strong className="text-blue-400">{formData.selectedOption}</strong> deployment.</p>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {budgets.map((b) => (
+          <Reveal className="space-y-6 h-full flex flex-col justify-center max-w-4xl mx-auto w-full pt-4">
+            <div className="text-center mb-12">
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <h3 className="text-4xl font-bold text-white mb-4 tracking-tight">Customize Your Solution</h3>
+                <p className="text-lg text-gray-400">
+                  Select an estimated budget for your <strong className="text-blue-400 font-semibold">{formData.selectedOption}</strong> deployment.
+                </p>
+              </motion.div>
+            </div>
+            
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {budgets.map((b, idx) => {
+                const isSelected = formData.budget === b.value;
+                return (
                   <motion.button
-                    whileHover={{ scale: 1.02 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.1, duration: 0.4, ease: "easeOut" }}
+                    whileHover={{ scale: 1.03, y: -4 }}
                     whileTap={{ scale: 0.98 }}
-                    key={b}
+                    key={b.value}
                     type="button"
-                    onClick={() => setFormData({ ...formData, budget: b })}
-                    className={`p-6 rounded-2xl border text-left transition-all ${
-                      formData.budget === b
-                        ? 'border-blue-500 bg-blue-500/10 text-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.2)]'
-                        : 'border-white/10 bg-white/[0.02] text-gray-400 hover:bg-white/[0.06] hover:border-white/20'
+                    onClick={() => setFormData({ ...formData, budget: b.value })}
+                    className={`relative p-6 rounded-2xl border text-left transition-all duration-300 group overflow-hidden ${
+                      isSelected
+                        ? 'border-blue-500 bg-blue-500/10 shadow-[0_10px_40px_rgba(59,130,246,0.2)]'
+                        : 'border-white/10 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/20 hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)]'
                     }`}
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="text-base font-bold">{b}</span>
-                      {formData.budget === b && <CheckCircle2 className="w-6 h-6" />}
+                    {/* Active State Background Glow */}
+                    {isSelected && (
+                      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-transparent pointer-events-none" />
+                    )}
+                    
+                    {/* Hover Glow Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+                    <div className="relative z-10 flex flex-col h-full">
+                      <div className="flex items-center justify-between mb-4">
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-300 ${
+                          isSelected ? 'bg-blue-500 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]' : 'bg-white/5 text-gray-400 group-hover:text-gray-200'
+                        }`}>
+                          <b.icon className="w-5 h-5" />
+                        </div>
+                        
+                        <div className={`transition-all duration-300 ${isSelected ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}>
+                          <CheckCircle2 className="w-6 h-6 text-blue-400 drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
+                        </div>
+                      </div>
+                      
+                      <div className="mt-auto">
+                        <span className={`block text-xs font-bold uppercase tracking-wider mb-1 transition-colors duration-300 ${
+                          isSelected ? 'text-blue-300' : 'text-gray-500 group-hover:text-gray-400'
+                        }`}>
+                          {b.label}
+                        </span>
+                        <span className={`block text-xl font-bold tracking-tight transition-colors duration-300 ${
+                          isSelected ? 'text-white' : 'text-gray-300 group-hover:text-white'
+                        }`}>
+                          {b.value}
+                        </span>
+                      </div>
                     </div>
                   </motion.button>
-                ))}
-              </div>
+                );
+              })}
             </div>
           </Reveal>
         );
