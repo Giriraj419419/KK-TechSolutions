@@ -95,21 +95,20 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
         ))}
       </svg>
 
-      {/* Center Hub */}
+      {/* Center Hub (Dominant Brand Anchor) */}
       <motion.div 
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.8, type: 'spring', bounce: 0.4 }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] premium-glass border z-20 flex items-center justify-center shadow-2xl"
-        style={{ borderColor: `${themeColorHex}50` }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center"
       >
         <BrandLogo 
           iconName={centerBrand} 
           color={centerColor} 
           fallbackIcon={centerFallback}
           customSvg={customCenterSvg}
-          className="w-20 h-20 md:w-32 md:h-32 drop-shadow-2xl" 
-          style={{ filter: `drop-shadow(0 0 25px ${themeColorHex}80)` }}
+          className="w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 object-contain drop-shadow-2xl" 
+          style={{ filter: `drop-shadow(0 0 30px ${themeColorHex}60)` }}
         />
       </motion.div>
 
@@ -125,7 +124,7 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
           <motion.div
             animate={{ y: [0, -6, 0] }}
             transition={{ repeat: Infinity, duration: 3 + (idx % 2), ease: 'easeInOut', delay: node.delay }}
-            className="p-3 md:p-4 rounded-xl md:rounded-2xl bg-white/[0.04] border border-white/10 premium-glass cursor-default transition-all duration-300 transform-gpu will-change-transform shadow-lg"
+            className="p-3 md:p-5 rounded-xl md:rounded-2xl bg-white/[0.04] border border-white/10 premium-glass cursor-default transition-all duration-300 transform-gpu will-change-transform shadow-lg"
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             style={{ '--hover-border': `${themeColorHex}90`, '--hover-bg': `${themeColorHex}20` } as any}
             whileHover={{ scale: 1.15, borderColor: 'var(--hover-border)', backgroundColor: 'var(--hover-bg)' }}
@@ -133,12 +132,12 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
             <BrandLogo 
               iconName={node.brand || ''} 
               fallbackIcon={node.fallbackIcon} 
-              className="w-6 h-6 md:w-8 md:h-8 transition-all duration-300"
+              className="w-8 h-8 md:w-12 md:h-12 lg:w-14 lg:h-14 transition-all duration-300"
               style={{ color: themeColorHex }} 
             />
           </motion.div>
           <motion.span 
-            className="mt-3 text-[9px] md:text-xs font-bold text-gray-300 uppercase tracking-wider bg-[#0B121F]/90 px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-white/10 opacity-90 group-hover:opacity-100 group-hover:text-white group-hover:border-white/30 transition-all shadow-xl backdrop-blur-md"
+            className="mt-3 text-[10px] md:text-sm font-bold text-gray-300 uppercase tracking-wider bg-[#0B121F]/90 px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-white/10 opacity-90 group-hover:opacity-100 group-hover:text-white group-hover:border-white/30 transition-all shadow-xl backdrop-blur-md"
             style={{ borderBottomColor: `${themeColorHex}80` }}
           >
             {node.label}
