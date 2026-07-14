@@ -2,8 +2,8 @@
 import { motion, animate } from 'framer-motion';
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, HeartPulse, GraduationCap, Package, Building2, Truck, Globe, MessageCircle, Mail, Phone } from 'lucide-react';
-import { Reveal, StaggerContainer, StaggerItem, TextReveal, Eyebrow } from '../components/Section';
+import { ArrowRight, HeartPulse, GraduationCap, Package, Building2, Truck, Globe, MessageCircle, Mail, Phone, Shield, Rocket } from 'lucide-react';
+import { Reveal, StaggerContainer, StaggerItem, TextReveal, Eyebrow, SectionTitle } from '../components/Section';
 import { CosmosField, GlowingOrbs, SectionGlow, FloatingElement, TiltCard } from '../components/Atmosphere';
 import TechConstellation from '../components/TechConstellation';
 import InteractivePartnerCard from '../components/InteractivePartnerCard';
@@ -518,24 +518,70 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Stats Counters Grid */}
-              <StaggerContainer className="grid grid-cols-3 gap-4" staggerChildren={0.1}>
-                {[
-                  { value: 15, suffix: '+', label: 'Years Experience' },
-                  { value: 500, suffix: '+', label: 'Projects Delivered' },
-                  { value: 99, suffix: '%', label: 'Client Satisfaction' }
-                ].map((stat, idx) => (
-                  <StaggerItem key={idx} direction="up">
-                    <div className="p-5 rounded-2xl premium-glass h-full">
-                      <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                      <div className="text-xs text-gray-500 mt-1.5 leading-snug">{stat.label}</div>
-                    </div>
-                  </StaggerItem>
-                ))}
-              </StaggerContainer>
+
             </Reveal>
 
           </div>
+        </div>
+      </section>
+
+      {/* ===== ENTERPRISE TRUST SECTION ===== */}
+      <section className="relative z-10 py-24 border-t border-white/5 bg-transparent" id="trust-section">
+        <SectionGlow color="teal" position="top-left" opacity={0.08} size={400} />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionTitle
+            center
+            eyebrow="Why Businesses Trust KK Tech Solutions"
+            title="Enterprise-Grade Reliability"
+            sub="We combine industry-leading expertise with uncompromising security to deliver technology that scales with your business."
+          />
+          <StaggerContainer className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6" staggerChildren={0.08}>
+            {[
+              { icon: Globe, title: 'Microsoft Expertise', desc: 'Enterprise productivity and cloud solutions.' },
+              { icon: Building2, title: 'Cloud Infrastructure', desc: 'Azure and AWS deployment expertise.' },
+              { icon: HeartPulse, title: 'Enterprise Support', desc: 'Reliable consultation and technical assistance.' },
+              { icon: Shield, title: 'Security & Compliance', desc: 'Secure and scalable technology implementations.' },
+              { icon: Rocket, title: 'Fast Deployment', desc: 'Rapid project delivery and onboarding.' },
+            ].map((feature, i) => (
+              <StaggerItem key={i} direction="up" className={i === 3 ? "lg:col-start-1 lg:ml-auto lg:w-[110%]" : i === 4 ? "lg:col-start-2 lg:mr-auto lg:w-[110%]" : ""}>
+                <TiltCard className="p-7 h-full flex flex-col group relative overflow-hidden text-left bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all duration-300 rounded-2xl">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  <div className="relative z-10">
+                    <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                      <feature.icon className="w-6 h-6 text-blue-400" />
+                    </div>
+                    <h3 className="text-lg font-bold text-white mb-2">{feature.title}</h3>
+                    <p className="text-sm text-gray-400 leading-relaxed">{feature.desc}</p>
+                  </div>
+                </TiltCard>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* ===== LIVE STATISTICS SECTION ===== */}
+      <section className="relative z-10 py-24 border-t border-white/5 bg-[#060A11] overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.05)_0%,transparent_70%)]" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <StaggerContainer className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12" staggerChildren={0.08}>
+            {[
+              { value: 500, suffix: '+', label: 'Projects Delivered' },
+              { value: 50, suffix: '+', label: 'Clients Served' },
+              { value: 15, suffix: '+', label: 'Years of Experience' },
+              { value: 200, suffix: '+', label: 'Cloud Deployments' },
+              { value: 15, suffix: 'm', label: 'Avg Response Time' }
+            ].map((stat, idx) => (
+              <StaggerItem key={idx} direction="scale" className="text-center">
+                <div className="text-4xl md:text-5xl font-black text-white mb-3 tracking-tight drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                  <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                </div>
+                <div className="text-[11px] uppercase tracking-widest font-bold text-gray-500">
+                  {stat.label}
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
         </div>
       </section>
 

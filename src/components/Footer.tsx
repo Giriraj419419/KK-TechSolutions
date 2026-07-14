@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Linkedin, Instagram, ChevronRight, Send, ArrowRight, ChevronUp, MapPin, ArrowUpRight } from 'lucide-react';
+import { Linkedin, ChevronRight, Send, ArrowRight, ChevronUp, MapPin, ArrowUpRight, Clock, MessageCircle, Phone } from 'lucide-react';
 import { SectionGlow } from './Atmosphere';
 
 export default function Footer() {
@@ -28,9 +28,9 @@ export default function Footer() {
 
       {/* Main Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-12">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.5fr]">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           
-          {/* Column 1: Brand & Socials */}
+          {/* Column 1: Brand & Contact Info */}
           <div className="space-y-6">
             <Link 
               to="/" 
@@ -44,16 +44,30 @@ export default function Footer() {
               />
             </Link>
             
-            <p className="text-sm leading-relaxed text-gray-400 pr-4">
-              KK Techsolutions consists of a group of highly experienced Information and Communications Technology (ICT) professionals.
-            </p>
+            <div className="space-y-3 mt-4 text-sm text-gray-400 pr-4">
+              <p className="flex items-start gap-3">
+                <MapPin className="w-4 h-4 text-blue-500 shrink-0 mt-1" />
+                <span>715, Shilp Arista, Sindhu Bhavan Road, Bodakdev, Ahmedabad, Gujarat – 380054</span>
+              </p>
+              <p className="flex items-center gap-3">
+                <Phone className="w-4 h-4 text-blue-500 shrink-0" />
+                <a href="tel:+917048214373" className="hover:text-white transition-colors">+91 70482 14373</a>
+              </p>
+              <p className="flex items-center gap-3">
+                <Send className="w-4 h-4 text-blue-500 shrink-0" />
+                <a href="mailto:info@kktechsolutions.in" className="hover:text-white transition-colors">info@kktechsolutions.in</a>
+              </p>
+              <p className="flex items-center gap-3">
+                <Clock className="w-4 h-4 text-blue-500 shrink-0" />
+                <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
+              </p>
+            </div>
 
-            <div className="flex gap-3">
+            <div className="flex gap-3 pt-2">
               {[
-                { Icon: Facebook, label: 'Facebook', href: '#' },
-                { Icon: Twitter, label: 'Twitter', href: '#' },
-                { Icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/company/kktechsolutions/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BUGmdLg3mTc2yfpNRPmOgow%3D%3D' },
-                { Icon: Instagram, label: 'Instagram', href: '#' },
+                { Icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/company/kktechsolutions' },
+                { Icon: MessageCircle, label: 'WhatsApp', href: 'https://wa.me/917048214373' },
+                { Icon: Send, label: 'Email', href: 'mailto:info@kktechsolutions.in' },
               ].map(({ Icon, label, href }) => (
                 <a
                   key={label}
@@ -69,37 +83,19 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Information */}
+          {/* Column 2: Services */}
           <div>
-            <h3 className="text-lg font-bold text-white mb-6">Information</h3>
-            <ul className="space-y-3">
-              {[
-                { label: 'About Us', to: '/about-us' },
-                { label: 'Our Clients', to: '/clients' },
-                { label: 'Latest Blog', to: '/blog' },
-                { label: 'Contact Us', to: '/contact-us' },
-                { label: 'Services', to: '/our-services' },
-              ].map((link) => (
-                <li key={link.label}>
-                  <Link to={link.to} className="flex items-center gap-2 text-sm text-gray-400 hover:text-blue-400 transition-colors">
-                    <ChevronRight className="w-3 h-3 text-blue-500 shrink-0" />
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 3: Our Services */}
-          <div>
-            <h3 className="text-lg font-bold text-white mb-6">Our Services</h3>
+            <h3 className="text-lg font-bold text-white mb-6">Services</h3>
             <ul className="space-y-3">
               {[
                 { label: 'Microsoft 365', to: '/microsoft-365' },
-                { label: 'Microsoft Azure', to: '/azure' },
+                { label: 'Azure', to: '/azure' },
                 { label: 'AWS Cloud', to: '/aws' },
                 { label: 'Adobe Solutions', to: '/adobe' },
                 { label: 'Autodesk', to: '/autodesk' },
+                { label: 'CorelDRAW', to: '/coreldraw' },
+                { label: 'GstarCAD', to: '/gstarcad' },
+                { label: 'ZWCAD', to: '/zwcad' },
               ].map((link) => (
                 <li key={link.label}>
                   <Link to={link.to} className="flex items-center gap-2 text-sm text-gray-400 hover:text-blue-400 transition-colors">
@@ -111,27 +107,45 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Newsletter */}
+          {/* Column 3: Servers */}
           <div>
-            <h3 className="text-lg font-bold text-white mb-6">Newsletter</h3>
-            <p className="text-sm leading-relaxed text-gray-400 mb-6 pr-4">
-              Please sign up to follow the latest news and events from us, we promise not to spam.
-            </p>
-            <form className="flex" onSubmit={e => e.preventDefault()}>
-              <input 
-                type="email" 
-                placeholder="Email Address" 
-                className="flex-1 bg-white/[0.03] border border-white/10 rounded-l-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-colors"
-                required
-              />
-              <button 
-                type="submit" 
-                className="bg-blue-600 hover:bg-blue-700 text-white px-5 rounded-r-lg flex items-center justify-center transition-colors"
-                aria-label="Subscribe"
-              >
-                <Send className="w-4 h-4" />
-              </button>
-            </form>
+            <h3 className="text-lg font-bold text-white mb-6">Servers</h3>
+            <ul className="space-y-3">
+              {[
+                { label: 'Dell PowerEdge', to: '/servers/dell' },
+                { label: 'HPE ProLiant', to: '/servers/hp' },
+                { label: 'Lenovo ThinkSystem', to: '/servers/lenovo' },
+              ].map((link) => (
+                <li key={link.label}>
+                  <Link to={link.to} className="flex items-center gap-2 text-sm text-gray-400 hover:text-blue-400 transition-colors">
+                    <ChevronRight className="w-3 h-3 text-blue-500 shrink-0" />
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4: Quick Links */}
+          <div>
+            <h3 className="text-lg font-bold text-white mb-6">Quick Links</h3>
+            <ul className="space-y-3">
+              {[
+                { label: 'Home', to: '/' },
+                { label: 'About Us', to: '/about-us' },
+                { label: 'Services', to: '/our-services' },
+                { label: 'Servers', to: '/servers/dell' },
+                { label: 'Clients', to: '/clients' },
+                { label: 'Contact Us', to: '/contact-us' },
+              ].map((link) => (
+                <li key={link.label}>
+                  <Link to={link.to} className="flex items-center gap-2 text-sm text-gray-400 hover:text-blue-400 transition-colors">
+                    <ChevronRight className="w-3 h-3 text-blue-500 shrink-0" />
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
         

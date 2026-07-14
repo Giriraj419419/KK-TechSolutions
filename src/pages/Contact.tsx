@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useRef, useEffect } from 'react';
-import { Send, ChevronRight, Check, Building2, Calendar, Clock, Loader2, CheckCircle2, Search, UploadCloud, X, Lock, File, Rocket, TrendingUp, Globe, Sparkles } from 'lucide-react';
+import { Send, ChevronRight, Check, Building2, Calendar, Clock, Loader2, CheckCircle2, Search, UploadCloud, X, Lock, File, Rocket, TrendingUp, Globe, Sparkles, Home, Phone, Mail } from 'lucide-react';
 import { Reveal, Eyebrow, TextReveal } from '../components/Section';
 import { SectionGlow } from '../components/Atmosphere';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -182,28 +182,66 @@ export default function Contact() {
   const renderStep = () => {
     if (isSubmitted) {
       return (
-        <Reveal className="h-full flex flex-col items-center justify-center py-12">
+        <Reveal className="h-full flex flex-col items-center justify-center py-12 px-4">
           <motion.div 
-            initial={{ scale: 0 }} 
-            animate={{ scale: 1 }} 
-            transition={{ type: "spring", bounce: 0.5 }}
-            className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-400/20 border border-blue-400/30 flex items-center justify-center mx-auto mb-8 shadow-[0_0_40px_rgba(34,211,238,0.3)]"
+            initial={{ scale: 0, opacity: 0 }} 
+            animate={{ scale: 1, opacity: 1 }} 
+            transition={{ type: "spring", bounce: 0.5, duration: 0.8 }}
+            className="w-24 h-24 rounded-full bg-gradient-to-br from-teal-500/20 to-emerald-400/20 border border-teal-400/30 flex items-center justify-center mx-auto mb-8 shadow-[0_0_40px_rgba(45,212,191,0.3)] relative"
           >
-            <Check className="w-12 h-12 text-cyan-400" />
+            <div className="absolute inset-0 bg-teal-500/20 rounded-full animate-ping opacity-50" />
+            <Check className="w-12 h-12 text-teal-400 relative z-10" />
           </motion.div>
           
-          <h3 className="text-3xl font-bold text-white mb-4">Thank You For Contacting KK Tech Solutions</h3>
-          <p className="text-gray-400 max-w-lg mx-auto text-center text-lg leading-relaxed mb-6">
-            Your consultation request has been submitted successfully.
-          </p>
-          <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl px-6 py-4 mb-6 text-center">
-            <span className="block text-sm text-blue-300 font-semibold mb-1">Reference ID:</span>
-            <span className="block text-xl text-white font-mono font-bold">[{leadId || 'KKT-PENDING'}]</span>
-          </div>
-          <p className="text-gray-400 max-w-lg mx-auto text-center leading-relaxed">
-            A confirmation email has been sent to your inbox.<br/>
-            Our team will contact you shortly.
-          </p>
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="text-center w-full max-w-2xl"
+          >
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Consultation Request Received Successfully
+            </h3>
+            
+            <p className="text-gray-400 text-lg leading-relaxed mb-8">
+              Our technology specialists will review your requirements and contact you within <strong className="text-white">24 business hours</strong>.
+            </p>
+
+            <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-8 mb-10 max-w-md mx-auto backdrop-blur-xl shadow-2xl relative overflow-hidden group">
+              <div className="absolute -inset-[100%] z-0 pointer-events-none opacity-0 group-hover:opacity-100 mix-blend-overlay transition-opacity duration-500">
+                <motion.div
+                  animate={{ x: ['-100%', '100%'], y: ['-100%', '100%'] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+                  className="w-full h-full bg-gradient-to-br from-transparent via-white/10 to-transparent"
+                />
+              </div>
+              <div className="relative z-10">
+                <span className="block text-sm text-gray-500 uppercase tracking-widest font-bold mb-3">Reference ID</span>
+                <span className="block text-3xl text-white font-mono font-bold tracking-tight">[{leadId || 'KKT-PENDING'}]</span>
+                <div className="mt-6 flex items-center justify-center gap-2 text-sm text-gray-400">
+                  <Mail className="w-4 h-4 text-blue-400" />
+                  Confirmation email sent to your inbox
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button 
+                onClick={() => window.location.href = '/'}
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold transition-all flex items-center justify-center gap-2"
+              >
+                <Home className="w-4 h-4" />
+                Return Home
+              </button>
+              <button 
+                onClick={() => window.location.href = 'mailto:info@kktechsolutions.in'}
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold transition-all flex items-center justify-center gap-2"
+              >
+                <Phone className="w-4 h-4 text-gray-400" />
+                Contact Support
+              </button>
+            </div>
+          </motion.div>
         </Reveal>
       );
     }

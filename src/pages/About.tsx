@@ -14,12 +14,6 @@ const stats = [
   { val: '24/7', label: 'Support Available', icon: Shield },
 ];
 
-const values = [
-  { icon: Target, title: 'Excellence', desc: 'We deliver nothing but the best, ensuring every project exceeds expectations.' },
-  { icon: Heart, title: 'Client-Centric', desc: 'Your success is our priority. We build solutions tailored to your unique needs.' },
-  { icon: Shield, title: 'Integrity', desc: 'Transparency, honesty, and ethical practices form the foundation of our work.' },
-  { icon: Globe, title: 'Innovation', desc: 'We constantly explore new technologies to keep you ahead of the curve.' },
-];
 
 export default function About() {
   return (
@@ -80,95 +74,140 @@ export default function About() {
         </div>
       </section>
 
-      {/* ===== STORY ===== */}
+      {/* ===== WHAT IS KK TECH & WHY DOES IT MATTER ===== */}
       <section className="relative z-10 py-24 border-t border-white/5 bg-transparent">
         <SectionGlow color="blue" position="top-left" opacity={0.08} size={400} />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-           <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <Reveal direction="right" className="order-2 lg:order-1">
-                 <TiltCard className="p-8 md:p-12 h-full flex flex-col justify-center relative overflow-hidden group">
+           <div className="grid lg:grid-cols-2 gap-16 items-start">
+              <Reveal direction="right">
+                 <SectionTitle
+                    eyebrow="What is KK Tech Solutions?"
+                    title="An Enterprise Technology Integrator"
+                    sub="We architect, deploy, and manage complex IT infrastructures for scaling businesses."
+                 />
+                 <p className="mt-6 text-gray-400 leading-relaxed text-lg">
+                   KK Tech Solutions is an Ahmedabad-based specialized technology consultancy. We don't just sell software; we design comprehensive technology ecosystems using products from Microsoft, AWS, and leading hardware vendors. 
+                 </p>
+                 <p className="mt-4 text-gray-400 leading-relaxed text-lg">
+                   We act as an extension of your own IT department, ensuring your network, servers, and cloud environments operate securely and without interruption.
+                 </p>
+              </Reveal>
+              
+              <Reveal direction="left" delay={0.1}>
+                 <TiltCard className="p-8 md:p-10 h-full flex flex-col justify-center relative overflow-hidden group border border-blue-500/20 bg-blue-500/[0.02]">
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 pointer-events-none group-hover:from-blue-500/10 group-hover:to-cyan-500/10 transition-colors duration-300" />
                     <div className="relative z-10">
-                       <h3 className="text-2xl font-bold text-white mb-6">Our Mission & Vision</h3>
-                       <p className="text-gray-400 leading-relaxed mb-6">
-                         <strong className="text-gray-300">Mission:</strong> To bridge the gap between complex enterprise IT requirements and 
-                         seamless, intuitive solutions that drive measurable business value.
-                       </p>
-                       <p className="text-gray-400 leading-relaxed mb-8">
-                         <strong className="text-gray-300">Vision:</strong> To become the globally preferred technology partner for enterprises 
-                         seeking secure, scalable, and intelligent digital transformation.
-                       </p>
-                       <div className="flex items-center gap-6">
-                         <div className="flex items-center gap-3">
-                           <div className="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
-                              <Target className="w-5 h-5 text-blue-400" />
-                           </div>
-                           <div>
-                              <div className="text-sm font-bold text-white">Client Focused</div>
-                              <div className="text-xs text-gray-500">100% Success Rate</div>
-                           </div>
+                       <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                         <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+                           <Target className="w-5 h-5 text-blue-400" />
                          </div>
-                         <div className="flex items-center gap-3">
-                           <div className="w-12 h-12 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-                              <Shield className="w-5 h-5 text-cyan-400" />
-                           </div>
-                           <div>
-                              <div className="text-sm font-bold text-white">Secure by Design</div>
-                              <div className="text-xs text-gray-500">Enterprise Grade</div>
-                           </div>
-                         </div>
-                       </div>
+                         Why Does It Matter?
+                       </h3>
+                       <p className="text-gray-300 leading-relaxed mb-6 text-lg">
+                         In modern business, technology downtime directly equals lost revenue. Relying on fragmented systems or under-resourced IT staff exposes your company to critical security risks and operational bottlenecks.
+                       </p>
+                       <p className="text-gray-400 leading-relaxed">
+                         By partnering with KK Tech Solutions, you transform your IT infrastructure from a high-risk liability into a reliable engine for business growth, ensuring you can scale rapidly without technical debt.
+                       </p>
                     </div>
                  </TiltCard>
-              </Reveal>
-              <Reveal direction="left" delay={0.1} className="order-1 lg:order-2">
-                 <SectionTitle
-                    eyebrow="Our Story"
-                    title="Built on Trust and Technical Excellence"
-                    sub="Since our inception, we have been driven by a singular focus: delivering measurable value through technology."
-                 />
-                 <StaggerContainer className="mt-8 space-y-4" staggerChildren={0.1}>
-                    {[
-                      'Strategic IT consulting and roadmapping',
-                      'Enterprise-grade cloud architectures',
-                      'Proactive 24/7 managed services',
-                      'Commitment to continuous innovation'
-                    ].map((pt, i) => (
-                       <StaggerItem key={i} direction="left">
-                         <div className="flex items-center gap-4 text-gray-300 p-3 rounded-xl bg-white/[0.01] border border-white/5 hover:bg-white/[0.03] hover:border-cyan-500/20 transition-all duration-300">
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500/10 to-blue-500/10 flex items-center justify-center border border-cyan-500/20 shrink-0 shadow-sm">
-                              <Check className="w-4 h-4 text-cyan-400" />
-                            </div>
-                            <span className="text-sm font-medium tracking-wide">{pt}</span>
-                         </div>
-                       </StaggerItem>
-                    ))}
-                 </StaggerContainer>
               </Reveal>
            </div>
         </div>
       </section>
 
-      {/* ===== VALUES ===== */}
+      {/* ===== BENEFITS & FEATURES ===== */}
+      <section className="relative z-10 py-24 border-t border-white/5 bg-[#060A11]">
+        <SectionGlow color="teal" position="bottom-right" opacity={0.08} size={400} />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16">
+            
+            {/* Benefits */}
+            <div>
+              <SectionTitle
+                eyebrow="Business Outcomes"
+                title="The Benefits You Experience"
+                sub="How our solutions directly impact your bottom line and daily operations."
+              />
+              <StaggerContainer className="mt-10 space-y-4" staggerChildren={0.1}>
+                {[
+                  { title: 'Zero Unexpected Downtime', desc: 'Proactive monitoring catches critical issues before your team even notices them.' },
+                  { title: 'Predictable IT Costs', desc: 'Eliminate surprise repair bills with structured, scalable infrastructure planning.' },
+                  { title: 'Bulletproof Data Security', desc: 'Bank-grade compliance and automated backups protect you from ransomware and data loss.' },
+                  { title: 'Frictionless Scaling', desc: 'Add new employees, offices, or software tools instantly without network overhauls.' }
+                ].map((b, i) => (
+                   <StaggerItem key={i} direction="left">
+                     <div className="flex items-start gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-all duration-300">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-500/10 to-blue-500/10 flex items-center justify-center border border-teal-500/20 shrink-0">
+                          <Check className="w-5 h-5 text-teal-400" />
+                        </div>
+                        <div>
+                          <h4 className="text-base font-bold text-white mb-1">{b.title}</h4>
+                          <p className="text-sm text-gray-400 leading-relaxed">{b.desc}</p>
+                        </div>
+                     </div>
+                   </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </div>
+
+            {/* Features */}
+            <div>
+              <SectionTitle
+                eyebrow="Technical Capabilities"
+                title="Enterprise-Grade Features"
+                sub="The robust technical foundations powering your new IT environment."
+              />
+              <StaggerContainer className="mt-10 space-y-4" staggerChildren={0.1}>
+                {[
+                  { title: 'Automated CI/CD Pipelines', desc: 'Streamline your development deployments with zero downtime.' },
+                  { title: 'High-Availability Server Clusters', desc: 'Redundant local and cloud servers ensuring 99.99% uptime SLAs.' },
+                  { title: 'Identity & Access Management (IAM)', desc: 'Granular security controls using Microsoft Entra ID (Azure AD).' },
+                  { title: 'Advanced Threat Protection (ATP)', desc: 'Real-time AI-driven monitoring for immediate threat isolation.' }
+                ].map((f, i) => (
+                   <StaggerItem key={i} direction="right">
+                     <div className="flex items-start gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-all duration-300">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500/10 to-blue-500/10 flex items-center justify-center border border-cyan-500/20 shrink-0">
+                          <Globe className="w-5 h-5 text-cyan-400" />
+                        </div>
+                        <div>
+                          <h4 className="text-base font-bold text-white mb-1">{f.title}</h4>
+                          <p className="text-sm text-gray-400 leading-relaxed">{f.desc}</p>
+                        </div>
+                     </div>
+                   </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+
+      {/* ===== WHY KK TECH SOLUTIONS ===== */}
       <section className="relative z-10 py-24 border-t border-white/5 bg-transparent">
-        <SectionGlow color="purple" position="bottom-right" opacity={0.08} size={400} />
+        <SectionGlow color="purple" position="top-right" opacity={0.08} size={400} />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionTitle
             center
-            eyebrow="Core Values"
-            title="What Drives Us Forward"
-            sub="The principles that guide our work, our partnerships, and our commitment to you."
+            eyebrow="The Differentiator"
+            title="Why Choose KK Tech Solutions?"
+            sub="We don't just fix computers; we architect scalable enterprise systems."
           />
-          <StaggerContainer className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6" staggerChildren={0.08}>
-            {values.map((v, i) => (
+          <StaggerContainer className="mt-14 grid sm:grid-cols-3 gap-6" staggerChildren={0.08}>
+            {[
+              { icon: Shield, title: 'Certified Expertise', desc: 'Our architects hold advanced certifications from Microsoft, AWS, and Dell.' },
+              { icon: Building, title: 'Vendor Agnostic', desc: 'We recommend the best technology for your specific use case, not just what earns the highest margin.' },
+              { icon: Heart, title: 'Long-Term Partnership', desc: 'We invest time in understanding your business roadmap so your IT infrastructure scales with you.' },
+            ].map((v, i) => (
               <StaggerItem key={i} direction="up">
-                <TiltCard className="p-7 text-center h-full flex flex-col items-center group relative overflow-hidden">
-                  <div className="absolute -inset-px bg-gradient-to-b from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl" />
+                <TiltCard className="p-8 text-center h-full flex flex-col items-center group relative overflow-hidden bg-white/[0.02] border border-white/5">
+                  <div className="absolute -inset-px bg-gradient-to-b from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl" />
                   <div className="relative z-10 flex flex-col items-center">
-                    <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-5 bg-white/5 border border-white/10 group-hover:scale-110 transition-transform">
-                      <v.icon className="w-6 h-6 text-cyan-400" />
+                    <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-white/5 border border-white/10 group-hover:scale-110 group-hover:bg-blue-500/20 group-hover:border-blue-500/50 transition-all duration-300">
+                      <v.icon className="w-7 h-7 text-blue-400" />
                     </div>
-                    <h3 className="text-base font-bold text-white mb-3">{v.title}</h3>
+                    <h3 className="text-xl font-bold text-white mb-4">{v.title}</h3>
                     <p className="text-sm leading-relaxed text-gray-400">{v.desc}</p>
                   </div>
                 </TiltCard>

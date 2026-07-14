@@ -1,4 +1,4 @@
-﻿/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useMotionValue, useSpring, useMotionTemplate } from 'framer-motion';
@@ -11,8 +11,8 @@ const navLinks = [
   { 
     label: 'Services', 
     dropdown: [
-      { label: 'Microsoft', to: '/microsoft-365', desc: 'Cloud Productivity', logo: '/microsoft.svg', colorClass: 'hover:border-blue-500/30 hover:bg-blue-500/10 group-hover:shadow-[0_8px_30px_rgba(59,130,246,0.15)]' },
-      { label: 'Microsoft Azure', to: '/azure', desc: 'Cloud Computing Platform', logo: '/azure.svg', colorClass: 'hover:border-sky-500/30 hover:bg-sky-500/10 group-hover:shadow-[0_8px_30px_rgba(14,165,233,0.15)]' },
+      { label: 'Microsoft 365', to: '/microsoft-365', desc: 'Cloud Productivity', logo: '/microsoft.svg', colorClass: 'hover:border-blue-500/30 hover:bg-blue-500/10 group-hover:shadow-[0_8px_30px_rgba(59,130,246,0.15)]' },
+      { label: 'Azure', to: '/azure', desc: 'Cloud Computing Platform', logo: '/azure.svg', colorClass: 'hover:border-sky-500/30 hover:bg-sky-500/10 group-hover:shadow-[0_8px_30px_rgba(14,165,233,0.15)]' },
       { label: 'Adobe Solutions', to: '/adobe', desc: 'Creative Cloud Software', logo: '/adobe.svg', colorClass: 'hover:border-red-500/30 hover:bg-red-500/10 group-hover:shadow-[0_8px_30px_rgba(239,68,68,0.15)]' },
       { label: 'Autodesk Solutions', to: '/autodesk', desc: '3D Design & Engineering', logo: '/autodesk.svg', colorClass: 'hover:border-emerald-500/30 hover:bg-emerald-500/10 group-hover:shadow-[0_8px_30px_rgba(16,185,129,0.15)]' },
       { label: 'GstarCAD Solutions', to: '/gstarcad', desc: 'Professional CAD Platform', logo: '/gstarcad.svg', colorClass: 'hover:border-cyan-500/30 hover:bg-cyan-500/10 group-hover:shadow-[0_8px_30px_rgba(6,182,212,0.15)]' },
