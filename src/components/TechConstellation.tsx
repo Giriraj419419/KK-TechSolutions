@@ -1,5 +1,5 @@
 import React, { useState, useRef, useMemo } from 'react';
-import { motion, useMotionValue, useSpring, useTransform, AnimatePresence, useReducedMotion, useScroll } from 'framer-motion';
+import { motion, useTransform, AnimatePresence, useReducedMotion, useScroll } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 // Layer 9: Multi-Depth Parallax (depth property added)

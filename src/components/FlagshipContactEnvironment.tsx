@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useScroll, useMotionValue } from 'framer-motion';
+import { useScroll } from 'framer-motion';
 
 import HeroAtmosphere from './HeroAtmosphere';
 import BackgroundGrid from './BackgroundGrid';

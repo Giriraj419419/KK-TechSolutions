@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Send, ChevronRight, Check, Building2, Calendar, Clock, Loader2, CheckCircle2, Search, UploadCloud, X, Lock, File, Rocket, TrendingUp, Globe, Sparkles } from 'lucide-react';
 import { Reveal, Eyebrow, TextReveal } from '../components/Section';
 import { SectionGlow } from '../components/Atmosphere';
@@ -49,6 +49,18 @@ export default function Contact() {
   
   // New States for Simplified Step 1
   const [activeTab, setActiveTab] = useState<'services' | 'servers'>('services');
+  const [bookedSlots, setBookedSlots] = useState<{date: string, time: string}[]>([]);
+
+  useEffect(() => {
+    fetch('/api/bookings')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.bookedSlots) {
+          setBookedSlots(data.bookedSlots);
+        }
+      })
+      .catch(err => console.error('Failed to fetch bookings:', err));
+  }, []);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -90,12 +102,14 @@ export default function Contact() {
         budget: formData.budget,
         projectDetails: formData.projectNotes,
         priority: formData.priority,
-        timeline: formData.timeline
+        timeline: formData.timeline,
+        date: formData.date,
+        time: formData.time
       };
 
       let res;
       try {
-        res = await fetch('/api/leads', {
+        res = await fetch('/api/bookings', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
@@ -124,6 +138,12 @@ export default function Contact() {
       } else {
         console.error('Failed to submit form:', data.error);
         setSubmitError(data.error || 'Configuration error or server issue.');
+        if (res.status === 409) {
+          // Re-fetch booked slots so the user sees it disabled now
+          fetch('/api/bookings').then(r => r.json()).then(d => {
+            if (d.success && d.bookedSlots) setBookedSlots(d.bookedSlots);
+          });
+        }
       }
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -676,24 +696,31 @@ export default function Contact() {
                 <div className="flex flex-col gap-3">
                   {timeSlots.map((time) => {
                     const isSelected = formData.time === time;
+                    const isBooked = bookedSlots.some(b => b.date === formData.date && b.time === time);
+                    
                     return (
                       <motion.button
-                        whileHover={formData.date ? { x: 5 } : {}}
-                        whileTap={formData.date ? { scale: 0.98 } : {}}
+                        whileHover={formData.date && !isBooked ? { x: 5 } : {}}
+                        whileTap={formData.date && !isBooked ? { scale: 0.98 } : {}}
                         key={time}
                         type="button"
-                        onClick={() => setFormData({ ...formData, time })}
-                        disabled={!formData.date}
+                        onClick={() => { if (!isBooked) setFormData({ ...formData, time }) }}
+                        disabled={!formData.date || isBooked}
                         className={`w-full py-4 px-6 text-base font-bold rounded-2xl border text-left transition-all flex items-center justify-between ${
                           !formData.date 
                             ? 'opacity-30 cursor-not-allowed border-white/5 bg-transparent text-gray-600'
-                            : isSelected
-                              ? 'border-cyan-500 bg-cyan-500/10 text-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.2)]'
-                              : 'border-white/10 bg-black/40 text-gray-400 hover:bg-white/10 hover:border-white/20'
+                            : isBooked
+                              ? 'opacity-50 cursor-not-allowed border-red-500/20 bg-red-500/5 text-red-400'
+                              : isSelected
+                                ? 'border-cyan-500 bg-cyan-500/10 text-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.2)]'
+                                : 'border-white/10 bg-black/40 text-gray-400 hover:bg-white/10 hover:border-white/20'
                         }`}
                       >
-                        {time}
-                        {isSelected && <CheckCircle2 className="w-6 h-6" />}
+                        <div className="flex items-center gap-3">
+                          {time}
+                          {isBooked && <span className="text-xs uppercase tracking-wider font-bold text-red-500/80 bg-red-500/10 px-2 py-0.5 rounded">Booked</span>}
+                        </div>
+                        {isSelected && !isBooked && <CheckCircle2 className="w-6 h-6" />}
                       </motion.button>
                     );
                   })}

@@ -13,6 +13,7 @@ const Services = lazy(() => import('./pages/Services'));
 const AWS = lazy(() => import('./pages/AWS'));
 const Microsoft365 = lazy(() => import('./pages/Microsoft365'));
 const Contact = lazy(() => import('./pages/Contact'));
+const Admin = lazy(() => import('./pages/Admin'));
 const ZWCAD = lazy(() => import('./pages/ZWCAD'));
 const Adobe = lazy(() => import('./pages/Adobe'));
 const GstarCAD = lazy(() => import('./pages/GstarCAD'));
@@ -52,6 +53,7 @@ export default function App() {
             <Route path="/microsoft-365" element={<Microsoft365 />} />
             <Route path="/clients" element={<Clients />} />
             <Route path="/contact-us" element={<Contact />} />
+            <Route path="/admin" element={<Admin />} />
             <Route path="*" element={<Home />} />
           </Routes>
         </Suspense>

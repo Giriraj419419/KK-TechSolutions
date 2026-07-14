@@ -8,7 +8,6 @@ import {
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
-import { BrandLogo } from '../components/BrandLogo';
 import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
 
 // =========================================================================

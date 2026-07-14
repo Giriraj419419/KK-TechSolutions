@@ -77,11 +77,12 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
               initial={{ offsetDistance: "0%" }}
               animate={{ offsetDistance: "100%" }}
               transition={{
-                duration: 2.5 + Math.random(),
+                duration: 2.5 + (i * 0.15),
                 repeat: Infinity,
                 ease: "linear",
                 delay: node.delay
               }}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               style={{ filter: `drop-shadow(0 0 5px ${themeColorHex})`, offsetPath: `path("M 0 0 L ${node.x} ${node.y}")` } as any}
             />
           </g>
@@ -119,6 +120,7 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
             animate={{ y: [0, -6, 0] }}
             transition={{ repeat: Infinity, duration: 3 + (idx % 2), ease: 'easeInOut', delay: node.delay }}
             className="p-3 rounded-xl bg-white/[0.03] border border-white/10 premium-glass cursor-default transition-all duration-300 transform-gpu will-change-transform"
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             style={{ '--hover-border': `${themeColorHex}80`, '--hover-bg': `${themeColorHex}15` } as any}
             whileHover={{ scale: 1.15, borderColor: 'var(--hover-border)', backgroundColor: 'var(--hover-bg)' }}
           >

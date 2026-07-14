@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+
 import {
   Mail, Calendar, FileText, Users, Shield, Cloud,
   ArrowRight, MessageSquare, Video, HardDrive
@@ -7,7 +7,6 @@ import {
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, TiltCard, SectionGlow } from '../components/Atmosphere';
 import EnterpriseCTA from '../components/EnterpriseCTA';
-import { BrandLogo } from '../components/BrandLogo';
 import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
 
 const features = [
