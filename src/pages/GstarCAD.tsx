@@ -8,7 +8,7 @@ import {
   Building, LayoutTemplate, Box, Server, Smartphone, Monitor,
   Zap, PiggyBank, PenTool, LayoutDashboard, Cloud, Blocks,
   Layers, FileText, Code, Terminal, FastForward, MessageSquare, Printer,
-  FileCode2, MonitorSmartphone, Repeat
+  FileCode2, MonitorSmartphone, Repeat, Compass
 } from 'lucide-react';
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, SectionGlow, GlowingOrbs } from '../components/Atmosphere';
@@ -261,11 +261,13 @@ export default function GstarCAD() {
                 centerBrand="gstarcad"
                 centerColor="06B6D4"
                 themeColorHex="#06B6D4"
-                customCenterSvg={<svg viewBox="0 0 40 40" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(6,182,212,0.5)] fill-cyan-400"><path d="M20,0 L40,20 L20,40 L0,20 Z" /><circle cx="20" cy="20" r="10" fill="#0B121F" /><circle cx="20" cy="20" r="5" fill="#22d3ee" /></svg>}
+                customCenterSvg={<img src="/gstarcad.svg" alt="GstarCAD Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
-                  { brand: 'gstarcad', fallbackIcon: PenTool, label: 'CAD Drafting' },
-                  { brand: 'gstarcad', fallbackIcon: LayoutTemplate, label: '2D Design' },
-                  { brand: 'gstarcad', fallbackIcon: Box, label: '3D Modeling' }
+                  { fallbackIcon: PenTool, label: '2D Drafting' },
+                  { fallbackIcon: Box, label: '3D Modeling' },
+                  { fallbackIcon: LayoutTemplate, label: 'Architecture' },
+                  { fallbackIcon: Factory, label: 'Mechanical' },
+                  { fallbackIcon: Compass, label: 'Mobile' }
                 ]}
               />
             </Reveal>

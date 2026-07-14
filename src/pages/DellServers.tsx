@@ -260,13 +260,13 @@ export default function DellServers() {
                 centerBrand="dell"
                 centerColor="007db8"
                 themeColorHex="#0078D4"
+                customCenterSvg={<img src="/dell.svg" alt="Dell Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
-                  { brand: 'dell', fallbackIcon: Server, label: 'Rack Servers' },
-                  { brand: 'dell', fallbackIcon: Database, label: 'Tower Servers' },
-                  { brand: 'dell', fallbackIcon: LayoutGrid, label: 'Modular' },
-                  { brand: 'dell', fallbackIcon: HardDrive, label: 'Storage' },
-                  { brand: 'dell', fallbackIcon: ShieldCheck, label: 'Data Security' },
-                  { brand: 'dell', fallbackIcon: BrainCircuit, label: 'AI Infrastructure' }
+                  { fallbackIcon: Server, label: 'Compute' },
+                  { fallbackIcon: HardDrive, label: 'Storage' },
+                  { fallbackIcon: Network, label: 'Networking' },
+                  { fallbackIcon: ShieldCheck, label: 'Security' },
+                  { fallbackIcon: LayoutGrid, label: 'Virtualization' }
                 ]}
               />
             </Reveal>

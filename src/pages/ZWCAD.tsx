@@ -6,7 +6,7 @@ import {
   Building2, Factory, Hammer, LayoutTemplate, CheckCircle, ChevronDown, ArrowRight, HardDrive, Cpu, 
   Building, FileCode2, LayoutDashboard, Zap, 
   PenTool, Box, Layers, AppWindow, 
-  Code, Repeat, Cloud, Globe, Settings
+  Code, Repeat, Cloud, Globe, Settings, Compass
 } from 'lucide-react';
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, SectionGlow } from '../components/Atmosphere';
@@ -224,11 +224,12 @@ export default function ZWCAD() {
                 centerBrand="zwcad"
                 centerColor="3B82F6"
                 themeColorHex="#3B82F6"
-                customCenterSvg={<svg viewBox="0 0 40 40" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)] fill-blue-400"><path d="M10,10 L30,10 L10,30 L30,30" stroke="currentColor" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+                customCenterSvg={<img src="/zwcad.svg" alt="ZWCAD Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
-                  { brand: 'zwcad', fallbackIcon: Building2, label: 'Architecture' },
-                  { brand: 'zwcad', fallbackIcon: Settings, label: 'Mechanical' },
-                  { brand: 'zwcad', fallbackIcon: Factory, label: 'MFG' }
+                  { fallbackIcon: Building2, label: 'Architecture' },
+                  { fallbackIcon: Settings, label: 'Mechanical' },
+                  { fallbackIcon: Box, label: '3D Standard' },
+                  { fallbackIcon: Compass, label: 'Mobile' }
                 ]}
               />
             </Reveal>

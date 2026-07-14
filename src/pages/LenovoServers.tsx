@@ -255,13 +255,13 @@ export default function LenovoServers() {
                 centerBrand="lenovo"
                 centerColor="e2231a"
                 themeColorHex="#DC2626"
+                customCenterSvg={<img src="/lenovo.svg" alt="Lenovo Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
-                  { brand: 'lenovo', fallbackIcon: Server, label: 'ThinkSystem Rack' },
-                  { brand: 'lenovo', fallbackIcon: Database, label: 'ThinkSystem Tower' },
-                  { brand: 'lenovo', fallbackIcon: LayoutGrid, label: 'ThinkAgile' },
-                  { brand: 'lenovo', fallbackIcon: Network, label: 'Networking' },
-                  { brand: 'lenovo', fallbackIcon: ShieldCheck, label: 'Security' },
-                  { brand: 'lenovo', fallbackIcon: HardDrive, label: 'Storage' }
+                  { fallbackIcon: Server, label: 'Compute' },
+                  { fallbackIcon: LayoutGrid, label: 'Data Center' },
+                  { fallbackIcon: HardDrive, label: 'Storage' },
+                  { fallbackIcon: Network, label: 'Infrastructure' },
+                  { fallbackIcon: ShieldCheck, label: 'Virtualization' }
                 ]}
               />
             </Reveal>
