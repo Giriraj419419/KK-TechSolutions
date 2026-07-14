@@ -155,7 +155,6 @@ export default function AWS() {
                   { brand: 'awslambda', fallbackIcon: Cloud, label: 'Lambda' },
                   { brand: 'amazonrds', fallbackIcon: Database, label: 'RDS' },
                   { brand: 'amazoncloudfront', fallbackIcon: Globe, label: 'CloudFront' },
-                  { fallbackIcon: ShieldCheck, label: 'Security' },
                   { fallbackIcon: Activity, label: 'Monitoring' }
                 ]}
               />

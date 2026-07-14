@@ -228,14 +228,13 @@ export default function Azure() {
                 centerColor="0089d6"
                 themeColorHex="#0078D4"
                 nodes={[
-                  { brand: 'microsoftazure', fallbackIcon: BrainCircuit, label: 'Azure AI' },
-                  { brand: 'microsoftazure', fallbackIcon: Server, label: 'Virtual Machines' },
-                  { brand: 'microsoftazure', fallbackIcon: ShieldCheck, label: 'Security Center' },
-                  { brand: 'microsoftazure', fallbackIcon: Network, label: 'Networking' },
-                  { brand: 'microsoftazure', fallbackIcon: Database, label: 'Backup' },
+                  { brand: 'microsoftazure', fallbackIcon: Cloud, label: 'Cloud' },
+                  { brand: 'microsoftazure', fallbackIcon: ShieldCheck, label: 'Security' },
                   { brand: 'microsoftazure', fallbackIcon: HardDrive, label: 'Storage' },
-                  { brand: 'microsoftazure', fallbackIcon: Users, label: 'Identity' },
-                  { brand: 'microsoftazure', fallbackIcon: Cloud, label: 'Cloud Services' }
+                  { brand: 'microsoftazure', fallbackIcon: Network, label: 'Networking' },
+                  { brand: 'microsoftazure', fallbackIcon: BrainCircuit, label: 'AI' },
+                  { brand: 'microsoftazure', fallbackIcon: Database, label: 'Backup' },
+                  { brand: 'microsoftazure', fallbackIcon: Server, label: 'Virtual Machines' }
                 ]}
               />
             </Reveal>

@@ -252,9 +252,8 @@ export default function Adobe() {
                   { brand: 'adobephotoshop', fallbackIcon: Image, label: 'Photoshop' },
                   { brand: 'adobeillustrator', fallbackIcon: PenTool, label: 'Illustrator' },
                   { brand: 'adobepremierepro', fallbackIcon: Video, label: 'Premiere Pro' },
-                  { brand: 'adobeaftereffects', fallbackIcon: Film, label: 'After Effects' },
                   { brand: 'adobeacrobatreader', fallbackIcon: FileText, label: 'Acrobat' },
-                  { brand: 'adobexd', fallbackIcon: MonitorSmartphone, label: 'XD' }
+                  { brand: 'adobeaftereffects', fallbackIcon: Film, label: 'After Effects' }
                 ]}
               />
             </Reveal>

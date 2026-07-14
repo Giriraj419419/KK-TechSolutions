@@ -270,12 +270,12 @@ export default function HPServers() {
                 centerColor="01a982"
                 themeColorHex="#22C55E"
                 nodes={[
-                  { brand: 'hewlettpackardenterprise', fallbackIcon: Server, label: 'ProLiant DL' },
-                  { brand: 'hewlettpackardenterprise', fallbackIcon: Database, label: 'ProLiant ML' },
-                  { brand: 'hewlettpackardenterprise', fallbackIcon: LayoutGrid, label: 'Synergy' },
-                  { brand: 'hewlettpackardenterprise', fallbackIcon: HardDrive, label: 'Data Storage' },
+                  { brand: 'hewlettpackardenterprise', fallbackIcon: Cpu, label: 'Compute' },
+                  { brand: 'hewlettpackardenterprise', fallbackIcon: HardDrive, label: 'Storage' },
+                  { brand: 'hewlettpackardenterprise', fallbackIcon: ShieldCheck, label: 'Security' },
                   { brand: 'hewlettpackardenterprise', fallbackIcon: Network, label: 'Networking' },
-                  { brand: 'hewlettpackardenterprise', fallbackIcon: ShieldCheck, label: 'OneView' }
+                  { brand: 'hewlettpackardenterprise', fallbackIcon: Cloud, label: 'Hybrid Cloud' },
+                  { brand: 'hewlettpackardenterprise', fallbackIcon: Server, label: 'Infrastructure' }
                 ]}
               />
             </Reveal>

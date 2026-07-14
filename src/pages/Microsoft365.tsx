@@ -77,14 +77,13 @@ export default function Microsoft365() {
                 centerColor="00a4ef"
                 themeColorHex="#2563EB"
                 nodes={[
-                  { brand: 'microsoftoutlook', label: 'Outlook' },
                   { brand: 'microsoftteams', label: 'Teams' },
-                  { brand: 'microsoftsharepoint', label: 'SharePoint' },
+                  { brand: 'microsoftoutlook', label: 'Outlook' },
                   { brand: 'microsoftonedrive', label: 'OneDrive' },
-                  { brand: 'microsoftexcel', label: 'Excel' },
                   { brand: 'microsoftword', label: 'Word' },
+                  { brand: 'microsoftexcel', label: 'Excel' },
                   { brand: 'microsoftpowerpoint', label: 'PowerPoint' },
-                  { brand: 'microsoftexchange', label: 'Exchange' }
+                  { brand: 'microsoftsharepoint', label: 'SharePoint' }
                 ]}
               />
             </Reveal>

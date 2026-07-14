@@ -24,7 +24,13 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
 
   useEffect(() => {
     const updateRadius = () => {
-      setRadius(window.innerWidth < 768 ? 110 : 160);
+      if (window.innerWidth < 768) {
+        setRadius(120);
+      } else if (window.innerWidth < 1024) {
+        setRadius(170);
+      } else {
+        setRadius(220);
+      }
     };
     updateRadius();
     window.addEventListener('resize', updateRadius);
@@ -43,12 +49,12 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
   });
 
   return (
-    <div className={`relative w-full h-[500px] flex items-center justify-center max-w-md mx-auto ${className}`}>
+    <div className={`relative w-full h-[500px] md:h-[650px] flex items-center justify-center max-w-2xl mx-auto ${className}`}>
       
       {/* Background Pulse Glow for Center */}
       <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full blur-2xl animate-pulse z-0" 
-        style={{ backgroundColor: `${themeColorHex}20` }} 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 rounded-full blur-[3xl] md:blur-[4xl] animate-pulse z-0" 
+        style={{ backgroundColor: `${themeColorHex}25` }} 
       />
 
       {/* SVG Connecting Lines with Pulses */}
@@ -63,7 +69,7 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
               y2={node.y}
               stroke={themeColorHex}
               strokeWidth="1.5"
-              strokeOpacity="0.2"
+              strokeOpacity="0.25"
               strokeDasharray="4 4"
               initial={{ opacity: 0, pathLength: 0 }}
               animate={{ opacity: 1, pathLength: 1 }}
@@ -71,7 +77,7 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
             />
             {/* Data Transmission Pulse */}
             <motion.circle
-              r="2.5"
+              r="3"
               fill={themeColorHex}
               className="will-change-transform transform-gpu"
               initial={{ offsetDistance: "0%" }}
@@ -83,7 +89,7 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
                 delay: node.delay
               }}
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              style={{ filter: `drop-shadow(0 0 5px ${themeColorHex})`, offsetPath: `path("M 0 0 L ${node.x} ${node.y}")` } as any}
+              style={{ filter: `drop-shadow(0 0 6px ${themeColorHex})`, offsetPath: `path("M 0 0 L ${node.x} ${node.y}")` } as any}
             />
           </g>
         ))}
@@ -94,16 +100,16 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.8, type: 'spring', bounce: 0.4 }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl premium-glass border z-20 flex items-center justify-center shadow-2xl"
-        style={{ borderColor: `${themeColorHex}40` }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] premium-glass border z-20 flex items-center justify-center shadow-2xl"
+        style={{ borderColor: `${themeColorHex}50` }}
       >
         <BrandLogo 
           iconName={centerBrand} 
           color={centerColor} 
           fallbackIcon={centerFallback}
           customSvg={customCenterSvg}
-          className="w-16 h-16 drop-shadow-lg" 
-          style={{ filter: `drop-shadow(0 0 15px ${themeColorHex}60)` }}
+          className="w-20 h-20 md:w-32 md:h-32 drop-shadow-2xl" 
+          style={{ filter: `drop-shadow(0 0 25px ${themeColorHex}80)` }}
         />
       </motion.div>
 
@@ -119,21 +125,21 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
           <motion.div
             animate={{ y: [0, -6, 0] }}
             transition={{ repeat: Infinity, duration: 3 + (idx % 2), ease: 'easeInOut', delay: node.delay }}
-            className="p-3 rounded-xl bg-white/[0.03] border border-white/10 premium-glass cursor-default transition-all duration-300 transform-gpu will-change-transform"
+            className="p-3 md:p-4 rounded-xl md:rounded-2xl bg-white/[0.04] border border-white/10 premium-glass cursor-default transition-all duration-300 transform-gpu will-change-transform shadow-lg"
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            style={{ '--hover-border': `${themeColorHex}80`, '--hover-bg': `${themeColorHex}15` } as any}
+            style={{ '--hover-border': `${themeColorHex}90`, '--hover-bg': `${themeColorHex}20` } as any}
             whileHover={{ scale: 1.15, borderColor: 'var(--hover-border)', backgroundColor: 'var(--hover-bg)' }}
           >
             <BrandLogo 
               iconName={node.brand || ''} 
               fallbackIcon={node.fallbackIcon} 
-              className="w-7 h-7 transition-all duration-300"
+              className="w-6 h-6 md:w-8 md:h-8 transition-all duration-300"
               style={{ color: themeColorHex }} 
             />
           </motion.div>
           <motion.span 
-            className="mt-2.5 text-[10px] font-bold text-gray-300 uppercase tracking-wider bg-[#0B121F]/90 px-2.5 py-1 rounded-full border border-white/5 opacity-80 group-hover:opacity-100 group-hover:text-white transition-all shadow-lg"
-            style={{ borderBottomColor: `${themeColorHex}60` }}
+            className="mt-3 text-[9px] md:text-xs font-bold text-gray-300 uppercase tracking-wider bg-[#0B121F]/90 px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-white/10 opacity-90 group-hover:opacity-100 group-hover:text-white group-hover:border-white/30 transition-all shadow-xl backdrop-blur-md"
+            style={{ borderBottomColor: `${themeColorHex}80` }}
           >
             {node.label}
           </motion.span>
