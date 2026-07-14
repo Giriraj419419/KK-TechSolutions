@@ -180,7 +180,7 @@ export default function LenovoServers() {
   const yParallax = useTransform(scrollY, [0, 1000], [0, 150]);
 
   return (
-    <div className="relative min-h-screen bg-[#0B121F] overflow-hidden">
+    <div className="relative min-h-[auto] lg:min-h-[75vh] bg-[#0B121F] overflow-hidden">
       
       {/* Premium Enterprise Background with Parallax */}
       <motion.div style={{ y: yParallax }} className="absolute inset-0 pointer-events-none z-0">
@@ -212,7 +212,7 @@ export default function LenovoServers() {
       </motion.div>
 
       {/* ===== HERO ===== */}
-      <section className="relative z-10 pt-36 pb-24 min-h-[90vh] flex items-center">
+      <section className="relative z-10 pt-28 pb-12 min-h-[auto] lg:min-h-[75vh] flex items-center">
         <SectionGlow color="red" position="bottom-right" opacity={0.15} size={700} />
         
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
@@ -250,7 +250,7 @@ export default function LenovoServers() {
             </div>
 
             {/* Right Column - Lenovo Hero Animation */}
-            <Reveal direction='left' delay={0.12} className='relative z-10 flex justify-center items-center w-full min-h-[500px]'>
+            <Reveal direction='left' delay={0.12} className='relative z-10 flex justify-center items-center w-full min-min-h-[350px] lg:min-h-[450px] h-auto'>
               <AnimatedEcosystem 
                 centerBrand="lenovo"
                 centerColor="e2231a"
@@ -567,7 +567,7 @@ export default function LenovoServers() {
             <Reveal direction="left" delay={0.2} className="relative h-[600px] hidden lg:block">
               <div className="absolute inset-0 rounded-[40px] border border-white/10 bg-white/[0.01] overflow-hidden premium-glass flex items-center justify-center p-8">
                 {/* Background Decor */}
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3" />
+                <div className="absolute top-0 right-0 w-[500px] min-h-[350px] lg:min-h-[450px] h-auto bg-red-600/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3" />
                 
                 <div className="relative z-10 w-full max-w-md space-y-6">
                   {/* Status Card 1 */}

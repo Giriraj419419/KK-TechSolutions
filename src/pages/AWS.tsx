@@ -96,7 +96,7 @@ export default function AWS() {
   const yParallax = useTransform(scrollY, [0, 1000], [0, 150]);
 
   return (
-    <div className="relative min-h-screen bg-[#0B121F] overflow-hidden">
+    <div className="relative min-h-[auto] lg:min-h-[75vh] bg-[#0B121F] overflow-hidden">
       
       {/* Enhanced Ambient Background with Scroll Parallax */}
       <motion.div style={{ y: yParallax }} className="absolute inset-0 pointer-events-none z-0">
@@ -105,7 +105,7 @@ export default function AWS() {
       </motion.div>
 
       {/* ===== HERO ===== */}
-      <section className="relative z-10 pt-36 pb-24 min-h-[90vh] flex items-center">
+      <section className="relative z-10 pt-28 pb-12 min-h-[auto] lg:min-h-[75vh] flex items-center">
         <SectionGlow color="orange" position="bottom-right" opacity={0.12} size={600} />
         
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
@@ -143,7 +143,7 @@ export default function AWS() {
               </Reveal>
             </div>
 
-            <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full h-[500px]">
+            <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full min-h-[350px] lg:min-h-[450px] h-auto">
               <AnimatedEcosystem 
                 centerBrand="amazonwebservices"
                 centerColor="ff9900"

@@ -796,7 +796,7 @@ export default function Contact() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-transparent">
+    <div className="relative min-h-[auto] lg:min-h-[75vh] bg-transparent">
       <FlagshipContactEnvironment />
 
       {/* ===== HEADER ===== */}
@@ -976,7 +976,7 @@ export default function Contact() {
               </div>
 
               {/* Map View */}
-              <div className="w-full h-[400px] lg:h-full min-h-[500px] bg-white/[0.02] border border-white/5 rounded-3xl overflow-hidden shadow-2xl relative group">
+              <div className="w-full h-[400px] lg:h-full min-min-h-[350px] lg:min-h-[450px] h-auto bg-white/[0.02] border border-white/5 rounded-3xl overflow-hidden shadow-2xl relative group">
                  <div className="absolute inset-0 bg-black/20 pointer-events-none z-10 transition-opacity duration-300 group-hover:bg-transparent" />
                  
                  // eslint-disable-next-line @typescript-eslint/no-unused-vars

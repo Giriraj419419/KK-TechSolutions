@@ -26,12 +26,12 @@ const highlights = [
 
 export default function Microsoft365() {
   return (
-    <div className="relative min-h-screen bg-[#0B121F]">
+    <div className="relative min-h-[auto] lg:min-h-[75vh] bg-[#0B121F]">
       <CosmosField />
       <GlowingOrbs />
 
       {/* ===== HERO ===== */}
-      <section className="relative z-10 pt-36 pb-24 overflow-hidden min-h-[90vh] flex items-center">
+      <section className="relative z-10 pt-28 pb-12 overflow-hidden min-h-[auto] lg:min-h-[75vh] flex items-center">
         <SectionGlow color="blue" position="bottom-right" opacity={0.15} size={500} />
         
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
@@ -70,7 +70,7 @@ export default function Microsoft365() {
               </Reveal>
             </div>
 
-            <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full h-[500px]">
+            <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full min-h-[350px] lg:min-h-[450px] h-auto">
               <AnimatedEcosystem 
                 centerBrand="microsoft"
                 centerColor="00a4ef"

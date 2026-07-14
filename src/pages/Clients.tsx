@@ -112,7 +112,7 @@ const clientLogos = [
 
 export default function Clients() {
   return (
-    <div className="relative min-h-screen bg-transparent">
+    <div className="relative min-h-[auto] lg:min-h-[75vh] bg-transparent">
       <CosmosField />
       <GlowingOrbs />
 
@@ -148,7 +148,7 @@ export default function Clients() {
             </div>
 
             {/* Right side floating graphics - Circular Orbit */}
-            <div className="relative hidden lg:flex items-center justify-center h-[500px]">
+            <div className="relative hidden lg:flex items-center justify-center min-h-[350px] lg:min-h-[450px] h-auto">
               
               {/* Central glowing core */}
               <div className="absolute w-64 h-64 rounded-full border border-blue-500/20 bg-blue-500/5 animate-pulse" />

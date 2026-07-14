@@ -25,15 +25,15 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
   useEffect(() => {
     const updateRadius = () => {
       if (window.innerWidth < 640) {
-        setRadius(125); // Mobile
+        setRadius(110); // Mobile
       } else if (window.innerWidth < 768) {
-        setRadius(150); // Tablet
+        setRadius(130); // Tablet
       } else if (window.innerWidth < 1024) {
-        setRadius(190); // Laptop
+        setRadius(160); // Laptop
       } else if (window.innerWidth < 1280) {
-        setRadius(230); // Desktop
+        setRadius(190); // Desktop
       } else {
-        setRadius(270); // Large Desktop
+        setRadius(210); // Large Desktop
       }
     };
     updateRadius();
@@ -53,11 +53,11 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
   });
 
   return (
-    <div className={`relative w-full h-[450px] sm:h-[500px] md:h-[600px] lg:h-[750px] flex items-center justify-center max-w-4xl mx-auto ${className}`}>
+    <div className={`relative w-full h-[350px] sm:h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center max-w-4xl mx-auto ${className}`}>
       
       {/* Background Pulse Glow for Center */}
       <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 lg:w-96 lg:h-96 rounded-full blur-[3xl] md:blur-[4xl] animate-pulse z-0" 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full blur-[3xl] md:blur-[4xl] animate-pulse z-0" 
         style={{ backgroundColor: `${themeColorHex}25` }} 
       />
 

@@ -221,7 +221,7 @@ export default function Home() {
   const baseDelay = isAppLoaded ? 0 : 2.0;
 
   return (
-    <div className="relative min-h-screen bg-transparent">
+    <div className="relative min-h-[auto] lg:min-h-[75vh] bg-transparent">
       <MemoizedCosmosField />
       <MemoizedGlowingOrbs />
 
@@ -230,7 +230,7 @@ export default function Home() {
         initial={{ opacity: isAppLoaded ? 1 : 0, scale: isAppLoaded ? 1 : 0.98, y: isAppLoaded ? 0 : 15 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ delay: baseDelay, duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 pt-36 pb-24 overflow-hidden min-h-[90vh] flex items-center"
+        className="relative z-10 pt-28 pb-12 overflow-hidden min-h-[auto] lg:min-h-[75vh] flex items-center"
       >
         {/* Subtle hero glow on bottom right */}
         <SectionGlow color="blue" position="bottom-right" opacity={0.15} size={500} />

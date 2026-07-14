@@ -69,12 +69,12 @@ export default function Services() {
   const activeSvc = services.find((s) => s.id === selectedService) || services[0];
 
   return (
-    <div className="relative min-h-screen bg-[#0B121F]">
+    <div className="relative min-h-[auto] lg:min-h-[75vh] bg-[#0B121F]">
       <CosmosField />
       <GlowingOrbs />
 
       {/* ===== HERO ===== */}
-      <section className="relative z-10 pt-36 pb-24 overflow-hidden min-h-[90vh] flex items-center">
+      <section className="relative z-10 pt-28 pb-12 overflow-hidden min-h-[auto] lg:min-h-[75vh] flex items-center">
         <SectionGlow color="blue" position="bottom-right" opacity={0.15} size={500} />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center w-full">
           <Reveal direction="down">
