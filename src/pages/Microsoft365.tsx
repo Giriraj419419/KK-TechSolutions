@@ -70,12 +70,12 @@ export default function Microsoft365() {
               </Reveal>
             </div>
 
-            {/* Right Column — Animated MS365 Ecosystem */}
             <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full h-[500px]">
               <AnimatedEcosystem 
                 centerBrand="microsoft"
                 centerColor="00a4ef"
                 themeColorHex="#2563EB"
+                customCenterSvg={<img src="/microsoft.svg" alt="Microsoft Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
                   { brand: 'microsoftteams', label: 'Teams' },
                   { brand: 'microsoftoutlook', label: 'Outlook' },

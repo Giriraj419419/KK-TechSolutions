@@ -221,12 +221,12 @@ export default function Azure() {
               </Reveal>
             </div>
 
-            {/* Right Column — Animated Azure Ecosystem */}
             <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full h-[500px]">
               <AnimatedEcosystem 
                 centerBrand="microsoftazure"
                 centerColor="0089d6"
                 themeColorHex="#0078D4"
+                customCenterSvg={<img src="/azure.svg" alt="Microsoft Azure Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
                   { brand: 'microsoftazure', fallbackIcon: Cloud, label: 'Cloud' },
                   { brand: 'microsoftazure', fallbackIcon: ShieldCheck, label: 'Security' },

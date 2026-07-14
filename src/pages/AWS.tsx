@@ -143,12 +143,12 @@ export default function AWS() {
               </Reveal>
             </div>
 
-            {/* Right Column — Animated AWS Ecosystem */}
             <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full h-[500px]">
               <AnimatedEcosystem 
                 centerBrand="amazonwebservices"
                 centerColor="ff9900"
                 themeColorHex="#F97316"
+                customCenterSvg={<img src="/aws.svg" alt="AWS Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
                   { brand: 'amazonec2', fallbackIcon: Server, label: 'EC2' },
                   { brand: 'amazons3', fallbackIcon: Database, label: 'S3' },

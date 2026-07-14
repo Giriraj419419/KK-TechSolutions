@@ -263,12 +263,12 @@ export default function HPServers() {
               </Reveal>
             </div>
 
-            {/* Right Column - HP Hero Animation */}
             <Reveal direction='left' delay={0.12} className='relative z-10 flex justify-center items-center w-full min-h-[500px]'>
               <AnimatedEcosystem 
                 centerBrand="hewlettpackardenterprise"
                 centerColor="01a982"
                 themeColorHex="#22C55E"
+                customCenterSvg={<img src="/hp.svg" alt="HPE Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
                   { brand: 'hewlettpackardenterprise', fallbackIcon: Cpu, label: 'Compute' },
                   { brand: 'hewlettpackardenterprise', fallbackIcon: HardDrive, label: 'Storage' },

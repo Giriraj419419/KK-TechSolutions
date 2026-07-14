@@ -242,12 +242,12 @@ export default function Adobe() {
               </Reveal>
             </div>
 
-            {/* Right Column — Animated Adobe Ecosystem */}
             <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full h-[500px]">
               <AnimatedEcosystem 
                 centerBrand="adobe"
                 centerColor="ff0000"
                 themeColorHex="#EF4444"
+                customCenterSvg={<img src="/adobe.svg" alt="Adobe Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
                   { brand: 'adobephotoshop', fallbackIcon: Image, label: 'Photoshop' },
                   { brand: 'adobeillustrator', fallbackIcon: PenTool, label: 'Illustrator' },
