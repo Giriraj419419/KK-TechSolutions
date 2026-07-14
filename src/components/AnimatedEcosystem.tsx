@@ -24,12 +24,16 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
 
   useEffect(() => {
     const updateRadius = () => {
-      if (window.innerWidth < 768) {
-        setRadius(120);
+      if (window.innerWidth < 640) {
+        setRadius(125); // Mobile
+      } else if (window.innerWidth < 768) {
+        setRadius(150); // Tablet
       } else if (window.innerWidth < 1024) {
-        setRadius(170);
+        setRadius(190); // Laptop
+      } else if (window.innerWidth < 1280) {
+        setRadius(230); // Desktop
       } else {
-        setRadius(220);
+        setRadius(270); // Large Desktop
       }
     };
     updateRadius();
@@ -49,11 +53,11 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
   });
 
   return (
-    <div className={`relative w-full h-[500px] md:h-[650px] flex items-center justify-center max-w-2xl mx-auto ${className}`}>
+    <div className={`relative w-full h-[450px] sm:h-[500px] md:h-[600px] lg:h-[750px] flex items-center justify-center max-w-4xl mx-auto ${className}`}>
       
       {/* Background Pulse Glow for Center */}
       <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 rounded-full blur-[3xl] md:blur-[4xl] animate-pulse z-0" 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 lg:w-96 lg:h-96 rounded-full blur-[3xl] md:blur-[4xl] animate-pulse z-0" 
         style={{ backgroundColor: `${themeColorHex}25` }} 
       />
 
@@ -107,7 +111,7 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
           color={centerColor} 
           fallbackIcon={centerFallback}
           customSvg={customCenterSvg}
-          className="w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 object-contain drop-shadow-2xl" 
+          className="w-[100px] h-[100px] sm:w-[130px] sm:h-[130px] md:w-[160px] md:h-[160px] lg:w-[180px] lg:h-[180px] xl:w-[210px] xl:h-[210px] object-contain drop-shadow-2xl" 
           style={{ filter: `drop-shadow(0 0 30px ${themeColorHex}60)` }}
         />
       </motion.div>
