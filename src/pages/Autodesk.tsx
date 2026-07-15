@@ -236,11 +236,11 @@ export default function Autodesk() {
                 themeColorHex="#14B8A6"
                 customCenterSvg={<img src="/autodesk.svg" alt="Autodesk Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
-                  { brand: 'autocad', fallbackIcon: Compass, label: 'AutoCAD' },
-                  { brand: 'autodeskrevit', fallbackIcon: Building2, label: 'Revit' },
-                  { fallbackIcon: Box, label: 'BIM' },
-                  { fallbackIcon: Factory, label: 'Fusion' },
-                  { fallbackIcon: Building2, label: 'Construction Cloud' }
+                  { brand: 'autocad', label: 'AutoCAD' },
+                  { brand: 'autodeskrevit', label: 'Revit' },
+                  { brand: 'autodeskmaya', label: 'Maya' },
+                  { brand: 'autodesk3dsmax', label: '3ds Max' },
+                  { brand: 'autodesk', label: 'Fusion' }
                 ]}
               />
             </Reveal>

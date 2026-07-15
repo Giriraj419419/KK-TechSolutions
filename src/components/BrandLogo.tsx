@@ -18,7 +18,7 @@ export function BrandLogo({ iconName, fallbackIcon: FallbackIcon, color = 'fffff
   }
 
   if (iconName && !error) {
-    const src = `https://cdn.simpleicons.org/${iconName}/${color}`;
+    const src = color === 'default' ? `https://cdn.simpleicons.org/${iconName}` : `https://cdn.simpleicons.org/${iconName}/${color}`;
     return (
       <img
         src={src}

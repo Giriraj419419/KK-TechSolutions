@@ -249,11 +249,12 @@ export default function Adobe() {
                 themeColorHex="#EF4444"
                 customCenterSvg={<img src="/adobe.svg" alt="Adobe Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
-                  { brand: 'adobephotoshop', fallbackIcon: Image, label: 'Photoshop' },
-                  { brand: 'adobeillustrator', fallbackIcon: PenTool, label: 'Illustrator' },
-                  { brand: 'adobepremierepro', fallbackIcon: Video, label: 'Premiere Pro' },
-                  { brand: 'adobeacrobatreader', fallbackIcon: FileText, label: 'Acrobat' },
-                  { brand: 'adobeaftereffects', fallbackIcon: Film, label: 'After Effects' }
+                  { brand: 'adobephotoshop', label: 'Photoshop' },
+                  { brand: 'adobeillustrator', label: 'Illustrator' },
+                  { brand: 'adobepremierepro', label: 'Premiere Pro' },
+                  { brand: 'adobeacrobatreader', label: 'Acrobat' },
+                  { brand: 'adobeaftereffects', label: 'After Effects' },
+                  { brand: 'adobelightroom', label: 'Lightroom' }
                 ]}
               />
             </Reveal>

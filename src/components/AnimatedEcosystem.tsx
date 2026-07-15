@@ -81,15 +81,16 @@ function MagneticNode({
         />
         
         <div
-          className="p-3 md:p-4 rounded-xl bg-[#0B121F]/90 border border-white/10 backdrop-blur-xl transition-all duration-300 transform-gpu will-change-transform shadow-[0_4px_20px_rgba(0,0,0,0.3)] relative overflow-hidden group-hover:border-white/20"
+          className="p-3 md:p-4 rounded-xl bg-[#0B121F]/90 border border-white/10 backdrop-blur-xl transition-all duration-300 transform-gpu will-change-transform shadow-[0_4px_20px_rgba(0,0,0,0.3)] relative overflow-hidden group-hover:border-white/20 flex items-center justify-center"
           style={{ 
             boxShadow: `inset 0 1px 1px rgba(255,255,255,0.1), 0 8px 32px rgba(0,0,0,0.5)`
           }}
         >
            <BrandLogo 
             iconName={node.brand || ''} 
+            color={node.brand ? 'default' : undefined}
             fallbackIcon={node.fallbackIcon} 
-            className="w-7 h-7 md:w-10 md:h-10 lg:w-12 lg:h-12 transition-all duration-300 text-gray-400 group-hover:text-white"
+            className="w-7 h-7 md:w-10 md:h-10 lg:w-12 lg:h-12 transition-all duration-300 text-gray-400 group-hover:text-white flex items-center justify-center"
             style={{ color: node.brand ? undefined : 'currentColor' }} 
           />
         </div>

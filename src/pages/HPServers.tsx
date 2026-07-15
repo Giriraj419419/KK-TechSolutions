@@ -270,12 +270,13 @@ export default function HPServers() {
                 themeColorHex="#22C55E"
                 customCenterSvg={<img src="/hp.svg" alt="HPE Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
-                  { brand: 'hewlettpackardenterprise', fallbackIcon: Cpu, label: 'Compute' },
-                  { brand: 'hewlettpackardenterprise', fallbackIcon: HardDrive, label: 'Storage' },
-                  { brand: 'hewlettpackardenterprise', fallbackIcon: ShieldCheck, label: 'Security' },
-                  { brand: 'hewlettpackardenterprise', fallbackIcon: Network, label: 'Networking' },
-                  { brand: 'hewlettpackardenterprise', fallbackIcon: Cloud, label: 'Hybrid Cloud' },
-                  { brand: 'hewlettpackardenterprise', fallbackIcon: Server, label: 'Infrastructure' }
+                  { brand: 'intel', label: 'Intel Xeon' },
+                  { brand: 'amd', label: 'AMD EPYC' },
+                  { brand: 'vmware', label: 'VMware vSphere' },
+                  { brand: 'windows', label: 'Windows Server' },
+                  { brand: 'ubuntu', label: 'Ubuntu Server' },
+                  { brand: 'redhat', label: 'Red Hat' },
+                  { brand: 'nvidia', label: 'NVIDIA GPUs' }
                 ]}
               />
             </Reveal>

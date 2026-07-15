@@ -261,10 +261,10 @@ export default function CorelDRAW() {
                 centerColor="18A558"
                 themeColorHex="#22C55E"
                 nodes={[
-                  { brand: 'coreldraw', fallbackIcon: PenTool, label: 'CorelDRAW' },
-                  { brand: 'coreldraw', fallbackIcon: Image, label: 'PHOTO-PAINT' },
-                  { brand: 'coreldraw', fallbackIcon: Sparkles, label: 'Vector' },
-                  { brand: 'coreldraw', fallbackIcon: Type, label: 'Font Manager' }
+                  { brand: 'coreldraw', label: 'CorelDRAW' },
+                  { brand: 'corel', label: 'Corel' },
+                  { brand: 'adobeillustrator', label: 'Illustrator' },
+                  { brand: 'adobephotoshop', label: 'Photoshop' }
                 ]}
               />
             </Reveal>

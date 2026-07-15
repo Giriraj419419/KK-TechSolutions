@@ -257,11 +257,12 @@ export default function LenovoServers() {
                 themeColorHex="#DC2626"
                 customCenterSvg={<img src="/lenovo.svg" alt="Lenovo Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
-                  { fallbackIcon: Server, label: 'Compute' },
-                  { fallbackIcon: LayoutGrid, label: 'Data Center' },
-                  { fallbackIcon: HardDrive, label: 'Storage' },
-                  { fallbackIcon: Network, label: 'Infrastructure' },
-                  { fallbackIcon: ShieldCheck, label: 'Virtualization' }
+                  { brand: 'intel', label: 'Intel' },
+                  { brand: 'amd', label: 'AMD' },
+                  { brand: 'vmware', label: 'VMware' },
+                  { brand: 'microsoft', label: 'Microsoft' },
+                  { brand: 'suse', label: 'SUSE Linux' },
+                  { brand: 'nvidia', label: 'NVIDIA' }
                 ]}
               />
             </Reveal>

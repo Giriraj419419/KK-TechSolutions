@@ -263,11 +263,11 @@ export default function GstarCAD() {
                 themeColorHex="#06B6D4"
                 customCenterSvg={<img src="/gstarcad.svg" alt="GstarCAD Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
-                  { fallbackIcon: PenTool, label: '2D Drafting' },
-                  { fallbackIcon: Box, label: '3D Modeling' },
-                  { fallbackIcon: LayoutTemplate, label: 'Architecture' },
-                  { fallbackIcon: Factory, label: 'Mechanical' },
-                  { fallbackIcon: Compass, label: 'Mobile' }
+                  { brand: 'windows', label: 'Windows' },
+                  { brand: 'apple', label: 'macOS' },
+                  { brand: 'android', label: 'Mobile' },
+                  { brand: 'autocad', label: 'DWG Compatible' },
+                  { brand: 'linux', label: 'Linux' }
                 ]}
               />
             </Reveal>

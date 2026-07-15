@@ -262,11 +262,13 @@ export default function DellServers() {
                 themeColorHex="#0078D4"
                 customCenterSvg={<img src="/dell.svg" alt="Dell Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
-                  { fallbackIcon: Server, label: 'Compute' },
-                  { fallbackIcon: HardDrive, label: 'Storage' },
-                  { fallbackIcon: Network, label: 'Networking' },
-                  { fallbackIcon: ShieldCheck, label: 'Security' },
-                  { fallbackIcon: LayoutGrid, label: 'Virtualization' }
+                  { brand: 'intel', label: 'Intel Xeon' },
+                  { brand: 'amd', label: 'AMD EPYC' },
+                  { brand: 'vmware', label: 'VMware vSphere' },
+                  { brand: 'windows', label: 'Windows Server' },
+                  { brand: 'ubuntu', label: 'Ubuntu Server' },
+                  { brand: 'redhat', label: 'Red Hat Enterprise' },
+                  { brand: 'nvidia', label: 'NVIDIA GPUs' }
                 ]}
               />
             </Reveal>

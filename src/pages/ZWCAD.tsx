@@ -226,10 +226,10 @@ export default function ZWCAD() {
                 themeColorHex="#3B82F6"
                 customCenterSvg={<img src="/zwcad.svg" alt="ZWCAD Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
-                  { fallbackIcon: Building2, label: 'Architecture' },
-                  { fallbackIcon: Settings, label: 'Mechanical' },
-                  { fallbackIcon: Box, label: '3D Standard' },
-                  { fallbackIcon: Compass, label: 'Mobile' }
+                  { brand: 'windows', label: 'Windows' },
+                  { brand: 'linux', label: 'Linux' },
+                  { brand: 'apple', label: 'macOS' },
+                  { brand: 'android', label: 'Android' }
                 ]}
               />
             </Reveal>
