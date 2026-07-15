@@ -226,7 +226,7 @@ export default function ZWCAD() {
                 themeColorHex="#3B82F6"
                 customCenterSvg={<img src="/zwcad.svg" alt="ZWCAD Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
-                  { brand: 'windows', label: 'Windows' },
+                  { iconify: 'logos:microsoft-windows', label: 'Windows' },
                   { brand: 'linux', label: 'Linux' },
                   { brand: 'apple', label: 'macOS' },
                   { brand: 'android', label: 'Android' }

@@ -273,7 +273,7 @@ export default function HPServers() {
                   { brand: 'intel', label: 'Intel Xeon' },
                   { brand: 'amd', label: 'AMD EPYC' },
                   { brand: 'vmware', label: 'VMware vSphere' },
-                  { brand: 'windows', label: 'Windows Server' },
+                  { iconify: 'logos:microsoft-windows', label: 'Windows Server' },
                   { brand: 'ubuntu', label: 'Ubuntu Server' },
                   { brand: 'redhat', label: 'Red Hat' },
                   { brand: 'nvidia', label: 'NVIDIA GPUs' }
