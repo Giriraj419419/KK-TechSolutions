@@ -154,7 +154,7 @@ const migrationSteps = [
 ];
 
 const whyUs = [
-  'Certified Experts', 'End-to-End Implementation', '24Ã—7 Support', 
+  'Certified Experts', 'End-to-End Implementation', '24/7 Support', 
   'Microsoft Best Practices', 'Customized Solutions', 'Fast Deployment'
 ];
 

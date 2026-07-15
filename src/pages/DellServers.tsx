@@ -127,7 +127,7 @@ const reasons = [
 ];
 
 const solutions = [
-  { icon: Server, title: 'Sales â€“ New & Refurbished Dell PowerEdge Servers', desc: 'Premium enterprise servers.' },
+  { icon: Server, title: 'Sales - New & Refurbished Dell PowerEdge Servers', desc: 'Premium enterprise servers.' },
   { icon: ShieldCheck, title: 'Annual Maintenance Contract (AMC)', desc: 'Comprehensive support contracts.' },
   { icon: Settings, title: 'Installation & Configuration', desc: 'Expert deployment services.' },
   { icon: Activity, title: 'On-site & Remote Technical Support', desc: 'Rapid technical assistance.' },
@@ -136,7 +136,7 @@ const solutions = [
   { icon: Database, title: 'Data Migration Services', desc: 'Seamless data transition.' },
   { icon: Network, title: 'Server Rack Installation & Networking Setup', desc: 'Complete infrastructure setup.' },
   { icon: Lock, title: 'Warranty Assistance & Extended Warranty', desc: 'Long-term hardware protection.' },
-  { icon: HelpCircle, title: '24Ã—7 Helpdesk Support', desc: 'Always-on enterprise assistance.' },
+  { icon: HelpCircle, title: '24/7 Helpdesk Support', desc: 'Always-on enterprise assistance.' },
   { icon: CheckSquare, title: 'AMC Renewal & Preventive Maintenance Visits', desc: 'Proactive infrastructure care.' },
   { icon: Briefcase, title: 'Enterprise Server Consultation', desc: 'Strategic infrastructure planning.' }
 ];
@@ -159,7 +159,7 @@ const migrationSteps = [
   { title: 'Quotation & Configuration', desc: 'Design a customized Dell PowerEdge server configuration based on processor, memory, storage, RAID, networking, and performance requirements, then provide a transparent quotation.' },
   { title: 'Delivery & Installation', desc: 'Source, quality-test, deliver, rack, install, configure, and deploy the Dell PowerEdge server either on-site or remotely, ensuring a smooth implementation.' },
   { title: 'Testing & Handover', desc: 'Perform complete diagnostics, validate hardware performance, configure networking, conduct system testing, provide documentation, and complete customer handover with operational guidance.' },
-  { title: 'Ongoing Support & AMC', desc: 'Deliver long-term support through warranty coordination, AMC renewals, preventive maintenance, firmware updates, health monitoring, upgrades, and responsive 24Ã—7 technical assistance.' }
+  { title: 'Ongoing Support & AMC', desc: 'Deliver long-term support through warranty coordination, AMC renewals, preventive maintenance, firmware updates, health monitoring, upgrades, and responsive 24/7 technical assistance.' }
 ];
 
 const whyUs = [

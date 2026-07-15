@@ -53,7 +53,7 @@ export default function Microsoft365() {
               </Reveal>
               <Reveal direction="up" delay={0.14}>
                 <p className="text-gray-400 text-lg leading-relaxed max-w-xl">
-                  Empower your organisation with Microsoft 365 â€” the complete productivity cloud
+                  Empower your organisation with Microsoft 365 - the complete productivity cloud
                   for modern enterprise teams.
                 </p>
               </Reveal>

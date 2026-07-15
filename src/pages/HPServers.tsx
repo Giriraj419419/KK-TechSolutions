@@ -145,7 +145,7 @@ const solutions = [
   { icon: Database, title: 'Data Migration Services', desc: 'Seamless, secure data transition with zero downtime.' },
   { icon: Network, title: 'Rack Installation & Networking', desc: 'Complete physical infrastructure and switch setup.' },
   { icon: Lock, title: 'Warranty Assistance', desc: 'Extended warranty and hardware protection services.' },
-  { icon: HelpCircle, title: '24Ã—7 Enterprise Helpdesk', desc: 'Always-on enterprise-grade technical assistance.' },
+  { icon: HelpCircle, title: '24/7 Enterprise Helpdesk', desc: 'Always-on enterprise-grade technical assistance.' },
   { icon: CheckSquare, title: 'Preventive Maintenance Visits', desc: 'Proactive infrastructure health checks.' },
   { icon: Briefcase, title: 'Enterprise Infrastructure Consultation', desc: 'Strategic IT planning and architecture design.' }
 ];

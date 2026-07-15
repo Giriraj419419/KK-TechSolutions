@@ -242,7 +242,7 @@ export default function Home() {
               <Reveal delay={baseDelay}>
                 <span className="badge-blue">
                   <span className="pulse-dot shrink-0" />
-                  Enterprise IT Solutions Â· Ahmedabad, India
+                  Enterprise IT Solutions · Ahmedabad, India
                 </span>
               </Reveal>
 

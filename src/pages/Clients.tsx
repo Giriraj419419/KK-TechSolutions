@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -29,7 +29,7 @@ const metrics = [
   { value: '500+', label: 'Projects Delivered' },
   { value: '100+', label: 'Happy Clients' },
   { value: '15+', label: 'Years Experience' },
-  { value: '24Ã—7', label: 'Technical Support' },
+  { value: '24/7', label: 'Technical Support' },
 ];
 
 const testimonials = [

@@ -128,7 +128,7 @@ const reasons = [
 ];
 
 const solutions = [
-  { icon: Server, title: 'Sales â€“ New & Refurbished', desc: 'Premium enterprise servers.' },
+  { icon: Server, title: 'Sales - New & Refurbished', desc: 'Premium enterprise servers.' },
   { icon: Settings, title: 'Installation & Configuration', desc: 'Expert deployment services.' },
   { icon: ShieldCheck, title: 'Annual Maintenance (AMC)', desc: 'Comprehensive support contracts.' },
   { icon: Activity, title: 'On-site Support', desc: 'Rapid technical assistance.' },
