@@ -1,8 +1,31 @@
 import { Resend } from 'resend';
 import supabase from './db-client.js';
 import * as ics from 'ics';
+import crypto from 'crypto';
 
 const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_key');
+
+// Helper to send admin alerts on subsystem failure
+async function sendAdminAlert(subject, message) {
+  if (!process.env.RESEND_API_KEY) return;
+  try {
+    const internalEmail = process.env.INTERNAL_SALES_EMAIL || 'hello@kktechsolutions.in';
+    const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev';
+    await resend.emails.send({
+      from: `System Alerts <${fromEmail}>`,
+      to: internalEmail,
+      subject: `🚨 ${subject}`,
+      html: `<div style="font-family: sans-serif; padding: 20px;">
+               <h2 style="color: #dc2626;">Subsystem Failure Alert</h2>
+               <p>${message}</p>
+               <hr />
+               <p style="font-size: 12px; color: #666;">KK Tech Solutions Automated Monitoring</p>
+             </div>`
+    });
+  } catch (err) {
+    console.error('[Admin Alert Error] Failed to send alert:', err);
+  }
+}
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
@@ -63,12 +86,20 @@ export default async function handler(req, res) {
               return res.status(409).json({ error: 'This time slot has just been booked. Please select another available time.' });
             }
             console.error('[Supabase Error] Insert failed:', insertError);
+            sendAdminAlert(
+              '[Supabase] Booking Database Insert Failed',
+              `Supabase failed to insert booking for <b>${email}</b> at ${date} ${time}.<br>Error: ${insertError.message}`
+            );
           } else {
             bookingData = data;
             isSupabaseSuccess = true;
           }
         } catch (dbErr) {
           console.error('[Supabase Error] Exception during insert:', dbErr);
+          sendAdminAlert(
+            '[Supabase] Booking Database Exception',
+            `An exception occurred while inserting booking for <b>${email}</b> at ${date} ${time}.<br>Error: ${dbErr.message}`
+          );
         }
       } else {
         console.warn('[Supabase Warning] Client not initialized, skipping insert.');
@@ -77,8 +108,8 @@ export default async function handler(req, res) {
       // 2. Generate Lead ID
       const today = new Date();
       const dateStrId = today.toISOString().split('T')[0].replace(/-/g, ''); 
-      const randomThree = Math.floor(Math.random() * 900) + 100;
-      const leadId = `KKT-${dateStrId}-${randomThree}`;
+      const uniqueHex = crypto.randomBytes(2).toString('hex').toUpperCase();
+      const leadId = `KKT-${dateStrId}-${uniqueHex}`;
       const timestamp = today.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
 
       console.log(`[Booking] Processing Lead ID: ${leadId} for ${email}`);
@@ -102,6 +133,10 @@ export default async function handler(req, res) {
           console.log(`[Google Sheets Success] Recorded ${leadId}`);
         } catch (gsError) {
           console.error(`[Google Sheets Error] Failure recording ${leadId}:`, gsError);
+          sendAdminAlert(
+            '[Google Sheets] Backup Sync Failed',
+            `Google Sheets failed to sync lead <b>${leadId}</b> (${email}).<br>Error: ${gsError.message}`
+          );
         }
       } else {
         console.warn('[Google Sheets Warning] URL not configured.');
@@ -236,6 +271,10 @@ export default async function handler(req, res) {
           isEmailSuccess = true;
         } catch (emailError) {
           console.error(`[Email Error] Resend Failure for ${leadId}:`, emailError);
+          sendAdminAlert(
+            '[Email] Customer Confirmation Failed',
+            `Failed to send confirmation emails for lead <b>${leadId}</b> (${email}).<br>Error: ${emailError.message}`
+          );
         }
       } else {
         console.warn('[Email Warning] RESEND_API_KEY not configured.');
