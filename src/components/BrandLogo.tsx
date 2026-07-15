@@ -8,13 +8,28 @@ export interface BrandLogoProps {
   className?: string;
   style?: React.CSSProperties;
   customSvg?: React.ReactNode;
+  iconify?: string;
 }
 
-export function BrandLogo({ iconName, fallbackIcon: FallbackIcon, color = 'ffffff', className = "w-6 h-6", style, customSvg }: BrandLogoProps) {
+export function BrandLogo({ iconName, iconify, fallbackIcon: FallbackIcon, color = 'ffffff', className = "w-6 h-6", style, customSvg }: BrandLogoProps) {
   const [error, setError] = useState(false);
 
   if (customSvg) {
     return <div className={`flex items-center justify-center ${className}`} style={style}>{customSvg}</div>;
+  }
+
+  if (iconify && !error) {
+    return (
+      <img
+        src={`https://api.iconify.design/${iconify.replace(':', '/')}.svg`}
+        alt={iconify}
+        className={`${className} object-contain`}
+        style={style}
+        loading="lazy"
+        decoding="async"
+        onError={() => setError(true)}
+      />
+    );
   }
 
   if (iconName && !error) {

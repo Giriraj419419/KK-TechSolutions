@@ -77,13 +77,14 @@ export default function Microsoft365() {
                 themeColorHex="#2563EB"
                 customCenterSvg={<img src="/microsoft.svg" alt="Microsoft Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
-                  { brand: 'microsoftteams', label: 'Teams' },
-                  { brand: 'microsoftoutlook', label: 'Outlook' },
-                  { brand: 'microsoftonedrive', label: 'OneDrive' },
-                  { brand: 'microsoftword', label: 'Word' },
-                  { brand: 'microsoftexcel', label: 'Excel' },
-                  { brand: 'microsoftpowerpoint', label: 'PowerPoint' },
-                  { brand: 'microsoftsharepoint', label: 'SharePoint' }
+                  { iconify: 'logos:microsoft-teams', label: 'Teams' },
+                  { iconify: 'vscode-icons:file-type-outlook', label: 'Outlook' },
+                  { iconify: 'logos:microsoft-onedrive', label: 'OneDrive' },
+                  { iconify: 'vscode-icons:file-type-word', label: 'Word' },
+                  { iconify: 'vscode-icons:file-type-excel', label: 'Excel' },
+                  { iconify: 'vscode-icons:file-type-powerpoint', label: 'PowerPoint' },
+                  { iconify: 'selfhst:microsoft-sharepoint', label: 'SharePoint' },
+                  { iconify: 'vscode-icons:file-type-onenote', label: 'OneNote' }
                 ]}
               />
             </Reveal>
