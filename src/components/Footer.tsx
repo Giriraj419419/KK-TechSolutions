@@ -155,7 +155,7 @@ export default function Footer() {
             href="https://maps.google.com/?q=715,+Shilp+Arista,+Sindhu+Bhavan+Road,+Bodakdev,+Ahmedabad,+Gujarat+380054"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Head Office â€” Opens Google Maps"
+            aria-label="Head Office - Opens Google Maps"
             className="group relative overflow-hidden bg-white/[0.02] border border-white/5 rounded-2xl p-6 hover:bg-white/[0.04] hover:-translate-y-1 hover:border-blue-500/50 hover:shadow-[0_8px_30px_rgba(59,130,246,0.15)] transition-all duration-300 block cursor-pointer active:scale-95"
           >
             {/* Glass highlight */}
@@ -171,7 +171,7 @@ export default function Footer() {
             <p className="text-sm text-gray-400 leading-relaxed">
               715, Shilp Arista<br/>
               Sindhu Bhavan Road, Bodakdev<br/>
-              Ahmedabad, Gujarat â€“ 380054
+              Ahmedabad, Gujarat - 380054
             </p>
           </a>
 
@@ -179,7 +179,7 @@ export default function Footer() {
             href="https://maps.google.com/?q=818,+8th+Floor,+Devika+Tower,+Nehru+Place,+New+Delhi+110019"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Branch Office â€” Opens Google Maps"
+            aria-label="Branch Office - Opens Google Maps"
             className="group relative overflow-hidden bg-white/[0.02] border border-white/5 rounded-2xl p-6 hover:bg-white/[0.04] hover:-translate-y-1 hover:border-blue-500/50 hover:shadow-[0_8px_30px_rgba(59,130,246,0.15)] transition-all duration-300 block cursor-pointer active:scale-95"
           >
             {/* Glass highlight */}
@@ -195,7 +195,7 @@ export default function Footer() {
             <p className="text-sm text-gray-400 leading-relaxed">
               818, 8th Floor<br/>
               Devika Tower, Nehru Place<br/>
-              New Delhi â€“ 110019
+              New Delhi - 110019
             </p>
           </a>
         </div>
@@ -205,7 +205,7 @@ export default function Footer() {
       <div className="border-t border-white/5 relative z-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 relative">
           <p className="text-sm text-gray-500">
-            Â© {new Date().getFullYear()} KK Techsolutions. All Rights Reserved.
+            © {new Date().getFullYear()} KK Techsolutions. All Rights Reserved.
           </p>
           <div className="flex items-center gap-6">
             <Link to="/privacy-policy" className="text-sm text-gray-500 hover:text-white transition-colors">Privacy Policy</Link>

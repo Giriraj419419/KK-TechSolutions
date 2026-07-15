@@ -10,13 +10,13 @@ const offices = [
   {
     id: 'ho',
     name: 'Ahmedabad, Gujarat (HO)',
-    address: '715, Shilp Arista\nSindhu Bhawan Road\nBodakdev\nAhmedabad, Gujarat â€“ 380054',
+    address: '715, Shilp Arista\nSindhu Bhawan Road\nBodakdev\nAhmedabad, Gujarat - 380054',
     mapQuery: 'Shilp Arista, Sindhu Bhawan Road, Bodakdev, Ahmedabad, Gujarat'
   },
   {
     id: 'delhi',
     name: 'Nehru Place, New Delhi',
-    address: '818, 8th Floor\nDevika Tower\nNehru Place\nNew Delhi â€“ 110019',
+    address: '818, 8th Floor\nDevika Tower\nNehru Place\nNew Delhi - 110019',
     mapQuery: '818, 8th Floor, Devika Tower, Nehru Place, New Delhi'
   }
 ];
