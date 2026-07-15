@@ -15,13 +15,20 @@ export default async function handler(req, res) {
       supabase: 'unknown',
       resend: process.env.RESEND_API_KEY ? 'configured' : 'missing',
       googleSheets: process.env.GOOGLE_APPS_SCRIPT_URL ? 'configured' : 'missing',
-    }
+    },
+    website: {
+      homepage: 'unknown',
+      services: 'unknown',
+      servers: 'unknown',
+      contact: 'unknown'
+    },
+    bookingAPI: 'unknown'
   };
 
   let hasError = false;
   let errorDetails = [];
 
-  // Check Supabase Connectivity
+  // 1. Check Supabase Connectivity
   try {
     if (!supabase) {
       throw new Error('Supabase client is not initialized.');
@@ -31,13 +38,69 @@ export default async function handler(req, res) {
     healthStatus.services.supabase = 'connected';
   } catch (error) {
     hasError = true;
-    healthStatus.status = 'degraded';
     healthStatus.services.supabase = 'failed';
     errorDetails.push(`Supabase Error: ${error.message}`);
-    console.error('[Health Check] Supabase failure:', error);
   }
 
-  // If degraded, send an admin alert
+  // 2. Check Website Pages
+  const baseUrl = process.env.WEBSITE_URL || 'http://localhost:5173'; // Fallback to localhost for dev
+  const pagesToTest = [
+    { key: 'homepage', path: '/' },
+    { key: 'services', path: '/services' },
+    { key: 'servers', path: '/servers' },
+    { key: 'contact', path: '/contact' }
+  ];
+
+  for (const page of pagesToTest) {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 5000);
+      const response = await fetch(`${baseUrl}${page.path}`, { signal: controller.signal });
+      clearTimeout(timeout);
+      
+      if (response.ok) {
+        healthStatus.website[page.key] = 'ok';
+      } else {
+        throw new Error(`HTTP ${response.status}`);
+      }
+    } catch (err) {
+      hasError = true;
+      healthStatus.website[page.key] = 'failed';
+      errorDetails.push(`Website Page Load Error (${page.path}): ${err.message}`);
+    }
+  }
+
+  // 3. Check Booking API (Slot Availability)
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000);
+    const apiRes = await fetch(`${baseUrl}/api/bookings`, { signal: controller.signal });
+    clearTimeout(timeout);
+
+    if (apiRes.ok) {
+      const data = await apiRes.json();
+      if (data.success && Array.isArray(data.bookedSlots)) {
+        healthStatus.bookingAPI = 'ok';
+      } else {
+        throw new Error('Invalid JSON response format from booking API');
+      }
+    } else {
+      throw new Error(`HTTP ${apiRes.status}`);
+    }
+  } catch (err) {
+    hasError = true;
+    healthStatus.bookingAPI = 'failed';
+    errorDetails.push(`Booking API Error: ${err.message}`);
+  }
+
+  if (hasError) {
+    healthStatus.status = 'degraded';
+    console.error('[Health Check] Failures detected:', errorDetails);
+  } else {
+    console.log('[Health Check] System Healthy');
+  }
+
+  // 4. If degraded, send an admin alert
   if (hasError && resend) {
     const internalEmail = process.env.INTERNAL_SALES_EMAIL || 'hello@kktechsolutions.in';
     const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev';
@@ -46,7 +109,7 @@ export default async function handler(req, res) {
       await resend.emails.send({
         from: `System Alerts <${fromEmail}>`,
         to: internalEmail,
-        subject: `🚨 [CRITICAL ALERT] KK Tech Solutions Health Check Failed`,
+        subject: `🚨 [KK TECH ALERT] System Health Check Failed`,
         html: `
           <div style="font-family: sans-serif; padding: 20px;">
             <h2 style="color: #dc2626;">System Health Check Failed</h2>

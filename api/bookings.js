@@ -6,18 +6,27 @@ import crypto from 'crypto';
 const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_key');
 
 // Helper to send admin alerts on subsystem failure
-async function sendAdminAlert(subject, message) {
+async function sendAdminAlert(errorType, message, details = {}) {
   if (!process.env.RESEND_API_KEY) return;
   try {
     const internalEmail = process.env.INTERNAL_SALES_EMAIL || 'hello@kktechsolutions.in';
     const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev';
+    const timestamp = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+
     await resend.emails.send({
       from: `System Alerts <${fromEmail}>`,
       to: internalEmail,
-      subject: `🚨 ${subject}`,
+      subject: `🚨 [KK TECH ALERT] Lead Submission Failure Detected`,
       html: `<div style="font-family: sans-serif; padding: 20px;">
                <h2 style="color: #dc2626;">Subsystem Failure Alert</h2>
-               <p>${message}</p>
+               <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                 <tr><th style="padding: 8px; border-bottom: 1px solid #ccc;">Timestamp</th><td style="padding: 8px; border-bottom: 1px solid #ccc;">${timestamp}</td></tr>
+                 <tr><th style="padding: 8px; border-bottom: 1px solid #ccc;">Error Type</th><td style="padding: 8px; border-bottom: 1px solid #ccc;">${errorType}</td></tr>
+                 <tr><th style="padding: 8px; border-bottom: 1px solid #ccc;">Service Selected</th><td style="padding: 8px; border-bottom: 1px solid #ccc;">${details.service || 'N/A'}</td></tr>
+                 <tr><th style="padding: 8px; border-bottom: 1px solid #ccc;">User Details</th><td style="padding: 8px; border-bottom: 1px solid #ccc;">${details.email || 'N/A'} (${details.name || 'N/A'})</td></tr>
+               </table>
+               <h3 style="margin-top: 20px;">Error Message</h3>
+               <p style="background: #f4f4f5; padding: 15px; border-radius: 5px; color: #dc2626;">${message}</p>
                <hr />
                <p style="font-size: 12px; color: #666;">KK Tech Solutions Automated Monitoring</p>
              </div>`
@@ -88,7 +97,8 @@ export default async function handler(req, res) {
             console.error('[Supabase Error] Insert failed:', insertError);
             sendAdminAlert(
               '[Supabase] Booking Database Insert Failed',
-              `Supabase failed to insert booking for <b>${email}</b> at ${date} ${time}.<br>Error: ${insertError.message}`
+              `Supabase failed to insert booking for <b>${email}</b> at ${date} ${time}.<br>Error: ${insertError.message}`,
+              { service, email, name }
             );
           } else {
             bookingData = data;
@@ -98,7 +108,8 @@ export default async function handler(req, res) {
           console.error('[Supabase Error] Exception during insert:', dbErr);
           sendAdminAlert(
             '[Supabase] Booking Database Exception',
-            `An exception occurred while inserting booking for <b>${email}</b> at ${date} ${time}.<br>Error: ${dbErr.message}`
+            `An exception occurred while inserting booking for <b>${email}</b> at ${date} ${time}.<br>Error: ${dbErr.message}`,
+            { service, email, name }
           );
         }
       } else {
@@ -107,9 +118,9 @@ export default async function handler(req, res) {
 
       // 2. Generate Lead ID
       const today = new Date();
-      const dateStrId = today.toISOString().split('T')[0].replace(/-/g, ''); 
+      const year = today.getFullYear();
       const uniqueHex = crypto.randomBytes(2).toString('hex').toUpperCase();
-      const leadId = `KKT-${dateStrId}-${uniqueHex}`;
+      const leadId = `KKT-${year}-${uniqueHex}`;
       const timestamp = today.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
 
       console.log(`[Booking] Processing Lead ID: ${leadId} for ${email}`);
@@ -135,7 +146,8 @@ export default async function handler(req, res) {
           console.error(`[Google Sheets Error] Failure recording ${leadId}:`, gsError);
           sendAdminAlert(
             '[Google Sheets] Backup Sync Failed',
-            `Google Sheets failed to sync lead <b>${leadId}</b> (${email}).<br>Error: ${gsError.message}`
+            `Google Sheets failed to sync lead <b>${leadId}</b> (${email}).<br>Error: ${gsError.message}`,
+            { service, email, name }
           );
         }
       } else {
@@ -273,7 +285,8 @@ export default async function handler(req, res) {
           console.error(`[Email Error] Resend Failure for ${leadId}:`, emailError);
           sendAdminAlert(
             '[Email] Customer Confirmation Failed',
-            `Failed to send confirmation emails for lead <b>${leadId}</b> (${email}).<br>Error: ${emailError.message}`
+            `Failed to send confirmation emails for lead <b>${leadId}</b> (${email}).<br>Error: ${emailError.message}`,
+            { service, email, name }
           );
         }
       } else {
