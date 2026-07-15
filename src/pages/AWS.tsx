@@ -150,12 +150,12 @@ export default function AWS() {
                 themeColorHex="#F97316"
                 customCenterSvg={<img src="/aws.svg" alt="AWS Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
-                  { brand: 'amazonec2', label: 'EC2' },
-                  { brand: 'amazons3', label: 'S3' },
-                  { brand: 'awslambda', label: 'Lambda' },
-                  { brand: 'amazonrds', label: 'RDS' },
-                  { brand: 'amazoncloudfront', label: 'CloudFront' },
-                  { brand: 'amazondynamodb', label: 'DynamoDB' }
+                  { iconify: 'logos:aws-ec2', label: 'EC2' },
+                  { iconify: 'logos:aws-s3', label: 'S3' },
+                  { iconify: 'logos:aws-lambda', label: 'Lambda' },
+                  { iconify: 'logos:aws-rds', label: 'RDS' },
+                  { iconify: 'logos:aws-cloudfront', label: 'CloudFront' },
+                  { iconify: 'logos:aws-dynamodb', label: 'DynamoDB' }
                 ]}
               />
             </Reveal>
