@@ -118,9 +118,9 @@ export default async function handler(req, res) {
 
       // 2. Generate Lead ID
       const today = new Date();
-      const year = today.getFullYear();
+      const currentYear = today.getFullYear();
       const uniqueHex = crypto.randomBytes(2).toString('hex').toUpperCase();
-      const leadId = `KKT-${year}-${uniqueHex}`;
+      const leadId = `KKT-${currentYear}-${uniqueHex}`;
       const timestamp = today.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
 
       console.log(`[Booking] Processing Lead ID: ${leadId} for ${email}`);
