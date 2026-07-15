@@ -7,6 +7,11 @@ const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_key');
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
+      if (!supabase) {
+        console.warn('[Supabase Warning] Client not initialized. Returning empty booked slots.');
+        return res.status(200).json({ success: true, bookedSlots: [] });
+      }
+
       // Fetch all booked slots
       const { data, error } = await supabase
         .from('bookings')
@@ -14,13 +19,13 @@ export default async function handler(req, res) {
         .neq('status', 'Cancelled');
 
       if (error) {
-        console.error('Supabase fetch error:', error);
+        console.error('[Supabase Error] fetch error:', error);
         return res.status(500).json({ error: 'Failed to fetch availability' });
       }
 
       return res.status(200).json({ success: true, bookedSlots: data || [] });
     } catch (error) {
-      console.error('API Failure:', error);
+      console.error('[API Error] GET Failure:', error);
       return res.status(500).json({ error: 'Internal Server Error' });
     }
   }
@@ -29,69 +34,62 @@ export default async function handler(req, res) {
     try {
       const { name, email, phone, company, service, budget, projectDetails, date, time } = req.body;
 
-      // 1. Validate required fields
       if (!name || !email || !service || !projectDetails || !date || !time) {
-        console.error('API Failure: Missing required fields');
+        console.error('[Validation Error] Missing required fields');
         return res.status(400).json({ error: 'Missing required fields' });
       }
 
-      // 2. Insert into Supabase with Date & Time locking
-      const { data: bookingData, error: insertError } = await supabase
-        .from('bookings')
-        .insert([
-          {
-            name,
-            email,
-            phone: phone || 'N/A',
-            company: company || 'N/A',
-            service,
-            budget: budget || 'N/A',
-            project_details: projectDetails,
-            date,
-            time,
-            status: 'Confirmed'
-          }
-        ])
-        .select()
-        .single();
+      let isSupabaseSuccess = false;
+      let isSheetSuccess = false;
+      let isEmailSuccess = false;
+      let bookingData = null;
 
-      if (insertError) {
-        // Handle duplicate unique constraint error (race condition)
-        // PostgreSQL duplicate key violates unique constraint error code is usually '23505'
-        if (insertError.code === '23505') {
-          console.warn(`Race condition avoided: ${date} ${time} already booked.`);
-          return res.status(409).json({ error: 'This time slot has just been booked. Please select another available time.' });
+      // 1. Insert into Supabase with Date & Time locking
+      if (supabase) {
+        try {
+          const { data, error: insertError } = await supabase
+            .from('bookings')
+            .insert([{
+              name, email, phone: phone || 'N/A', company: company || 'N/A',
+              service, budget: budget || 'N/A', project_details: projectDetails,
+              date, time, status: 'Confirmed'
+            }])
+            .select()
+            .single();
+
+          if (insertError) {
+            if (insertError.code === '23505') {
+              console.warn(`[Race Condition] Avoided: ${date} ${time} already booked.`);
+              return res.status(409).json({ error: 'This time slot has just been booked. Please select another available time.' });
+            }
+            console.error('[Supabase Error] Insert failed:', insertError);
+          } else {
+            bookingData = data;
+            isSupabaseSuccess = true;
+          }
+        } catch (dbErr) {
+          console.error('[Supabase Error] Exception during insert:', dbErr);
         }
-        console.error('Supabase insert error:', insertError);
-        return res.status(500).json({ error: 'Database error occurred while securing your slot.' });
+      } else {
+        console.warn('[Supabase Warning] Client not initialized, skipping insert.');
       }
 
-      // 3. Generate Lead ID
+      // 2. Generate Lead ID
       const today = new Date();
-      const dateStrId = today.toISOString().split('T')[0].replace(/-/g, ''); // YYYYMMDD
-      const randomThree = Math.floor(Math.random() * 900) + 100; // 100-999
+      const dateStrId = today.toISOString().split('T')[0].replace(/-/g, ''); 
+      const randomThree = Math.floor(Math.random() * 900) + 100;
       const leadId = `KKT-${dateStrId}-${randomThree}`;
       const timestamp = today.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
 
-      console.log(`Booking Created: ${leadId} for ${email} at ${date} ${time}`);
+      console.log(`[Booking] Processing Lead ID: ${leadId} for ${email}`);
 
       const leadData = {
-        leadId,
-        timestamp,
-        name,
-        company: company || 'N/A',
-        email,
-        phone: phone || 'N/A',
-        service,
-        budget: budget || 'N/A',
-        projectDetails,
-        date,
-        time,
-        status: 'Confirmed',
-        source: 'Website'
+        leadId, timestamp, name, company: company || 'N/A', email,
+        phone: phone || 'N/A', service, budget: budget || 'N/A', projectDetails,
+        date, time, status: 'Confirmed', source: 'Website'
       };
 
-      // 4. Save to Google Sheets as Backup
+      // 3. Save to Google Sheets as Backup
       if (process.env.GOOGLE_APPS_SCRIPT_URL) {
         try {
           const gsRes = await fetch(process.env.GOOGLE_APPS_SCRIPT_URL, {
@@ -100,17 +98,19 @@ export default async function handler(req, res) {
             body: JSON.stringify(leadData)
           });
           if (!gsRes.ok) throw new Error(`Google Apps Script returned status ${gsRes.status}`);
-          console.log(`Google Sheet Success: ${leadId}`);
+          isSheetSuccess = true;
+          console.log(`[Google Sheets Success] Recorded ${leadId}`);
         } catch (gsError) {
-          console.error(`Google Sheet Failure: ${leadId}`, gsError);
+          console.error(`[Google Sheets Error] Failure recording ${leadId}:`, gsError);
         }
+      } else {
+        console.warn('[Google Sheets Warning] URL not configured.');
       }
 
-      // 5. Create ICS Event
+      // 4. Create ICS Event
       const [year, month, day] = date.split('-').map(Number);
       const timeMatch = time.match(/(\d+):(\d+)\s+(AM|PM)/i);
-      let hour = 9;
-      let minute = 0;
+      let hour = 9, minute = 0;
       
       if (timeMatch) {
         hour = parseInt(timeMatch[1], 10);
@@ -132,9 +132,7 @@ export default async function handler(req, res) {
         status: 'CONFIRMED',
         busyStatus: 'BUSY',
         organizer: { name: 'KK Tech Solutions', email: 'hello@kktechsolutions.in' },
-        attendees: [
-          { name, email, rsvp: true, partstat: 'ACCEPTED', role: 'REQ-PARTICIPANT' }
-        ]
+        attendees: [{ name, email, rsvp: true, partstat: 'ACCEPTED', role: 'REQ-PARTICIPANT' }]
       };
 
       let icsContent = '';
@@ -142,7 +140,7 @@ export default async function handler(req, res) {
         if (!error) icsContent = value;
       });
 
-      // 6. Dispatch Emails
+      // 5. Dispatch Emails
       if (process.env.RESEND_API_KEY) {
         const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev';
         const internalEmail = process.env.INTERNAL_SALES_EMAIL || 'hello@kktechsolutions.in';
@@ -234,17 +232,25 @@ export default async function handler(req, res) {
               attachments
             })
           ]);
-          console.log(`Emails Sent for: ${leadId}`);
+          console.log(`[Email Success] Emails Sent for: ${leadId}`);
+          isEmailSuccess = true;
         } catch (emailError) {
-          console.error(`Resend Failure: ${leadId}`, emailError);
+          console.error(`[Email Error] Resend Failure for ${leadId}:`, emailError);
         }
+      } else {
+        console.warn('[Email Warning] RESEND_API_KEY not configured.');
       }
 
-      // 7. Return JSON response
+      if (!isSupabaseSuccess && !isSheetSuccess && !isEmailSuccess) {
+        console.error(`[Critical Failure] Booking ${leadId} could not be saved to any system.`);
+        return res.status(500).json({ error: 'Critical system failure. Could not save booking.' });
+      }
+
+      // 6. Return JSON response
       return res.status(200).json({ success: true, leadId });
 
     } catch (error) {
-      console.error('API Failure:', error);
+      console.error('[API Error] POST Failure:', error);
       return res.status(500).json({ error: 'Internal Server Error' });
     }
   }
