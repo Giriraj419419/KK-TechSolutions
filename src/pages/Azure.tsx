@@ -228,11 +228,11 @@ export default function Azure() {
                 themeColorHex="#0078D4"
                 customCenterSvg={<img src="/azure.svg" alt="Microsoft Azure Logo" className="w-full h-full object-contain drop-shadow-xl" />}
                 nodes={[
-                  { brand: 'microsoftazure', label: 'Azure Cloud' },
-                  { brand: 'azuredevops', label: 'Azure DevOps' },
-                  { brand: 'azurefunctions', label: 'Azure Functions' },
-                  { brand: 'azurepipelines', label: 'Azure Pipelines' },
-                  { brand: 'microsoftsqlserver', label: 'SQL Server' },
+                  { iconify: 'logos:microsoft-azure', label: 'Azure Cloud' },
+                  { iconify: 'devicon:azuredevops', label: 'Azure DevOps' },
+                  { iconify: 'vscode-icons:file-type-azure', label: 'Azure Functions' },
+                  { iconify: 'vscode-icons:file-type-azurepipelines', label: 'Azure Pipelines' },
+                  { iconify: 'selfhst:microsoft-sql-server', label: 'SQL Server' },
                   { brand: 'docker', label: 'Docker' },
                   { brand: 'kubernetes', label: 'Kubernetes' }
                 ]}
