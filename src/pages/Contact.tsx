@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useRef, useEffect } from 'react';
-import { Send, ChevronRight, Check, Building2, Calendar, Clock, Loader2, CheckCircle2, Search, UploadCloud, X, Lock, File, Rocket, TrendingUp, Globe, Sparkles, Home, Phone, Mail } from 'lucide-react';
+import { Send, ChevronRight, ChevronLeft, Check, Building2, Calendar, Clock, Loader2, CheckCircle2, Search, UploadCloud, X, Lock, File, Rocket, TrendingUp, Globe, Sparkles, Home, Phone, Mail } from 'lucide-react';
 import { Reveal, Eyebrow, TextReveal } from '../components/Section';
 import { SectionGlow } from '../components/Atmosphere';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -50,6 +50,7 @@ export default function Contact() {
   // New States for Simplified Step 1
   const [activeTab, setActiveTab] = useState<'services' | 'servers'>('services');
   const [bookedSlots, setBookedSlots] = useState<{date: string, time: string}[]>([]);
+  const [currentMonth, setCurrentMonth] = useState(new Date(new Date().getFullYear(), new Date().getMonth(), 1));
 
   useEffect(() => {
     fetch('/api/bookings')
@@ -162,22 +163,54 @@ export default function Contact() {
   ];
 
   const timeSlots = [
-    '09:00 AM', '10:00 AM', '11:00 AM', '01:00 PM', '02:30 PM', '04:00 PM'
+    '10:00 AM', '11:00 AM', '12:00 PM', '01:00 PM', '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM', '06:00 PM'
   ];
 
-  const generateDates = () => {
-    const dates = [];
-    const today = new Date();
-    for (let i = 1; i <= 14; i++) {
-      const d = new Date(today);
-      d.setDate(today.getDate() + i);
-      if (d.getDay() !== 0 && d.getDay() !== 6) {
-        dates.push(d);
-      }
-    }
-    return dates;
+  // Calendar Logic
+  const getDaysInMonth = (year: number, month: number) => {
+    return new Date(year, month + 1, 0).getDate();
   };
-  const availableDates = generateDates();
+
+  const getFirstDayOfMonth = (year: number, month: number) => {
+    return new Date(year, month, 1).getDay();
+  };
+
+  const generateCalendarDays = () => {
+    const year = currentMonth.getFullYear();
+    const month = currentMonth.getMonth();
+    const daysInMonth = getDaysInMonth(year, month);
+    const firstDay = getFirstDayOfMonth(year, month);
+    
+    const days = [];
+    for (let i = 0; i < firstDay; i++) {
+      days.push(null);
+    }
+    for (let i = 1; i <= daysInMonth; i++) {
+      days.push(new Date(year, month, i));
+    }
+    return days;
+  };
+
+  const nextMonth = () => {
+    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1));
+  };
+
+  const prevMonth = () => {
+    const today = new Date();
+    if (currentMonth.getFullYear() > today.getFullYear() || (currentMonth.getFullYear() === today.getFullYear() && currentMonth.getMonth() > today.getMonth())) {
+      setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1));
+    }
+  };
+  
+  const isDateDisabled = (date: Date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    // Disable past dates
+    if (date < today) return true;
+    // Disable weekends (Saturday = 6, Sunday = 0)
+    if (date.getDay() === 0 || date.getDay() === 6) return true;
+    return false;
+  };
 
   const renderStep = () => {
     if (isSubmitted) {
@@ -690,41 +723,76 @@ export default function Contact() {
               <p className="text-base text-gray-400">Select a time to discuss your {formData.selectedOption} solution.</p>
             </div>
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-5 bg-white/[0.02] p-8 rounded-3xl border border-white/5">
+              <div className="space-y-5 bg-white/[0.02] p-6 sm:p-8 rounded-3xl border border-white/5">
                 <div className="flex items-center justify-between border-b border-white/10 pb-4">
                   <div className="flex items-center gap-2 text-base font-bold text-white">
                     <Calendar className="w-5 h-5 text-blue-400" />
                     Available Dates
                   </div>
+                  <div className="flex items-center gap-2">
+                    <button 
+                      onClick={prevMonth}
+                      disabled={currentMonth.getFullYear() === new Date().getFullYear() && currentMonth.getMonth() === new Date().getMonth()}
+                      className="p-1.5 rounded-lg border border-white/10 bg-black/40 text-gray-400 hover:text-white hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <span className="text-sm font-bold text-white w-24 text-center">
+                      {currentMonth.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+                    </span>
+                    <button 
+                      onClick={nextMonth}
+                      className="p-1.5 rounded-lg border border-white/10 bg-black/40 text-gray-400 hover:text-white hover:bg-white/10 transition-colors"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
                 </div>
-                <div className="grid grid-cols-4 gap-3">
-                  {availableDates.slice(0, 12).map((d, i) => {
-                    const dateStr = d.toISOString().split('T')[0];
-                    const dayName = d.toLocaleDateString('en-US', { weekday: 'short' });
-                    const dayNum = d.getDate();
+                
+                {/* Calendar Grid */}
+                <div className="grid grid-cols-7 gap-1 sm:gap-2 mb-2">
+                  {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
+                    <div key={day} className="text-center text-[10px] font-bold text-gray-500 uppercase tracking-wider py-2">
+                      {day}
+                    </div>
+                  ))}
+                  {generateCalendarDays().map((date, i) => {
+                    if (!date) return <div key={`empty-${i}`} className="p-2" />;
+                    
+                    const year = date.getFullYear();
+                    const month = String(date.getMonth() + 1).padStart(2, '0');
+                    const day = String(date.getDate()).padStart(2, '0');
+                    const dateStr = `${year}-${month}-${day}`;
+                    
+                    const isDisabled = isDateDisabled(date);
                     const isSelected = formData.date === dateStr;
+                    
                     return (
                       <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        whileHover={!isDisabled ? { scale: 1.1 } : {}}
+                        whileTap={!isDisabled ? { scale: 0.95 } : {}}
                         key={i}
                         type="button"
+                        disabled={isDisabled}
                         onClick={() => setFormData({ ...formData, date: dateStr })}
-                        className={`flex flex-col items-center justify-center py-4 rounded-2xl border transition-all ${
-                          isSelected 
-                            ? 'border-blue-500 bg-blue-500/20 text-white shadow-[0_0_15px_rgba(59,130,246,0.3)]' 
-                            : 'border-white/10 bg-black/40 text-gray-400 hover:bg-white/10 hover:border-white/20'
-                        }`}
+                        className={`
+                          relative flex items-center justify-center aspect-square rounded-xl text-sm font-bold transition-all
+                          ${isDisabled 
+                            ? 'text-gray-700 cursor-not-allowed opacity-50' 
+                            : isSelected
+                              ? 'bg-blue-500 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)] border border-blue-400'
+                              : 'bg-white/5 text-gray-300 hover:bg-white/10 hover:border-white/30 border border-white/5'
+                          }
+                        `}
                       >
-                        <span className="text-[10px] uppercase font-bold tracking-wider opacity-70 mb-1">{dayName}</span>
-                        <span className="text-2xl font-black">{dayNum}</span>
+                        {date.getDate()}
                       </motion.button>
                     );
                   })}
                 </div>
               </div>
 
-              <div className="space-y-5 bg-white/[0.02] p-8 rounded-3xl border border-white/5">
+              <div className="space-y-5 bg-white/[0.02] p-6 sm:p-8 rounded-3xl border border-white/5 h-full flex flex-col">
                 <div className="flex items-center justify-between border-b border-white/10 pb-4">
                   <div className="flex items-center gap-2 text-base font-bold text-white">
                     <Clock className="w-5 h-5 text-cyan-400" />
@@ -764,7 +832,11 @@ export default function Contact() {
                   })}
                 </div>
                 {!formData.date && (
-                  <p className="text-sm text-gray-500 italic mt-4 text-center">Select a date first to view available times.</p>
+                  <div className="flex-1 flex items-center justify-center text-center p-4">
+                    <p className="text-sm text-gray-500 italic bg-black/40 border border-white/5 p-4 rounded-xl">
+                      Select a date on the calendar first to view available time slots.
+                    </p>
+                  </div>
                 )}
               </div>
             </div>
