@@ -3,201 +3,139 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export let isAppLoaded = false;
 
-const LOADING_MESSAGES = [
-  "Initializing Enterprise Solutions",
-  "Connecting Cloud Infrastructure",
-  "Preparing Technology Ecosystem",
-  "Launching Digital Innovation"
-];
-
 export default function Preloader() {
   const [visible, setVisible] = useState(true);
-  const [isExiting, setIsExiting] = useState(false);
-  const [activeMessageIndex, setActiveMessageIndex] = useState(0);
+  const [phase, setPhase] = useState(0);
 
-  const [isReturningVisitor] = useState(() => {
-    try {
-      const lastVisitStr = localStorage.getItem('kktech_last_visit_v2');
-      const todayStr = new Date().toDateString();
-      if (lastVisitStr === todayStr) return true;
-      localStorage.setItem('kktech_last_visit_v2', todayStr);
-      return false;
-    } catch {
-      return false;
-    }
-  });
-
-  // Timings
-  const FULL_DURATION = 3800;
-  const RETURNING_DURATION = 1000;
-  const EXIT_DURATION = 600;
+  // Phase 0: Network Formation (0-600ms)
+  // Phase 1: Logo Reveal & Orbit (600ms-1800ms)
+  // Phase 2: Energy Transition & Signature Exit (1800ms-2400ms)
 
   useEffect(() => {
-    const totalDuration = isReturningVisitor ? RETURNING_DURATION : FULL_DURATION;
-    
-    // Start exit animation
-    const exitTimer = setTimeout(() => {
-      setIsExiting(true);
-    }, totalDuration - EXIT_DURATION);
-
-    // Completely unmount
-    const unmountTimer = setTimeout(() => {
+    const t1 = setTimeout(() => setPhase(1), 600);
+    const t2 = setTimeout(() => setPhase(2), 1800);
+    const t3 = setTimeout(() => {
       setVisible(false);
-      setTimeout(() => { isAppLoaded = true; }, 100);
-    }, totalDuration);
+      setTimeout(() => { isAppLoaded = true; }, 50);
+    }, 2400);
 
     return () => {
-      clearTimeout(exitTimer);
-      clearTimeout(unmountTimer);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
     };
-  }, [isReturningVisitor]);
-
-  // Message Rotation
-  useEffect(() => {
-    if (isReturningVisitor || isExiting) return;
-
-    const intervalTime = (FULL_DURATION - EXIT_DURATION - 500) / LOADING_MESSAGES.length;
-    
-    const interval = setInterval(() => {
-      setActiveMessageIndex((prev) => {
-        if (prev < LOADING_MESSAGES.length - 1) return prev + 1;
-        return prev;
-      });
-    }, intervalTime);
-
-    return () => clearInterval(interval);
-  }, [isReturningVisitor, isExiting]);
+  }, []);
 
   return (
     <AnimatePresence>
       {visible && (
         <motion.div
-          key="premium-preloader"
+          key="cinematic-loader"
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden bg-[#03070c]"
           initial={{ opacity: 1 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.6, ease: "easeInOut" } }}
+          exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
         >
-          {/* SCENE 1 & 4: Dark Premium Environment & Technology Activation */}
-          <motion.div 
-            className="absolute inset-0 pointer-events-none"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isExiting ? 0 : 1 }}
-            transition={{ duration: 1 }}
-          >
-            {/* Ambient Glows */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-blue-600/5 rounded-full blur-[100px] transform-gpu" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] bg-cyan-500/5 rounded-full blur-[80px] transform-gpu" />
-            
-            {/* Subtle Network Grid */}
-            <div 
-              className="absolute inset-0 opacity-[0.02]"
-              style={{
-                backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
-                backgroundSize: '40px 40px',
-                transform: 'perspective(1000px) rotateX(60deg) scale(2) translateY(-100px)',
-                transformOrigin: 'top center'
-              }}
-            />
+          {/* Premium Ambient Background */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-[#03070c] to-[#03070c]" />
 
-            {/* Subtle Particles / Nodes */}
+          {/* PHASE 1 & 3: Digital Network Formation & Technology Orbit */}
+          <motion.div 
+            className="absolute inset-0 flex items-center justify-center pointer-events-none"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: phase === 2 ? 0 : 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            {/* Subtle rotating network */}
             <motion.div 
-              className="absolute inset-0 mix-blend-screen opacity-30"
-              animate={{ opacity: [0.1, 0.3, 0.1] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] absolute rounded-full border border-white/[0.02]"
+              initial={{ rotate: 0, scale: 0.9 }}
+              animate={{ rotate: 90, scale: 1 }}
+              transition={{ duration: 3, ease: "linear" }}
             >
-              <div className="absolute top-1/3 left-1/4 w-1 h-1 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
-              <div className="absolute bottom-1/3 right-1/4 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
-              <div className="absolute top-1/4 right-1/3 w-1 h-1 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+              <div className="absolute top-0 left-1/2 w-[1px] h-16 bg-gradient-to-b from-transparent via-blue-500/40 to-transparent -translate-x-1/2" />
+              <div className="absolute bottom-0 left-1/2 w-[1px] h-16 bg-gradient-to-t from-transparent via-cyan-500/40 to-transparent -translate-x-1/2" />
+              <div className="absolute left-0 top-1/2 h-[1px] w-16 bg-gradient-to-r from-transparent via-blue-400/40 to-transparent -translate-y-1/2" />
+              <div className="absolute right-0 top-1/2 h-[1px] w-16 bg-gradient-to-l from-transparent via-cyan-400/40 to-transparent -translate-y-1/2" />
+              
+              {/* Orbiting Particles */}
+              <div className="absolute top-0 left-1/2 w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_10px_rgba(59,130,246,0.8)] -translate-x-1/2" />
+              <div className="absolute bottom-0 left-1/2 w-1 h-1 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)] -translate-x-1/2" />
             </motion.div>
           </motion.div>
 
-          <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-2xl mx-auto px-4">
+          {/* PHASE 5: Energy Transition Wave */}
+          <AnimatePresence>
+            {phase === 2 && (
+              <motion.div
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                initial={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <motion.div
+                  className="w-12 h-12 rounded-full bg-blue-500/20 blur-md"
+                  initial={{ scale: 1, opacity: 1 }}
+                  animate={{ scale: 50, opacity: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-2xl mx-auto px-4 h-full">
             
-            {/* SCENE 2: KK Tech Logo Reveal & SCENE 7: Completion Animation */}
+            {/* PHASE 2: Logo Reveal & PHASE 6: Signature Exit */}
             <motion.div
-              className="relative flex justify-center items-center"
-              initial={{ opacity: 0, scale: 0.85, filter: 'blur(10px)' }}
-              animate={isExiting ? {
-                scale: 1.1,
-                y: -window.innerHeight,
-                opacity: 0,
-                filter: 'blur(5px)',
-                transition: { duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] } // Cinematic fast exit upward
-              } : {
-                opacity: 1,
-                scale: 1,
-                filter: 'blur(0px)',
-                y: 0,
-                transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] }
+              className="relative flex justify-center items-center h-24"
+              initial={{ opacity: 0, filter: 'blur(12px)' }}
+              animate={
+                phase === 0 ? { opacity: 0, filter: 'blur(12px)' } :
+                phase === 1 ? { opacity: 1, filter: 'blur(0px)', scale: 1 } :
+                { opacity: 0, y: -150, scale: 1.05, filter: 'blur(6px) drop-shadow(0 0 30px rgba(59,130,246,1)) brightness(2)' }
+              }
+              transition={{ 
+                duration: phase === 2 ? 0.6 : 1.2, 
+                ease: phase === 2 ? [0.6, -0.05, 0.01, 0.99] : "easeOut" 
               }}
             >
-              {/* Logo Glow Behind */}
-              <motion.div 
-                className="absolute inset-0 bg-blue-500/20 blur-[40px] rounded-full"
-                animate={isExiting ? { opacity: 1, scale: 1.5 } : { opacity: 0.5, scale: 1 }}
-                transition={{ duration: 0.5 }}
-              />
+              {/* Soft glow behind logo */}
+              <div className="absolute inset-0 bg-blue-500/15 blur-[40px] rounded-full scale-150" />
 
               <img
                 src="/kk-logo-transparent.png"
                 alt="KK Tech Solutions"
-                className="h-16 sm:h-24 w-auto object-contain relative z-10 will-change-transform"
+                className="h-16 sm:h-20 w-auto object-contain relative z-10 will-change-transform"
               />
               
-              {/* SCENE 3: Cinematic Light Sweep */}
-              {!isExiting && (
+              {/* Cinematic Light Sweep */}
+              {phase === 1 && (
                 <motion.div
                   initial={{ x: '-150%', skewX: -20 }}
                   animate={{ x: '150%' }}
-                  transition={{ 
-                    duration: 1.5, 
-                    ease: "easeInOut", 
-                    delay: 0.5
-                  }}
-                  className="absolute inset-0 z-20 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none"
+                  transition={{ duration: 1.4, ease: "easeInOut", delay: 0.2 }}
+                  className="absolute inset-0 z-20 w-1/2 bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none"
                   style={{ mixBlendMode: 'overlay' }}
                 />
               )}
             </motion.div>
 
-            {/* SCENE 5 & 6 Container (Only show for first time visitors) */}
-            {!isReturningVisitor && (
-              <motion.div
-                initial={{ opacity: 1 }}
-                animate={{ opacity: isExiting ? 0 : 1 }}
-                transition={{ duration: 0.4 }}
-                className="mt-12 flex flex-col items-center h-24"
-              >
-                {/* SCENE 5: Loading Text */}
-                <div className="h-6 relative w-full flex justify-center items-center mb-6">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={activeMessageIndex}
-                      initial={{ opacity: 0, y: 5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -5 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="absolute text-cyan-400/90 font-mono text-[10px] sm:text-xs tracking-widest uppercase"
-                    >
-                      {LOADING_MESSAGES[activeMessageIndex]}
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
-
-                {/* SCENE 6: Brand Statement */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 1.2, ease: "easeOut" }}
-                  className="text-center"
-                >
-                  <h1 className="text-white/60 font-light tracking-[0.2em] text-[10px] sm:text-[11px] uppercase">
-                    Empowering Businesses Through Technology
-                  </h1>
-                </motion.div>
-              </motion.div>
-            )}
+            {/* PHASE 4: Brand Statement */}
+            <motion.div
+              className="absolute top-[58%] w-full flex justify-center"
+              initial={{ opacity: 0, y: 10 }}
+              animate={
+                phase === 1 ? { opacity: 1, y: 0 } :
+                { opacity: 0, y: -10 }
+              }
+              transition={{ 
+                duration: 0.6, 
+                ease: "easeOut", 
+                delay: phase === 1 ? 0.4 : 0 
+              }}
+            >
+              <h1 className="text-white/60 font-light tracking-[0.25em] text-[10px] sm:text-xs uppercase">
+                Enterprise Technology Solutions
+              </h1>
+            </motion.div>
 
           </div>
         </motion.div>
