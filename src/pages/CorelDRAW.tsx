@@ -262,9 +262,9 @@ export default function CorelDRAW() {
                 themeColorHex="#22C55E"
                 nodes={[
                   { brand: 'coreldraw', label: 'CorelDRAW' },
-                  { brand: 'corel', label: 'Corel' },
-                  { brand: 'adobeillustrator', label: 'Illustrator' },
-                  { brand: 'adobephotoshop', label: 'Photoshop' }
+                  { brand: 'coreldraw', color: 'e3352b', label: 'Corel PHOTO-PAINT' },
+                  { iconify: 'logos:adobe-illustrator', label: 'Illustrator' },
+                  { iconify: 'logos:adobe-photoshop', label: 'Photoshop' }
                 ]}
               />
             </Reveal>

@@ -7,6 +7,8 @@ export interface EcosystemNode {
   brand?: string;
   iconify?: string;
   fallbackIcon?: LucideIcon;
+  customSvg?: React.ReactNode;
+  color?: string;
   label: string;
 }
 
@@ -90,10 +92,11 @@ function MagneticNode({
            <BrandLogo 
             iconName={node.brand || ''}
             iconify={node.iconify} 
-            color={node.brand ? 'default' : undefined}
+            color={node.color ? node.color : node.brand ? 'default' : undefined}
             fallbackIcon={node.fallbackIcon} 
+            customSvg={node.customSvg}
             className="w-7 h-7 md:w-10 md:h-10 lg:w-12 lg:h-12 transition-all duration-300 text-gray-400 group-hover:text-white flex items-center justify-center"
-            style={{ color: node.brand || node.iconify ? undefined : 'currentColor' }} 
+            style={{ color: node.brand || node.iconify || node.customSvg ? undefined : 'currentColor' }} 
           />
         </div>
         
