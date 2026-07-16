@@ -7,17 +7,17 @@ export default function Preloader() {
   const [visible, setVisible] = useState(true);
   const [phase, setPhase] = useState(0);
 
-  // Phase 0: Network Formation (0-600ms)
-  // Phase 1: Logo Reveal & Orbit (600ms-1800ms)
-  // Phase 2: Energy Transition & Signature Exit (1800ms-2400ms)
+  // Phase 0: Network Formation (0-2000ms)
+  // Phase 1: Logo Reveal & Orbit (2000ms-10000ms)
+  // Phase 2: Energy Transition & Signature Exit (10000ms-12000ms)
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase(1), 600);
-    const t2 = setTimeout(() => setPhase(2), 1800);
+    const t1 = setTimeout(() => setPhase(1), 2000);
+    const t2 = setTimeout(() => setPhase(2), 10000);
     const t3 = setTimeout(() => {
       setVisible(false);
       setTimeout(() => { isAppLoaded = true; }, 50);
-    }, 2400);
+    }, 12000);
 
     return () => {
       clearTimeout(t1);
@@ -50,7 +50,7 @@ export default function Preloader() {
               className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] absolute rounded-full border border-white/[0.02]"
               initial={{ rotate: 0, scale: 0.9 }}
               animate={{ rotate: 90, scale: 1 }}
-              transition={{ duration: 3, ease: "linear" }}
+              transition={{ duration: 12, ease: "linear", repeat: Infinity }}
             >
               <div className="absolute top-0 left-1/2 w-[1px] h-16 bg-gradient-to-b from-transparent via-blue-500/40 to-transparent -translate-x-1/2" />
               <div className="absolute bottom-0 left-1/2 w-[1px] h-16 bg-gradient-to-t from-transparent via-cyan-500/40 to-transparent -translate-x-1/2" />
@@ -75,7 +75,7 @@ export default function Preloader() {
                   className="w-12 h-12 rounded-full bg-blue-500/20 blur-md"
                   initial={{ scale: 1, opacity: 1 }}
                   animate={{ scale: 50, opacity: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  transition={{ duration: 1.5, ease: "easeOut" }}
                 />
               </motion.div>
             )}
@@ -93,7 +93,7 @@ export default function Preloader() {
                 { opacity: 0, y: -150, scale: 1.05, filter: 'blur(6px) drop-shadow(0 0 30px rgba(59,130,246,1)) brightness(2)' }
               }
               transition={{ 
-                duration: phase === 2 ? 0.6 : 1.2, 
+                duration: phase === 2 ? 1 : 2, 
                 ease: phase === 2 ? [0.6, -0.05, 0.01, 0.99] : "easeOut" 
               }}
             >
@@ -111,7 +111,7 @@ export default function Preloader() {
                 <motion.div
                   initial={{ x: '-150%', skewX: -20 }}
                   animate={{ x: '150%' }}
-                  transition={{ duration: 1.4, ease: "easeInOut", delay: 0.2 }}
+                  transition={{ duration: 3, ease: "easeInOut", delay: 0.5 }}
                   className="absolute inset-0 z-20 w-1/2 bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none"
                   style={{ mixBlendMode: 'overlay' }}
                 />
