@@ -117,7 +117,7 @@ const TechConstellation = React.memo(({ className = "" }: { className?: string }
   return (
     <motion.div 
       ref={containerRef}
-      className={`relative ${className} flex items-center justify-center perspective-[1000px]`}
+      className={`relative ${className} flex items-center justify-center perspective-[1000px] scale-[0.65] sm:scale-100 transform-gpu overflow-visible`}
       style={{ y: shouldReduceMotion ? 0 : scrollParallaxY }}
     >
       {/* Layer 8: Ambient Background Glow (expanding/contracting) */}

@@ -238,14 +238,14 @@ function MobileNavItem({ l, loc, closeNav }: { l: any, loc: any, closeNav: () =>
           aria-haspopup="true"
           aria-expanded={isOpen}
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all w-full text-left"
+          className="flex items-center justify-between px-5 py-4 min-h-[48px] rounded-xl text-base font-semibold transition-all w-full text-left"
           style={{
-            color: active ? '#FFFFFF' : 'rgba(255, 255, 255, 0.65)',
+            color: active ? '#FFFFFF' : 'rgba(255, 255, 255, 0.75)',
             background: active && !isOpen ? 'rgba(255, 255, 255, 0.06)' : 'transparent',
           }}
         >
           {l.label}
-          <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180 text-white' : 'text-white/60'}`} />
+          <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${isOpen ? 'rotate-180 text-white' : 'text-white/60'}`} />
         </button>
         <AnimatePresence>
           {isOpen && (
@@ -262,20 +262,20 @@ function MobileNavItem({ l, loc, closeNav }: { l: any, loc: any, closeNav: () =>
                       key={d.label}
                       to={d.to}
                       onClick={closeNav}
-                      className={`group relative flex items-center gap-3 p-3 rounded-xl border border-transparent transition-all mt-1 ${d.colorClass}`}
+                      className={`group relative flex items-center gap-4 px-4 py-3 min-h-[56px] rounded-xl border border-transparent transition-all mt-1 ${d.colorClass}`}
                       style={{
                         background: loc.pathname === d.to ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
                         borderColor: loc.pathname === d.to ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
                       }}
                     >
-                      <div className="shrink-0 w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center transition-colors group-hover:bg-white/10">
+                      <div className="shrink-0 w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center transition-colors group-hover:bg-white/10">
                         <img src={d.logo} alt={d.label} className="w-5 h-5 object-contain opacity-90 group-hover:opacity-100 transition-opacity" />
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-sm font-semibold text-white/90 group-hover:text-white transition-colors">
+                        <span className="text-[15px] font-semibold text-white/90 group-hover:text-white transition-colors">
                           {d.label}
                         </span>
-                        <span className="text-[10px] text-gray-400 leading-tight">
+                        <span className="text-[11px] text-gray-400 leading-tight">
                           {d.desc}
                         </span>
                       </div>
@@ -288,9 +288,9 @@ function MobileNavItem({ l, loc, closeNav }: { l: any, loc: any, closeNav: () =>
                     key={d.label}
                     to={d.to}
                     onClick={closeNav}
-                    className="px-4 py-2.5 rounded-lg text-sm font-medium transition-all mt-1"
+                    className="px-5 py-3 min-h-[48px] flex items-center rounded-lg text-base font-medium transition-all mt-1"
                     style={{
-                      color: loc.pathname === d.to ? '#FFFFFF' : 'rgba(255, 255, 255, 0.5)',
+                      color: loc.pathname === d.to ? '#FFFFFF' : 'rgba(255, 255, 255, 0.6)',
                       background: loc.pathname === d.to ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
                     }}
                   >
@@ -309,9 +309,9 @@ function MobileNavItem({ l, loc, closeNav }: { l: any, loc: any, closeNav: () =>
     <Link
       to={l.to}
       onClick={closeNav}
-      className="flex items-center px-4 py-3 rounded-xl text-sm font-semibold transition-all"
+      className="flex items-center px-5 py-4 min-h-[48px] rounded-xl text-base font-semibold transition-all active:scale-[0.98]"
       style={{
-        color: active ? '#FFFFFF' : 'rgba(255, 255, 255, 0.65)',
+        color: active ? '#FFFFFF' : 'rgba(255, 255, 255, 0.75)',
         background: active ? 'rgba(255, 255, 255, 0.06)' : 'transparent',
       }}
     >
@@ -465,11 +465,11 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 380, damping: 38 }}
-              className="absolute right-0 top-0 h-full w-[82%] max-w-sm flex flex-col"
+              className="absolute right-0 top-0 h-full w-[85%] max-w-sm flex flex-col backdrop-blur-[40px] transform-gpu"
               style={{
-                background: '#0E1626',
-                borderLeft: '1px solid rgba(255, 255, 255, 0.06)',
-                boxShadow: '-10px 0 50px rgba(0,0,0,0.8)',
+                background: 'rgba(11, 18, 31, 0.75)',
+                borderLeft: '1px solid rgba(255, 255, 255, 0.08)',
+                boxShadow: '-20px 0 60px rgba(0,0,0,0.9)',
               }}
             >
               {/* Drawer Header */}

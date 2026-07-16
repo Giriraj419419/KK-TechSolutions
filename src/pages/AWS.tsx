@@ -117,7 +117,7 @@ export default function AWS() {
                 <Eyebrow>AWS Cloud Solutions</Eyebrow>
               </Reveal>
               <Reveal direction="up" delay={0.08}>
-                <h1 className="text-4xl sm:text-5xl lg:text-[4rem] font-medium leading-[1.08] tracking-tight text-white flex flex-col items-start gap-1">
+                <h1 className="text-[2.25rem] leading-[1.15] sm:text-5xl lg:text-[4rem] font-medium lg:leading-[1.08] tracking-tight text-white flex flex-col items-start gap-1 break-words">
                   <TextReveal text="Leveraging the Power of" delay={0.08} className="!justify-start" />
                   <span className="bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent font-semibold inline-block">
                     AWS Cloud
@@ -131,12 +131,12 @@ export default function AWS() {
                 </p>
               </Reveal>
               <Reveal direction="up" delay={0.2}>
-                <div className="flex flex-wrap gap-4 pt-2">
-                  <Link to="/contact-us" className="btn-primary py-3 px-8 text-sm inline-flex items-center gap-2 group">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2 w-full">
+                  <Link to="/contact-us" className="btn-primary py-3 px-8 text-sm inline-flex items-center justify-center gap-2 group w-full sm:w-auto">
                     Get Started with AWS
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
-                  <Link to="/our-services" className="btn-secondary py-3 px-8 text-sm">
+                  <Link to="/our-services" className="btn-secondary py-3 px-8 text-sm text-center w-full sm:w-auto">
                     All Services
                   </Link>
                 </div>

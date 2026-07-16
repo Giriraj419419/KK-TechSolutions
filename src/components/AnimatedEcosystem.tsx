@@ -116,7 +116,9 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
     const updateRadius = () => {
       const width = window.innerWidth;
       setIsMobile(width < 640);
-      if (width < 640) {
+      if (width < 380) {
+        setRadius(110); // Small Mobile (iPhone SE)
+      } else if (width < 640) {
         setRadius(130); // Mobile
       } else if (width < 768) {
         setRadius(160); // Tablet
@@ -133,11 +135,11 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
     return () => window.removeEventListener('resize', updateRadius);
   }, []);
 
-  // Limit nodes on mobile for clarity
-  const activeNodes = isMobile ? nodes.slice(0, 4) : nodes;
+  // Limit nodes on mobile for clarity (6 nodes look better than 4 and still fit)
+  const activeNodes = isMobile ? nodes.slice(0, 6) : nodes;
   const nodeCount = activeNodes.length;
   
-  // Distribute nodes evenly in a circle (or semi-circle if preferred, but circle is solid)
+  // Distribute nodes evenly in a circle
   const distributedNodes = activeNodes.map((node, i) => {
     // Start from top (-90deg) and go clockwise
     const angle = (360 / nodeCount) * i - 90;
@@ -148,7 +150,7 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
   });
 
   return (
-    <div className={`relative w-full h-[350px] sm:h-[450px] md:h-[550px] lg:h-[700px] flex items-center justify-center max-w-5xl mx-auto ${className} overflow-visible`}>
+    <div className={`relative w-full h-[380px] sm:h-[450px] md:h-[550px] lg:h-[700px] flex items-center justify-center max-w-5xl mx-auto ${className} overflow-visible scale-[0.85] min-[400px]:scale-[0.95] sm:scale-100 transform-gpu`}>
       
       {/* Layer 1: Dynamic Energy Background */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden flex items-center justify-center">

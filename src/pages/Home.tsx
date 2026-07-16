@@ -247,7 +247,7 @@ export default function Home() {
               </Reveal>
 
               <Reveal direction="up" delay={baseDelay + 0.08}>
-                <h1 className="text-4xl sm:text-5xl lg:text-[4rem] font-medium leading-[1.08] tracking-tight text-white">
+                <h1 className="text-[2.25rem] leading-[1.15] sm:text-5xl lg:text-[4rem] font-medium lg:leading-[1.08] tracking-tight text-white break-words">
                   <TextReveal text="Empowering Your" delay={baseDelay + 0.08} />{' '}
                   <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent font-semibold">
                     Digital Future
@@ -278,12 +278,12 @@ export default function Home() {
 
               {/* Action CTAs */}
               <Reveal delay={baseDelay + 0.26}>
-                <div className="flex flex-wrap items-center gap-4 pt-2">
-                  <Link to="/contact-us" className="btn-primary py-3 px-8 text-sm inline-flex items-center gap-2">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2 w-full">
+                  <Link to="/contact-us" className="btn-primary py-3 px-8 text-sm inline-flex items-center justify-center gap-2 w-full sm:w-auto">
                     Book Free Consultation
                     <ArrowRight className="w-4 h-4" />
                   </Link>
-                  <Link to="/our-services" className="btn-secondary py-3 px-8 text-sm">
+                  <Link to="/our-services" className="btn-secondary py-3 px-8 text-sm text-center w-full sm:w-auto">
                     View Our Services
                   </Link>
                 </div>
@@ -291,7 +291,7 @@ export default function Home() {
             </div>
 
             {/* Right side floating constellation graphic */}
-            <Reveal direction="left" delay={baseDelay + 0.12} className="relative z-10 flex justify-center lg:justify-end">
+            <Reveal direction="left" delay={baseDelay + 0.12} className="relative z-10 flex justify-center lg:justify-end mt-8 lg:mt-0">
               <MemoizedTechConstellation className="w-full max-w-[500px] aspect-square" />
             </Reveal>
           </div>

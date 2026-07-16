@@ -81,7 +81,7 @@ export default function Services() {
             <Eyebrow>Our Services</Eyebrow>
           </Reveal>
           <Reveal direction="up" delay={0.08}>
-            <h1 className="mt-5 text-4xl sm:text-5xl lg:text-[4rem] font-medium leading-[1.08] tracking-tight text-white">
+            <h1 className="mt-5 text-[2.25rem] leading-[1.15] sm:text-5xl lg:text-[4rem] font-medium lg:leading-[1.08] tracking-tight text-white break-words">
               <TextReveal text="End-to-End" delay={0.08} />{' '}
               <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent font-semibold">
                 Technology Solutions
@@ -234,12 +234,12 @@ export default function Services() {
                   </div>
 
                   {/* CTA */}
-                  <div className="mt-8 pt-6 flex flex-wrap items-center justify-between gap-4 border-t border-white/5">
-                    <Link to="/contact-us" className="btn-primary py-2.5 px-6 text-sm">
+                  <div className="mt-8 pt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-t border-white/5">
+                    <Link to="/contact-us" className="btn-primary py-2.5 px-6 text-sm flex justify-center w-full sm:w-auto">
                       Get This Service
                       <ArrowRight className="w-4 h-4" />
                     </Link>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 flex-wrap justify-center sm:justify-end w-full sm:w-auto">
                       {services.map((s) => (
                         <button
                           key={s.id}
@@ -273,7 +273,7 @@ export default function Services() {
             title="Powered by Deep Technical Expertise"
             sub="Our team brings hands-on experience across all major platforms, technologies, and infrastructure systems."
           />
-          <StaggerContainer className="mt-12 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-5" staggerChildren={0.08}>
+          <StaggerContainer className="mt-12 grid grid-cols-1 min-[400px]:grid-cols-2 lg:grid-cols-4 gap-5" staggerChildren={0.08}>
             {capabilities.map((c, i) => (
               <StaggerItem key={i} direction="up">
                 <TiltCard className="p-6 text-center cursor-default group relative overflow-hidden">

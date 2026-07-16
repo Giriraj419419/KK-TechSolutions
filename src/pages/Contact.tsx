@@ -879,7 +879,7 @@ export default function Contact() {
             <Eyebrow>Book a Consultation</Eyebrow>
           </Reveal>
           <Reveal direction="up" delay={0.08}>
-            <h1 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-medium leading-[1.08] tracking-tight text-white">
+            <h1 className="mt-4 text-[2.25rem] leading-[1.15] sm:text-5xl lg:text-6xl font-medium lg:leading-[1.08] tracking-tight text-white break-words">
               <TextReveal text="Ready to Elevate" delay={0.08} />{' '}
               <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 bg-clip-text text-transparent font-semibold">
                 Your Enterprise?

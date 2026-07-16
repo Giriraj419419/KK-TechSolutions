@@ -238,7 +238,7 @@ export default function HPServers() {
                 <Eyebrow>Enterprise Server Solutions</Eyebrow>
               </Reveal>
               <Reveal direction="up" delay={0.08}>
-                <h1 className="text-4xl sm:text-5xl lg:text-[4rem] font-medium leading-[1.08] tracking-tight text-white flex flex-col items-start gap-1">
+                <h1 className="text-[2.25rem] leading-[1.15] sm:text-5xl lg:text-[4rem] font-medium lg:leading-[1.08] tracking-tight text-white flex flex-col items-start gap-1 break-words">
                   <TextReveal text="Innovate Faster with" delay={0.08} className="!justify-start" />
                   <span className="bg-gradient-to-r from-[#0078D4] via-[#2B88D8] to-[#00BCF2] bg-clip-text text-transparent font-semibold inline-block">
                     HP (HPE ProLiant)
@@ -251,12 +251,12 @@ export default function HPServers() {
                 </p>
               </Reveal>
               <Reveal direction="up" delay={0.2}>
-                <div className="flex flex-wrap gap-4 pt-2">
-                  <Link to="/contact-us" className="btn-primary py-3 px-8 text-sm inline-flex items-center gap-2 group shadow-[0_0_20px_rgba(0,120,212,0.3)] border-[#0078D4] bg-[#0078D4] hover:bg-[#005A9E] hover:border-[#005A9E]">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2 w-full">
+                  <Link to="/contact-us" className="btn-primary py-3 px-8 text-sm inline-flex items-center justify-center gap-2 group shadow-[0_0_20px_rgba(0,120,212,0.3)] border-[#0078D4] bg-[#0078D4] hover:bg-[#005A9E] hover:border-[#005A9E] w-full sm:w-auto">
                     Get Free Consultation
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
-                  <Link to="/contact-us" className="btn-secondary py-3 px-8 text-sm">
+                  <Link to="/contact-us" className="btn-secondary py-3 px-8 text-sm text-center w-full sm:w-auto">
                     Talk to an Azure Expert
                   </Link>
                 </div>
