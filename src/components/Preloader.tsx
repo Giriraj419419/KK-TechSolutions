@@ -118,24 +118,7 @@ export default function Preloader() {
               )}
             </motion.div>
 
-            {/* PHASE 4: Brand Statement */}
-            <motion.div
-              className="absolute top-[58%] w-full flex justify-center"
-              initial={{ opacity: 0, y: 10 }}
-              animate={
-                phase === 1 ? { opacity: 1, y: 0 } :
-                { opacity: 0, y: -10 }
-              }
-              transition={{ 
-                duration: 0.6, 
-                ease: "easeOut", 
-                delay: phase === 1 ? 0.4 : 0 
-              }}
-            >
-              <h1 className="text-white/60 font-light tracking-[0.25em] text-[10px] sm:text-xs uppercase">
-                Enterprise Technology Solutions
-              </h1>
-            </motion.div>
+
 
           </div>
         </motion.div>
