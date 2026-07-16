@@ -10,7 +10,7 @@ export default function HeroAtmosphere() {
       <motion.div 
         animate={{ opacity: [0.1, 0.25, 0.1], scale: [1, 1.15, 1] }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[100vw] max-w-[1400px] h-[800px] bg-blue-600/10 rounded-[100%] blur-[140px] z-0"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1400px] h-[800px] bg-blue-600/10 rounded-[100%] blur-[140px] z-0"
       />
       
       {/* Noise Texture */}
