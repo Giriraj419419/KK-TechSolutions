@@ -5,6 +5,7 @@ import { Reveal, Eyebrow, TextReveal } from '../components/Section';
 import { SectionGlow } from '../components/Atmosphere';
 import { motion, AnimatePresence } from 'framer-motion';
 import FlagshipContactEnvironment from '../components/FlagshipContactEnvironment';
+import { Turnstile } from '@marsidev/react-turnstile';
 
 const offices = [
   {
@@ -46,6 +47,7 @@ export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [leadId, setLeadId] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   
   // New States for Simplified Step 1
   const [activeTab, setActiveTab] = useState<'services' | 'servers'>('services');
@@ -105,7 +107,8 @@ export default function Contact() {
         priority: formData.priority,
         timeline: formData.timeline,
         date: formData.date,
-        time: formData.time
+        time: formData.time,
+        turnstileToken
       };
 
       let res;
@@ -856,7 +859,7 @@ export default function Contact() {
       if (formData.phone && !/^\+?[\d\s-]{7,15}$/.test(formData.phone)) return true;
       if (!formData.projectNotes.trim()) return true;
     }
-    if (step === 4 && (!formData.date || !formData.time)) return true;
+    if (step === 4 && (!formData.date || !formData.time || !turnstileToken)) return true;
     return false;
   };
 
@@ -944,9 +947,19 @@ export default function Contact() {
 
               {/* Navigation */}
               {!isSubmitted && (
-                <div className="mt-12 pt-8 border-t border-white/10 flex items-center justify-between relative z-20">
-                  {step > 1 ? (
-                    <button
+                <div className="mt-12 pt-8 border-t border-white/10 flex flex-col items-end gap-6 relative z-20">
+                  {step === 4 && (
+                    <div className="w-full flex justify-end">
+                      <Turnstile 
+                        siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'} 
+                        onSuccess={(token) => setTurnstileToken(token)}
+                        options={{ theme: 'dark' }}
+                      />
+                    </div>
+                  )}
+                  <div className="w-full flex items-center justify-between">
+                    {step > 1 ? (
+                      <button
                       type="button"
                       onClick={() => setStep(step - 1)}
                       disabled={isSubmitting}
@@ -987,6 +1000,7 @@ export default function Contact() {
                       </>
                     )}
                   </button>
+                  </div>
                 </div>
               )}
             </form>

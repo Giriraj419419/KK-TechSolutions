@@ -11,6 +11,7 @@
     "sync": "node scripts/github-sync.cjs"
   },
   "dependencies": {
+    "@marsidev/react-turnstile": "^1.5.3",
     "@supabase/supabase-js": "^2.99.1",
     "@tailwindcss/vite": "^4.2.1",
     "framer-motion": "^12.35.0",
