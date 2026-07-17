@@ -1,6 +1,7 @@
 import { Resend } from 'resend';
 import * as ics from 'ics';
 import crypto from 'crypto';
+import { Buffer } from 'buffer';
 
 const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_key');
 
@@ -244,7 +245,7 @@ export default async function handler(req, res) {
         }
 
         try {
-          await Promise.all([
+          const [adminRes, customerRes] = await Promise.all([
             resend.emails.send({
               from: `${companyName} <${fromEmail}>`,
               to: internalEmail,
@@ -309,6 +310,10 @@ export default async function handler(req, res) {
               `
             })
           ]);
+          
+          if (adminRes.error) throw new Error(adminRes.error.message);
+          if (customerRes.error) throw new Error(customerRes.error.message);
+          
           console.log(`[STEP 7] Email sending completed for ${leadId}`);
         } catch (emailError) {
           console.error(`[Email Error] Resend Failure for ${leadId}:`, emailError);
@@ -320,6 +325,8 @@ export default async function handler(req, res) {
             { service, email, name }
           );
         }
+      } else {
+        console.warn(`[System Warning] RESEND_API_KEY is not defined. Skipping emails.`);
       }
 
       console.log(`[STEP 8] Success response returned`);
