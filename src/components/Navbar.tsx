@@ -137,7 +137,7 @@ function DesktopNavItem({ l, loc }: { l: any, loc: any }) {
               animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
               exit={{ opacity: 0, y: 15, scale: 0.96, filter: 'blur(8px)' }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className={`absolute top-[calc(100%+0.5rem)] ${l.label === 'Services' ? 'left-1/2 -translate-x-1/2 w-[90vw] max-w-[700px] p-5' : l.label === 'Servers' ? 'left-1/2 -translate-x-1/2 w-[90vw] max-w-[900px] p-5' : 'left-0 min-w-[200px] p-2'} rounded-2xl overflow-hidden`}
+              className={`absolute top-[calc(100%+0.5rem)] ${l.label === 'Services' ? 'left-1/2 -translate-x-1/2 w-[90vw] max-w-[700px] p-5' : l.label === 'Servers' ? 'left-1/2 -translate-x-1/2 w-[90vw] max-w-[900px] p-5' : 'left-0 min-w-[200px] max-w-[90vw] p-2'} rounded-2xl overflow-hidden`}
               style={{
                 background: 'rgba(11, 18, 31, 0.88)',
                 backdropFilter: 'blur(30px)',

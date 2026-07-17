@@ -390,7 +390,7 @@ export default function Home() {
             <div className="overflow-hidden relative w-full py-4" style={{ maskImage: 'linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent)' }}>
               <div className="flex gap-6 w-max animate-marquee pause-on-hover motion-reduce:animate-none motion-reduce:flex-wrap motion-reduce:justify-center will-change-transform transform-gpu">
                 {[...partnersList, ...partnersList].map((p, idx) => (
-                  <div key={idx} className="w-[300px] sm:w-[320px] shrink-0 h-auto pb-8">
+                  <div key={idx} className="w-[85vw] max-w-[320px] sm:w-[320px] shrink-0 h-auto pb-8">
                     <InteractivePartnerCard p={p} idx={idx} />
                   </div>
                 ))}
@@ -470,7 +470,7 @@ export default function Home() {
               transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
             >
               {[...industries, ...industries, ...industries, ...industries].map((ind, idx) => (
-                <div key={`${ind.label}-${idx}`} className="w-[220px] sm:w-[240px] p-6 rounded-2xl border border-white/5 bg-white/[0.02] text-center hover:border-white/15 hover:bg-white/[0.04] transition-all duration-300 group shrink-0">
+                <div key={`${ind.label}-${idx}`} className="w-[85vw] max-w-[240px] sm:w-[240px] p-6 rounded-2xl border border-white/5 bg-white/[0.02] text-center hover:border-white/15 hover:bg-white/[0.04] transition-all duration-300 group shrink-0">
                   <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                     <ind.icon className="w-5 h-5 text-blue-400" />
                   </div>

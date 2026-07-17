@@ -49,7 +49,6 @@ html {
   background: var(--bg);
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
 }
 
 body {
@@ -61,19 +60,16 @@ body {
   text-rendering: optimizeLegibility;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
   line-height: 1.6;
 }
 
 #root {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
 }
 
 section {
   max-width: 100%;
-  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {

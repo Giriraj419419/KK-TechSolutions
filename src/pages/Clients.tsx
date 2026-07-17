@@ -163,7 +163,7 @@ export default function Clients() {
               <motion.div 
                 animate={{ rotate: 360 }} 
                 transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-                className="absolute w-[380px] h-[380px] rounded-full border border-white/5"
+                className="absolute w-full max-w-[380px] aspect-square rounded-full border border-white/5"
               >
                 {/* Enterprise Solutions Card (Top Left Orbit) */}
                 <motion.div 
@@ -260,7 +260,7 @@ export default function Clients() {
           <div className="relative overflow-hidden w-full flex py-4" style={{ maskImage: 'linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent)' }}>
             <div className="flex gap-4 shrink-0 px-2 w-max animate-marquee pause-on-hover will-change-transform transform-gpu motion-reduce:animate-none motion-reduce:flex-wrap motion-reduce:justify-center">
               {[...clientLogos, ...clientLogos, ...clientLogos, ...clientLogos].map((client, idx) => (
-                <div key={idx} className="w-[180px] shrink-0">
+                <div key={idx} className="w-[45vw] max-w-[180px] sm:w-[180px] shrink-0">
                   <TiltCard className="p-6 h-32 flex flex-col items-center justify-center text-center premium-glass group cursor-pointer hover:border-blue-500/30 transition-all duration-300">
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
                     <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-lg font-bold text-gray-300 group-hover:text-blue-400 group-hover:scale-110 transition-all duration-300 mb-2 shadow-lg">
@@ -382,7 +382,7 @@ export default function Clients() {
 
           <div className="flex flex-wrap justify-center gap-6">
             {partnersList.map((p, idx) => (
-              <div key={idx} className="w-[300px] sm:w-[320px] shrink-0 h-auto pb-8">
+              <div key={idx} className="w-[85vw] max-w-[320px] sm:w-[320px] shrink-0 h-auto pb-8">
                 <InteractivePartnerCard p={p} idx={idx} />
               </div>
             ))}
