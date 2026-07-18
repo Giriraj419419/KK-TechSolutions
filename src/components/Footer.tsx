@@ -152,7 +152,7 @@ export default function Footer() {
         {/* Office Addresses */}
         <div className="mt-16 pt-12 border-t border-white/5 grid gap-8 md:grid-cols-2 lg:grid-cols-2">
           <a 
-            href="https://maps.google.com/?q=715,+Shilp+Arista,+Sindhu+Bhavan+Road,+Bodakdev,+Ahmedabad,+Gujarat+380054"
+            href="https://maps.app.goo.gl/3Ges4WWCEz2QiPPQA"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Head Office - Opens Google Maps"
