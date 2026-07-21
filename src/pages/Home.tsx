@@ -230,13 +230,13 @@ export default function Home() {
         initial={{ opacity: isAppLoaded ? 1 : 0, scale: isAppLoaded ? 1 : 0.98, y: isAppLoaded ? 0 : 15 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ delay: baseDelay, duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 pt-24 pb-8 lg:pt-28 lg:pb-12 overflow-hidden min-h-[auto] lg:min-h-[75vh] flex items-center"
+        className="relative z-10 pt-[84px] pb-4 lg:pt-28 lg:pb-12 overflow-hidden min-h-[auto] max-h-[100vh] lg:max-h-none lg:min-h-[75vh] flex items-center"
       >
         {/* Subtle hero glow on bottom right */}
         <SectionGlow color="blue" position="bottom-right" opacity={0.15} size={500} />
         
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-16 items-center">
             {/* Left side text */}
             <div className="relative z-10 text-left flex flex-col">
               <Reveal delay={baseDelay}>
@@ -246,7 +246,7 @@ export default function Home() {
                 </span>
               </Reveal>
 
-              <Reveal direction="up" delay={baseDelay + 0.08} className="mt-5 lg:mt-8">
+              <Reveal direction="up" delay={baseDelay + 0.08} className="mt-[14px] lg:mt-8">
                 <h1 className="text-[2.25rem] leading-[1.15] sm:text-5xl lg:text-[4rem] font-medium lg:leading-[1.08] tracking-tight text-white break-words">
                   <TextReveal text="Empowering Your" delay={baseDelay + 0.08} />{' '}
                   <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent font-semibold">
@@ -256,7 +256,7 @@ export default function Home() {
                 </h1>
               </Reveal>
 
-              <Reveal delay={baseDelay + 0.14} className="mt-6 lg:mt-8">
+              <Reveal delay={baseDelay + 0.14} className="mt-[18px] lg:mt-8">
                 <p className="text-gray-400 text-lg leading-relaxed max-w-xl">
                   Innovative, reliable, and scalable IT solutions for SMEs, enterprises, and government projects. From cloud migrations to infrastructure setups, we deliver end-to-end digital transformation.
                 </p>
@@ -264,7 +264,7 @@ export default function Home() {
 
 
               {/* Social Proof separator bar */}
-              <Reveal delay={baseDelay + 0.2} className="mt-4 lg:mt-8">
+              <Reveal delay={baseDelay + 0.2} className="mt-[11px] lg:mt-8">
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold uppercase tracking-wider text-gray-500 border-l-2 border-blue-500/50 pl-4 py-1">
                   <span>15+ Years Experience</span>
                   <span className="text-gray-700">|</span>
@@ -277,8 +277,8 @@ export default function Home() {
               </Reveal>
 
               {/* Action CTAs */}
-              <Reveal delay={baseDelay + 0.26} className="mt-6 lg:mt-8">
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2 w-full">
+              <Reveal delay={baseDelay + 0.26} className="mt-[16px] lg:mt-8">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-[6px] sm:pt-2 w-full">
                   <Link to="/contact-us" className="btn-primary py-3 px-8 text-sm inline-flex items-center justify-center gap-2 w-full sm:w-auto">
                     Book Free Consultation
                     <ArrowRight className="w-4 h-4" />
@@ -291,8 +291,8 @@ export default function Home() {
             </div>
 
             {/* Right side floating constellation graphic */}
-            <Reveal direction="left" delay={baseDelay + 0.12} className="relative z-10 flex justify-center lg:justify-end mt-8 lg:mt-0">
-              <MemoizedTechConstellation className="w-full max-w-[500px] aspect-square" />
+            <Reveal direction="left" delay={baseDelay + 0.12} className="relative z-10 flex justify-center lg:justify-end mt-2 lg:mt-0">
+              <MemoizedTechConstellation className="w-full max-w-[160px] xs:max-w-[200px] sm:max-w-[280px] lg:max-w-[500px] aspect-square" />
             </Reveal>
           </div>
         </div>
