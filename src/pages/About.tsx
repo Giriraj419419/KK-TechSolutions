@@ -22,14 +22,14 @@ export default function About() {
       <GlowingOrbs />
 
       {/* ===== HERO ===== */}
-      <section className="relative z-10 pt-28 pb-12 overflow-hidden min-h-[auto] lg:min-h-[75vh] flex items-center">
+      <section className="relative z-10 pt-20 pb-8 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-12 overflow-hidden min-h-[80vh] sm:min-h-[85vh] lg:min-h-[75vh] flex items-center">
         <SectionGlow color="teal" position="bottom-right" opacity={0.15} size={500} />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center w-full">
           <Reveal direction="down">
             <Eyebrow>About KK Tech</Eyebrow>
           </Reveal>
           <Reveal direction="up" delay={0.08}>
-            <h1 className="mt-5 text-4xl sm:text-5xl lg:text-[4rem] font-medium leading-[1.08] tracking-tight text-white">
+            <h1 className="mt-5 text-2xl xs:text-3xl sm:text-4xl lg:text-[4rem] font-medium leading-[1.18] lg:leading-[1.08] tracking-tight text-white break-words">
               <TextReveal text="Innovating Your" delay={0.08} />{' '}
               <span className="bg-gradient-to-r from-teal-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent font-semibold">
                 Digital Tomorrow

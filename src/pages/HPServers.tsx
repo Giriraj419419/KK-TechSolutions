@@ -226,7 +226,7 @@ export default function HPServers() {
       </motion.div>
 
       {/* ===== HERO ===== */}
-      <section className="relative z-10 pt-28 pb-12 min-h-[auto] lg:min-h-[75vh] flex items-center">
+      <section className="relative z-10 pt-20 pb-8 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-12 min-h-[80vh] sm:min-h-[85vh] lg:min-h-[75vh] flex items-center">
         <SectionGlow color="green" position="bottom-right" opacity={0.15} size={700} />
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
@@ -238,7 +238,7 @@ export default function HPServers() {
                 <Eyebrow>Enterprise Server Solutions</Eyebrow>
               </Reveal>
               <Reveal direction="up" delay={0.08}>
-                <h1 className="text-[2.25rem] leading-[1.15] sm:text-5xl lg:text-[4rem] font-medium lg:leading-[1.08] tracking-tight text-white flex flex-col items-start gap-1 break-words">
+                <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-[4rem] font-medium leading-[1.18] lg:leading-[1.08] tracking-tight text-white flex flex-col items-start gap-1 break-words">
                   <TextReveal text="Innovate Faster with" delay={0.08} className="!justify-start" />
                   <span className="bg-gradient-to-r from-[#0078D4] via-[#2B88D8] to-[#00BCF2] bg-clip-text text-transparent font-semibold inline-block">
                     HP (HPE ProLiant)
@@ -263,7 +263,7 @@ export default function HPServers() {
               </Reveal>
             </div>
 
-            <Reveal direction='left' delay={0.12} className='relative z-10 flex justify-center items-center w-full min-min-h-[350px] lg:min-h-[450px] h-auto'>
+            <Reveal direction='left' delay={0.12} className='relative z-10 flex justify-center items-center w-full min-h-[280px] xs:min-h-[320px] lg:min-h-[450px] h-auto'>
               <AnimatedEcosystem 
                 centerBrand="hewlettpackardenterprise"
                 centerColor="01a982"

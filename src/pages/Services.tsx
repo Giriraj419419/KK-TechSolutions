@@ -74,14 +74,14 @@ export default function Services() {
       <GlowingOrbs />
 
       {/* ===== HERO ===== */}
-      <section className="relative z-10 pt-28 pb-12 overflow-hidden min-h-[auto] lg:min-h-[75vh] flex items-center">
+      <section className="relative z-10 pt-20 pb-8 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-12 overflow-hidden min-h-[80vh] sm:min-h-[85vh] lg:min-h-[75vh] flex items-center">
         <SectionGlow color="blue" position="bottom-right" opacity={0.15} size={500} />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center w-full">
           <Reveal direction="down">
             <Eyebrow>Our Services</Eyebrow>
           </Reveal>
           <Reveal direction="up" delay={0.08}>
-            <h1 className="mt-5 text-[2.25rem] leading-[1.15] sm:text-5xl lg:text-[4rem] font-medium lg:leading-[1.08] tracking-tight text-white break-words">
+            <h1 className="mt-5 text-2xl xs:text-3xl sm:text-4xl lg:text-[4rem] font-medium leading-[1.18] lg:leading-[1.08] tracking-tight text-white break-words">
               <TextReveal text="End-to-End" delay={0.08} />{' '}
               <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent font-semibold">
                 Technology Solutions

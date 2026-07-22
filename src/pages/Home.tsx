@@ -230,7 +230,7 @@ export default function Home() {
         initial={{ opacity: isAppLoaded ? 1 : 0, scale: isAppLoaded ? 1 : 0.98, y: isAppLoaded ? 0 : 15 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ delay: baseDelay, duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 pt-[84px] pb-4 lg:pt-28 lg:pb-12 overflow-hidden min-h-[auto] max-h-[100vh] lg:max-h-none lg:min-h-[75vh] flex items-center"
+        className="relative z-10 pt-20 pb-8 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-12 overflow-hidden min-h-[80vh] sm:min-h-[85vh] lg:min-h-[75vh] flex items-center"
       >
         {/* Subtle hero glow on bottom right */}
         <SectionGlow color="blue" position="bottom-right" opacity={0.15} size={500} />
@@ -247,7 +247,7 @@ export default function Home() {
               </Reveal>
 
               <Reveal direction="up" delay={baseDelay + 0.08} className="mt-[14px] lg:mt-8">
-                <h1 className="text-[2.25rem] leading-[1.15] sm:text-5xl lg:text-[4rem] font-medium lg:leading-[1.08] tracking-tight text-white break-words">
+                <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-[4rem] font-medium leading-[1.18] lg:leading-[1.08] tracking-tight text-white break-words">
                   <TextReveal text="Empowering Your" delay={baseDelay + 0.08} />{' '}
                   <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent font-semibold">
                     Digital Future
@@ -291,8 +291,8 @@ export default function Home() {
             </div>
 
             {/* Right side floating constellation graphic */}
-            <Reveal direction="left" delay={baseDelay + 0.12} className="relative z-10 flex justify-center lg:justify-end mt-2 lg:mt-0">
-              <MemoizedTechConstellation className="w-full max-w-[160px] xs:max-w-[200px] sm:max-w-[280px] lg:max-w-[500px] aspect-square" />
+            <Reveal direction="left" delay={baseDelay + 0.12} className="relative z-10 flex justify-center lg:justify-end mt-4 lg:mt-0 w-full">
+              <MemoizedTechConstellation className="w-full max-w-[240px] xs:max-w-[280px] sm:max-w-[360px] lg:max-w-[500px] aspect-square mx-auto" />
             </Reveal>
           </div>
         </div>

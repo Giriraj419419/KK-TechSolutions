@@ -191,7 +191,7 @@ export default function Autodesk() {
       </motion.div>
 
       {/* ===== HERO ===== */}
-      <section className="relative z-10 pt-28 pb-12 min-h-[auto] lg:min-h-[75vh] flex items-center">
+      <section className="relative z-10 pt-20 pb-8 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-12 min-h-[80vh] sm:min-h-[85vh] lg:min-h-[75vh] flex items-center">
         <SectionGlow color="teal" position="bottom-right" opacity={0.15} size={700} />
         
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
@@ -203,7 +203,7 @@ export default function Autodesk() {
                 <Eyebrow>Enterprise Design Software</Eyebrow>
               </Reveal>
               <Reveal direction="up" delay={0.08}>
-                <h1 className="text-4xl sm:text-5xl lg:text-[4rem] font-medium leading-[1.08] tracking-tight text-white flex flex-col items-start gap-1">
+                <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-[4rem] font-medium leading-[1.18] lg:leading-[1.08] tracking-tight text-white flex flex-col items-start gap-1 break-words">
                   <TextReveal text="Design & Create with" delay={0.08} className="!justify-start" />
                   <span className="bg-gradient-to-r from-[#14B8A6] via-[#0D9488] to-[#0F766E] bg-clip-text text-transparent font-semibold inline-block">
                     Autodesk Solutions
@@ -216,12 +216,12 @@ export default function Autodesk() {
                 </p>
               </Reveal>
               <Reveal direction="up" delay={0.2}>
-                <div className="flex flex-wrap gap-4 pt-2">
-                  <Link to="/contact-us" className="btn-primary py-3 px-8 text-sm inline-flex items-center gap-2 group shadow-[0_0_20px_rgba(20,184,166,0.3)] border-[#0D9488] bg-[#0D9488] hover:bg-[#0F766E] hover:border-[#0F766E]">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2 w-full">
+                  <Link to="/contact-us" className="btn-primary py-3 px-8 text-sm inline-flex items-center justify-center gap-2 group shadow-[0_0_20px_rgba(20,184,166,0.3)] border-[#0D9488] bg-[#0D9488] hover:bg-[#0F766E] hover:border-[#0F766E] w-full sm:w-auto">
                     Get Authorized Licensing
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
-                  <Link to="/contact-us" className="btn-secondary py-3 px-8 text-sm">
+                  <Link to="/contact-us" className="btn-secondary py-3 px-8 text-sm text-center w-full sm:w-auto">
                     Talk to an Expert
                   </Link>
                 </div>
@@ -229,7 +229,7 @@ export default function Autodesk() {
             </div>
 
             {/* Right Column — Animated Autodesk Ecosystem */}
-            <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full min-h-[350px] lg:min-h-[450px] h-auto">
+            <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full min-h-[280px] xs:min-h-[320px] lg:min-h-[450px] h-auto">
               <AnimatedEcosystem 
                 centerBrand="autodesk"
                 centerColor="00a89d"

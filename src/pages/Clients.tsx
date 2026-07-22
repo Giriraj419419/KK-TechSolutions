@@ -117,7 +117,7 @@ export default function Clients() {
       <GlowingOrbs />
 
       {/* ===== HERO SECTION ===== */}
-      <section className="relative z-10 pt-32 pb-24 overflow-hidden min-h-[70vh] flex flex-col justify-center border-b border-white/5">
+      <section className="relative z-10 pt-20 pb-12 sm:pt-24 sm:pb-16 lg:pt-32 lg:pb-24 overflow-hidden min-h-[80vh] sm:min-h-[85vh] lg:min-h-[70vh] flex flex-col justify-center border-b border-white/5">
         <SectionGlow color="blue" position="top-left" opacity={0.15} size={600} />
         <SectionGlow color="teal" position="bottom-right" opacity={0.1} size={500} />
         
@@ -130,7 +130,7 @@ export default function Clients() {
                 <Eyebrow>Our Clients</Eyebrow>
               </Reveal>
               <Reveal direction="up" delay={0.1}>
-                <h1 className="mt-6 text-4xl sm:text-5xl lg:text-[4rem] font-medium leading-[1.1] tracking-tight text-white mb-6">
+                <h1 className="mt-6 text-2xl xs:text-3xl sm:text-4xl lg:text-[4rem] font-medium leading-[1.18] lg:leading-[1.1] tracking-tight text-white mb-6 break-words">
                   <TextReveal text="Empowering Businesses Through" delay={0.15} />{' '}
                   <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 bg-clip-text text-transparent font-semibold block mt-2">
                     Trusted Technology

@@ -15,7 +15,7 @@ import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
 // =========================================================================
 const AWSPremiumCard = React.memo(function AWSPremiumCard({ children, className, delayOffset = 0 }: { children: React.ReactNode, className?: string, delayOffset?: number }) {
   const ref = useRef<HTMLDivElement>(null);
-  
+
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -61,7 +61,7 @@ const AWSPremiumCard = React.memo(function AWSPremiumCard({ children, className,
       className={`relative group rounded-2xl border border-white/5 bg-white/[0.02] premium-glass will-change-transform transform-gpu transition-all duration-300 hover:shadow-[0_20px_40px_-10px_rgba(249,115,22,0.12)] hover:border-orange-500/20 hover:bg-white/[0.03] ${className}`}
     >
       {/* Subtle hover spotlight tracking mouse */}
-      <motion.div 
+      <motion.div
         className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0 overflow-hidden"
         style={{
           background: useTransform(
@@ -97,7 +97,7 @@ export default function AWS() {
 
   return (
     <div className="relative min-h-[auto] lg:min-h-[75vh] bg-[#0B121F] overflow-hidden">
-      
+
       {/* Enhanced Ambient Background with Scroll Parallax */}
       <motion.div style={{ y: yParallax }} className="absolute inset-0 pointer-events-none z-0">
         <CosmosField />
@@ -105,9 +105,9 @@ export default function AWS() {
       </motion.div>
 
       {/* ===== HERO ===== */}
-      <section className="relative z-10 pt-28 pb-12 min-h-[auto] lg:min-h-[75vh] flex items-center">
+      <section className="relative z-10 pt-20 pb-8 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-12 min-h-[80vh] sm:min-h-[85vh] lg:min-h-[75vh] flex items-center">
         <SectionGlow color="orange" position="bottom-right" opacity={0.12} size={600} />
-        
+
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
@@ -117,7 +117,7 @@ export default function AWS() {
                 <Eyebrow>AWS Cloud Solutions</Eyebrow>
               </Reveal>
               <Reveal direction="up" delay={0.08}>
-                <h1 className="text-[2.25rem] leading-[1.15] sm:text-5xl lg:text-[4rem] font-medium lg:leading-[1.08] tracking-tight text-white flex flex-col items-start gap-1 break-words">
+                <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-[4rem] font-medium leading-[1.18] lg:leading-[1.08] tracking-tight text-white flex flex-col items-start gap-1 break-words">
                   <TextReveal text="Leveraging the Power of" delay={0.08} className="!justify-start" />
                   <span className="bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent font-semibold inline-block">
                     AWS Cloud
@@ -143,8 +143,8 @@ export default function AWS() {
               </Reveal>
             </div>
 
-            <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full min-h-[350px] lg:min-h-[450px] h-auto">
-              <AnimatedEcosystem 
+            <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full min-h-[280px] xs:min-h-[320px] lg:min-h-[450px] h-auto">
+              <AnimatedEcosystem
                 centerBrand="amazonwebservices"
                 centerColor="ff9900"
                 themeColorHex="#F97316"
@@ -178,7 +178,7 @@ export default function AWS() {
               <StaggerItem key={f.title} direction="up">
                 <AWSPremiumCard delayOffset={i * 0.2} className="p-8 h-full flex flex-col min-h-[240px]">
                   <div className="relative z-10 flex flex-col h-full">
-                    <motion.div 
+                    <motion.div
                       animate={{ scale: [1, 1.05, 1] }}
                       transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: i * 0.3 }}
                       className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 bg-white/5 border border-white/10 group-hover:bg-orange-500/10 group-hover:border-orange-500/30 transition-colors duration-300"
@@ -210,7 +210,7 @@ export default function AWS() {
               <StaggerItem key={i} direction="up">
                 <AWSPremiumCard delayOffset={i * 0.15} className="p-8 text-center h-full flex flex-col items-center min-h-[240px]">
                   <div className="relative z-10 flex flex-col items-center">
-                    <motion.div 
+                    <motion.div
                       animate={{ scale: [1, 1.05, 1] }}
                       transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: i * 0.2 }}
                       className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-white/5 border border-white/10 group-hover:bg-orange-500/10 group-hover:border-orange-500/30 transition-colors duration-300"
@@ -227,8 +227,8 @@ export default function AWS() {
         </div>
       </section>
 
-            {/* ===== FLAGSHIP ENTERPRISE CTA ===== */}
-      <EnterpriseCTA 
+      {/* ===== FLAGSHIP ENTERPRISE CTA ===== */}
+      <EnterpriseCTA
         title="Ready to Harness the Power of AWS?"
         description="Let our AWS-certified consultants design your cloud strategy, tailored for scale, security, and savings."
         primaryButtonText="Get Free AWS Consultation"

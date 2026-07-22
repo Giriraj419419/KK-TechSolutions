@@ -205,7 +205,7 @@ export default function Adobe() {
       </motion.div>
 
       {/* ===== HERO ===== */}
-      <section className="relative z-10 pt-28 pb-12 min-h-[auto] lg:min-h-[75vh] flex items-center">
+      <section className="relative z-10 pt-20 pb-8 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-12 min-h-[80vh] sm:min-h-[85vh] lg:min-h-[75vh] flex items-center">
         <SectionGlow color="red" position="bottom-right" opacity={0.15} size={700} />
         
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
@@ -217,7 +217,7 @@ export default function Adobe() {
                 <Eyebrow>Creative Cloud & Enterprise Solutions</Eyebrow>
               </Reveal>
               <Reveal direction="up" delay={0.08}>
-                <h1 className="text-4xl sm:text-5xl lg:text-[4rem] font-medium leading-[1.08] tracking-tight text-white flex flex-col items-start gap-1">
+                <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-[4rem] font-medium leading-[1.18] lg:leading-[1.08] tracking-tight text-white flex flex-col items-start gap-1 break-words">
                   <TextReveal text="Empower Creativity & Business" delay={0.08} className="!justify-start" />
                   <span className="bg-gradient-to-r from-[#FCA5A5] via-[#EF4444] to-[#DC2626] bg-clip-text text-transparent font-semibold inline-block">
                     Productivity with Adobe Solutions
@@ -230,19 +230,19 @@ export default function Adobe() {
                 </p>
               </Reveal>
               <Reveal direction="up" delay={0.2}>
-                <div className="flex flex-wrap gap-4 pt-2">
-                  <Link to="/contact-us" className="btn-primary py-3 px-8 text-sm inline-flex items-center gap-2 group shadow-[0_0_20px_rgba(239,68,68,0.3)] border-[#EF4444] bg-[#EF4444] hover:bg-[#DC2626] hover:border-[#DC2626]">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2 w-full">
+                  <Link to="/contact-us" className="btn-primary py-3 px-8 text-sm inline-flex items-center justify-center gap-2 group shadow-[0_0_20px_rgba(239,68,68,0.3)] border-[#EF4444] bg-[#EF4444] hover:bg-[#DC2626] hover:border-[#DC2626] w-full sm:w-auto">
                     Get Authorized Licensing
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
-                  <Link to="/contact-us" className="btn-secondary py-3 px-8 text-sm">
+                  <Link to="/contact-us" className="btn-secondary py-3 px-8 text-sm text-center w-full sm:w-auto">
                     Talk to an Expert
                   </Link>
                 </div>
               </Reveal>
             </div>
 
-            <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full min-h-[350px] lg:min-h-[450px] h-auto">
+            <Reveal direction="left" delay={0.12} className="relative z-10 flex justify-center w-full min-h-[280px] xs:min-h-[320px] lg:min-h-[450px] h-auto">
               <AnimatedEcosystem 
                 centerBrand="adobe"
                 centerColor="ff0000"

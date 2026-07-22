@@ -119,18 +119,20 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
     const updateRadius = () => {
       const width = window.innerWidth;
       setIsMobile(width < 640);
-      if (width < 380) {
-        setRadius(110); // Small Mobile (iPhone SE)
+      if (width < 360) {
+        setRadius(95); // Ultra small mobile (320px)
+      } else if (width < 414) {
+        setRadius(115); // Standard mobile (360px - 390px)
       } else if (width < 640) {
-        setRadius(130); // Mobile
+        setRadius(130); // Large mobile (412px - 430px)
       } else if (width < 768) {
         setRadius(160); // Tablet
       } else if (width < 1024) {
-        setRadius(210); // Laptop
+        setRadius(200); // Small Laptop
       } else if (width < 1280) {
-        setRadius(250); // Desktop
+        setRadius(240); // Desktop
       } else {
-        setRadius(280); // Large Desktop
+        setRadius(270); // Large Desktop
       }
     };
     updateRadius();
@@ -153,7 +155,7 @@ export function AnimatedEcosystem({ centerBrand, centerColor, centerFallback, cu
   });
 
   return (
-    <div className={`relative w-full h-[380px] sm:h-[450px] md:h-[550px] lg:h-[700px] flex items-center justify-center max-w-5xl mx-auto ${className} overflow-visible scale-[0.85] min-[400px]:scale-[0.95] sm:scale-100 transform-gpu`}>
+    <div className={`relative w-full h-[280px] xs:h-[320px] sm:h-[420px] md:h-[520px] lg:h-[650px] flex items-center justify-center max-w-5xl mx-auto ${className} overflow-visible transform-gpu`}>
       
       {/* Layer 1: Dynamic Energy Background */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden flex items-center justify-center">

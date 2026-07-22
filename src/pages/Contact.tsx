@@ -875,14 +875,14 @@ export default function Contact() {
       <FlagshipContactEnvironment />
 
       {/* ===== HEADER ===== */}
-      <section className="relative z-10 pt-36 pb-12 overflow-hidden">
+      <section className="relative z-10 pt-20 pb-8 sm:pt-24 sm:pb-12 lg:pt-36 lg:pb-12 overflow-hidden">
         <SectionGlow color="blue" position="top-left" opacity={0.15} size={500} />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <Reveal direction="down">
             <Eyebrow>Book a Consultation</Eyebrow>
           </Reveal>
           <Reveal direction="up" delay={0.08}>
-            <h1 className="mt-4 text-[2.25rem] leading-[1.15] sm:text-5xl lg:text-6xl font-medium lg:leading-[1.08] tracking-tight text-white break-words">
+            <h1 className="mt-4 text-2xl xs:text-3xl sm:text-4xl lg:text-6xl font-medium leading-[1.18] lg:leading-[1.08] tracking-tight text-white break-words">
               <TextReveal text="Ready to Elevate" delay={0.08} />{' '}
               <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 bg-clip-text text-transparent font-semibold">
                 Your Enterprise?
