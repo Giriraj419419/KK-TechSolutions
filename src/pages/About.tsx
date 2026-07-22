@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, TiltCard, SectionGlow } from '../components/Atmosphere';
+import SEO from '../components/SEO';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 
 const stats = [
@@ -18,6 +19,15 @@ const stats = [
 export default function About() {
   return (
     <div className="relative w-full max-w-full min-h-[auto] lg:min-h-[75vh] bg-transparent overflow-x-clip">
+      <SEO 
+        title="About Us | KK Tech Solutions - Enterprise IT Solutions Partner"
+        description="Learn about KK Tech Solutions, India's trusted technology partner providing cloud infrastructure, software licensing, and hardware server solutions."
+        canonicalUrl="https://kktechsolutions.in/about-us"
+        breadcrumbs={[
+          { name: "Home", item: "/" },
+          { name: "About Us", item: "/about-us" }
+        ]}
+      />
       <CosmosField />
       <GlowingOrbs />
 

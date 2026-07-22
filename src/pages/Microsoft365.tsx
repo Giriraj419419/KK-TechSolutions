@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, TiltCard, SectionGlow } from '../components/Atmosphere';
+import SEO from '../components/SEO';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
 
@@ -25,8 +26,33 @@ const highlights = [
 ];
 
 export default function Microsoft365() {
+  const m365Faqs = [
+    {
+      question: "What is included in Microsoft 365 enterprise licensing?",
+      answer: "Microsoft 365 enterprise plans include Word, Excel, PowerPoint, Outlook, Exchange corporate email, Microsoft Teams, OneDrive cloud storage, SharePoint, and advanced Defender cybersecurity features."
+    },
+    {
+      question: "Can KK Tech Solutions assist with email migration to Microsoft 365?",
+      answer: "Yes, KK Tech Solutions provides end-to-end email and data migration from legacy mail servers (IMAP, Google Workspace, on-premise Exchange) to Microsoft 365 with zero downtime."
+    },
+    {
+      question: "How does KK Tech Solutions help with Microsoft 365 license optimization?",
+      answer: "We analyze your workforce usage patterns and recommend the exact license mix (Business Basic, Standard, Premium, E3, E5) to eliminate redundant licenses and reduce IT spend."
+    }
+  ];
+
   return (
     <div className="relative w-full max-w-full min-h-[auto] lg:min-h-[75vh] bg-[#0B121F] overflow-x-clip">
+      <SEO 
+        title="Microsoft 365 Solutions & Licensing | KK Tech Solutions"
+        description="Enterprise Microsoft 365 licensing, cloud migration, security setup, and support services for businesses in India."
+        canonicalUrl="https://kktechsolutions.in/microsoft-365"
+        faq={m365Faqs}
+        breadcrumbs={[
+          { name: "Home", item: "/" },
+          { name: "Microsoft 365", item: "/microsoft-365" }
+        ]}
+      />
       <CosmosField />
       <GlowingOrbs />
 

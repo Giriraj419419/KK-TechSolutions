@@ -6,6 +6,7 @@ import { SectionGlow } from '../components/Atmosphere';
 import { motion, AnimatePresence } from 'framer-motion';
 import FlagshipContactEnvironment from '../components/FlagshipContactEnvironment';
 import { Turnstile } from '@marsidev/react-turnstile';
+import SEO from '../components/SEO';
 
 const offices = [
   {
@@ -872,6 +873,15 @@ export default function Contact() {
 
   return (
     <div className="relative w-full max-w-full min-h-[auto] lg:min-h-[75vh] bg-transparent overflow-x-clip">
+      <SEO 
+        title="Contact KK Tech Solutions | Enterprise IT Consulting"
+        description="Get in touch with KK Tech Solutions for customized cloud, server, and software licensing consultation. Call +91 70482 14373."
+        canonicalUrl="https://kktechsolutions.in/contact-us"
+        breadcrumbs={[
+          { name: "Home", item: "/" },
+          { name: "Contact Us", item: "/contact-us" }
+        ]}
+      />
       <FlagshipContactEnvironment />
 
       {/* ===== HEADER ===== */}

@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, SectionGlow } from '../components/Atmosphere';
+import SEO from '../components/SEO';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
 
@@ -95,8 +96,33 @@ export default function AWS() {
   const { scrollY } = useScroll();
   const yParallax = useTransform(scrollY, [0, 1000], [0, 150]);
 
+  const awsFaqs = [
+    {
+      question: "What AWS cloud services does KK Tech Solutions support?",
+      answer: "KK Tech Solutions provides consulting, architectural design, migration, cost optimization, and 24/7 managed support for AWS EC2, S3, RDS, Lambda, VPC, CloudFront, and EKS."
+    },
+    {
+      question: "How does KK Tech Solutions assist with AWS Cloud Migration?",
+      answer: "We follow the AWS Well-Architected Framework to plan and execute zero-downtime database and application migrations to AWS with automated security and compliance monitoring."
+    },
+    {
+      question: "Can KK Tech Solutions help reduce our monthly AWS bill?",
+      answer: "Yes, our AWS cost optimization services analyze Reserved Instances, Savings Plans, right-sizing opportunities, and automated resource scheduling to reduce AWS infrastructure costs by 20% to 40%."
+    }
+  ];
+
   return (
     <div className="relative w-full max-w-full min-h-[auto] lg:min-h-[75vh] bg-[#0B121F] overflow-x-clip">
+      <SEO 
+        title="AWS Cloud Infrastructure Solutions | KK Tech Solutions"
+        description="Optimize your cloud operations with AWS cloud consulting, migration, infrastructure management, and DevOps solutions from KK Tech Solutions."
+        canonicalUrl="https://kktechsolutions.in/aws"
+        faq={awsFaqs}
+        breadcrumbs={[
+          { name: "Home", item: "/" },
+          { name: "AWS Cloud", item: "/aws" }
+        ]}
+      />
 
       {/* Enhanced Ambient Background with Scroll Parallax */}
       <motion.div style={{ y: yParallax }} className="absolute inset-0 pointer-events-none z-0">

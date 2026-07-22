@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Trash2, Loader2, CalendarX2, CheckCircle2 } from 'lucide-react';
+import SEO from '../components/SEO';
 
 interface Booking {
   id: string;
@@ -63,6 +64,7 @@ export default function Admin() {
 
   return (
     <div className="min-h-[auto] lg:min-h-[75vh] bg-[#060b13] pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+      <SEO title="Admin Portal | KK Tech Solutions" description="Admin portal for KK Tech Solutions." noindex={true} />
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>

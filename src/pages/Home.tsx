@@ -7,6 +7,7 @@ import { Reveal, StaggerContainer, StaggerItem, TextReveal, Eyebrow, SectionTitl
 import { CosmosField, GlowingOrbs, SectionGlow, FloatingElement, TiltCard } from '../components/Atmosphere';
 import TechConstellation from '../components/TechConstellation';
 import InteractivePartnerCard from '../components/InteractivePartnerCard';
+import SEO from '../components/SEO';
 import { isAppLoaded } from '../components/Preloader';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 
@@ -220,8 +221,32 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
 export default function Home() {
   const baseDelay = isAppLoaded ? 0 : 2.0;
 
+  const homeFaqs = [
+    {
+      question: "What services does KK Tech Solutions provide?",
+      answer: "KK Tech Solutions provides enterprise software licensing (Microsoft 365, Azure, AWS, Adobe, Autodesk, CorelDRAW, GstarCAD, ZWCAD) and enterprise server hardware solutions (Dell PowerEdge, HPE ProLiant, Lenovo ThinkSystem)."
+    },
+    {
+      question: "Where is KK Tech Solutions located?",
+      answer: "KK Tech Solutions is located at 715, Shilp Arista, Sindhu Bhavan Road, Bodakdev, Ahmedabad, Gujarat 380054, serving clients across India."
+    },
+    {
+      question: "How can I request a quote for enterprise licensing or server infrastructure?",
+      answer: "You can request a quote by calling +91 70482 14373, emailing info@kktechsolutions.in, or filling out the contact form on our website."
+    },
+    {
+      question: "Are the software licenses provided by KK Tech Solutions genuine?",
+      answer: "Yes, KK Tech Solutions provides 100% genuine corporate software licenses directly from authorized vendor ecosystems with full support and compliance."
+    }
+  ];
+
   return (
     <div className="relative w-full max-w-full min-h-[auto] lg:min-h-[75vh] bg-transparent overflow-x-clip">
+      <SEO 
+        title="KK Tech Solutions | Microsoft 365, Azure, AWS, Adobe & Enterprise IT Solutions"
+        description="KK Tech Solutions delivers Microsoft 365, Azure, AWS Cloud, Adobe, Autodesk and enterprise server infrastructure solutions for businesses across India."
+        faq={homeFaqs}
+      />
       <MemoizedCosmosField />
       <MemoizedGlowingOrbs />
 

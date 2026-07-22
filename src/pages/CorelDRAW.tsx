@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, SectionGlow, GlowingOrbs } from '../components/Atmosphere';
+import SEO from '../components/SEO';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 import { BrandLogo } from '../components/BrandLogo';
 import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
@@ -209,6 +210,15 @@ export default function CorelDRAW() {
 
   return (
     <div className="relative w-full max-w-full min-h-[auto] lg:min-h-[75vh] bg-[#0B121F] overflow-x-clip">
+      <SEO 
+        title="CorelDRAW Licensing Solutions | KK Tech Solutions"
+        description="Genuine CorelDRAW Graphics Suite corporate licensing and software support tailored for graphic design and marketing teams."
+        canonicalUrl="https://kktechsolutions.in/coreldraw"
+        breadcrumbs={[
+          { name: "Home", item: "/" },
+          { name: "CorelDRAW", item: "/coreldraw" }
+        ]}
+      />
       
       {/* Enhanced Ambient Background with Scroll Parallax */}
       <motion.div style={{ y: yParallax }} className="absolute inset-0 pointer-events-none z-0">

@@ -8,6 +8,7 @@ import { Building2, Factory, MonitorPlay, Hammer, Box, Lightbulb,
 } from 'lucide-react';
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, SectionGlow } from '../components/Atmosphere';
+import SEO from '../components/SEO';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 import { BrandLogo } from '../components/BrandLogo';
 import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
@@ -183,6 +184,15 @@ export default function Autodesk() {
 
   return (
     <div className="relative w-full max-w-full min-h-[auto] lg:min-h-[75vh] bg-[#0B121F] overflow-x-clip">
+      <SEO 
+        title="Autodesk Business Solutions | KK Tech Solutions"
+        description="Empower engineering and architectural teams with licensed Autodesk software including AutoCAD, Revit, Maya, and BIM solutions from KK Tech Solutions."
+        canonicalUrl="https://kktechsolutions.in/autodesk"
+        breadcrumbs={[
+          { name: "Home", item: "/" },
+          { name: "Autodesk", item: "/autodesk" }
+        ]}
+      />
       
       {/* Enhanced Ambient Background with Scroll Parallax */}
       <motion.div style={{ y: yParallax }} className="absolute inset-0 pointer-events-none z-0">

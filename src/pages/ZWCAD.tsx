@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, SectionGlow } from '../components/Atmosphere';
+import SEO from '../components/SEO';
 import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
 
 // =========================================================================
@@ -173,6 +174,15 @@ export default function ZWCAD() {
 
   return (
     <div className="relative w-full max-w-full min-h-[auto] lg:min-h-[75vh] bg-[#0B121F] overflow-x-clip">
+      <SEO 
+        title="ZWCAD Professional CAD Software Solutions | KK Tech Solutions"
+        description="Powerful, fast, and highly compatible 2D/3D CAD software licensing and enterprise integration services from KK Tech Solutions."
+        canonicalUrl="https://kktechsolutions.in/zwcad"
+        breadcrumbs={[
+          { name: "Home", item: "/" },
+          { name: "ZWCAD", item: "/zwcad" }
+        ]}
+      />
       
       {/* Enhanced Ambient Background with Scroll Parallax */}
       <motion.div style={{ y: yParallax }} className="absolute inset-0 pointer-events-none z-0">

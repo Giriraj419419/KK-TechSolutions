@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, SectionGlow } from '../components/Atmosphere';
+import SEO from '../components/SEO';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 import { BrandLogo } from '../components/BrandLogo';
 import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
@@ -186,6 +187,15 @@ export default function DellServers() {
 
   return (
     <div className="relative w-full max-w-full min-h-[auto] lg:min-h-[75vh] bg-[#0B121F] overflow-x-clip">
+      <SEO 
+        title="Dell PowerEdge Server Solutions | KK Tech Solutions"
+        description="Enterprise-grade Dell PowerEdge rack, tower, and modular server deployment, hardware customization, and support by KK Tech Solutions."
+        canonicalUrl="https://kktechsolutions.in/servers/dell"
+        breadcrumbs={[
+          { name: "Home", item: "/" },
+          { name: "Dell PowerEdge Servers", item: "/servers/dell" }
+        ]}
+      />
       
       {/* Premium Enterprise Background with Parallax */}
       <motion.div style={{ y: yParallax }} className="absolute inset-0 pointer-events-none z-0">

@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, SectionGlow, GlowingOrbs } from '../components/Atmosphere';
+import SEO from '../components/SEO';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 import { BrandLogo } from '../components/BrandLogo';
 import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
@@ -210,6 +211,15 @@ export default function GstarCAD() {
 
   return (
     <div className="relative w-full max-w-full min-h-[auto] lg:min-h-[75vh] bg-[#0B121F] overflow-x-clip">
+      <SEO 
+        title="GstarCAD Professional CAD Solutions | KK Tech Solutions"
+        description="Cost-effective, high-performance 2D/3D DWG CAD software licensing and deployment services by KK Tech Solutions."
+        canonicalUrl="https://kktechsolutions.in/gstarcad"
+        breadcrumbs={[
+          { name: "Home", item: "/" },
+          { name: "GstarCAD", item: "/gstarcad" }
+        ]}
+      />
       
       {/* Enhanced Ambient Background with Scroll Parallax */}
       <motion.div style={{ y: yParallax }} className="absolute inset-0 pointer-events-none z-0">

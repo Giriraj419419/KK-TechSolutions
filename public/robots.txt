@@ -1,0 +1,15 @@
+# Production Robots.txt for KK Tech Solutions
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+# User-agent specific rules for search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# XML Sitemap Location
+Sitemap: https://kktechsolutions.in/sitemap.xml

@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { Reveal, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, TiltCard, SectionGlow } from '../components/Atmosphere';
+import SEO from '../components/SEO';
 import InteractivePartnerCard from '../components/InteractivePartnerCard';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 
@@ -113,6 +114,15 @@ const clientLogos = [
 export default function Clients() {
   return (
     <div className="relative w-full max-w-full min-h-[auto] lg:min-h-[75vh] bg-transparent overflow-x-clip">
+      <SEO 
+        title="Our Clients & Enterprise Trust | KK Tech Solutions"
+        description="Trusted by leading enterprises across India for cloud migration, server infrastructure deployment, and software licensing."
+        canonicalUrl="https://kktechsolutions.in/clients"
+        breadcrumbs={[
+          { name: "Home", item: "/" },
+          { name: "Our Clients", item: "/clients" }
+        ]}
+      />
       <CosmosField />
       <GlowingOrbs />
 

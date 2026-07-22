@@ -10,6 +10,7 @@ import {
 import { Link } from 'react-router-dom';
 import { SectionTitle, Reveal, StaggerContainer, StaggerItem, Eyebrow, TextReveal } from '../components/Section';
 import { CosmosField, SectionGlow } from '../components/Atmosphere';
+import SEO from '../components/SEO';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 import { BrandLogo } from '../components/BrandLogo';
 import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
@@ -181,6 +182,15 @@ export default function LenovoServers() {
 
   return (
     <div className="relative w-full max-w-full min-h-[auto] lg:min-h-[75vh] bg-[#0B121F] overflow-x-clip">
+      <SEO 
+        title="Lenovo ThinkSystem Solutions | KK Tech Solutions"
+        description="High-reliability Lenovo ThinkSystem server and storage infrastructure tailored for demanding corporate enterprise workloads."
+        canonicalUrl="https://kktechsolutions.in/servers/lenovo"
+        breadcrumbs={[
+          { name: "Home", item: "/" },
+          { name: "Lenovo ThinkSystem", item: "/servers/lenovo" }
+        ]}
+      />
       
       {/* Premium Enterprise Background with Parallax */}
       <motion.div style={{ y: yParallax }} className="absolute inset-0 pointer-events-none z-0">

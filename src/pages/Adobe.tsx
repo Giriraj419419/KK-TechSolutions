@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, SectionGlow } from '../components/Atmosphere';
+import SEO from '../components/SEO';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 import { BrandLogo } from '../components/BrandLogo';
 import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
@@ -197,6 +198,15 @@ export default function Adobe() {
 
   return (
     <div className="relative w-full max-w-full min-h-[auto] lg:min-h-[75vh] bg-[#0B121F] overflow-x-clip">
+      <SEO 
+        title="Adobe Licensing & Creative Solutions | KK Tech Solutions"
+        description="Official Adobe Creative Cloud & document cloud licensing solutions for enterprise teams, creative agencies, and commercial enterprises across India."
+        canonicalUrl="https://kktechsolutions.in/adobe"
+        breadcrumbs={[
+          { name: "Home", item: "/" },
+          { name: "Adobe Solutions", item: "/adobe" }
+        ]}
+      />
       
       {/* Enhanced Ambient Background with Scroll Parallax */}
       <motion.div style={{ y: yParallax }} className="absolute inset-0 pointer-events-none z-0">

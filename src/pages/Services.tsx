@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, GlowingOrbs, TiltCard, SectionGlow } from '../components/Atmosphere';
+import SEO from '../components/SEO';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 
 const services = [
@@ -70,6 +71,15 @@ export default function Services() {
 
   return (
     <div className="relative w-full max-w-full min-h-[auto] lg:min-h-[75vh] bg-[#0B121F] overflow-x-clip">
+      <SEO 
+        title="Enterprise IT Services & Solutions | KK Tech Solutions"
+        description="Explore our end-to-end IT services including cloud migration, software licensing, server infrastructure, cybersecurity, and managed IT support."
+        canonicalUrl="https://kktechsolutions.in/our-services"
+        breadcrumbs={[
+          { name: "Home", item: "/" },
+          { name: "Our Services", item: "/our-services" }
+        ]}
+      />
       <CosmosField />
       <GlowingOrbs />
 

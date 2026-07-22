@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { Reveal, SectionTitle, Eyebrow, StaggerContainer, StaggerItem, TextReveal } from '../components/Section';
 import { CosmosField, SectionGlow } from '../components/Atmosphere';
+import SEO from '../components/SEO';
 import EnterpriseCTA from '../components/EnterpriseCTA';
 import { BrandLogo } from '../components/BrandLogo';
 import { AnimatedEcosystem } from '../components/AnimatedEcosystem';
@@ -195,6 +196,15 @@ export default function HPServers() {
 
   return (
     <div className="relative w-full max-w-full min-h-[auto] lg:min-h-[75vh] bg-[#0B121F] overflow-x-clip">
+      <SEO 
+        title="HPE ProLiant Infrastructure Solutions | KK Tech Solutions"
+        description="Secure, resilient HPE ProLiant server infrastructure, hybrid cloud architecture, and data center hardware solutions."
+        canonicalUrl="https://kktechsolutions.in/servers/hp"
+        breadcrumbs={[
+          { name: "Home", item: "/" },
+          { name: "HPE ProLiant Servers", item: "/servers/hp" }
+        ]}
+      />
 
       {/* Premium Enterprise Background with Parallax */}
       <motion.div style={{ y: yParallax }} className="absolute inset-0 pointer-events-none z-0">
