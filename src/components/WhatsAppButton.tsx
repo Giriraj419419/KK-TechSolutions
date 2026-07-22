@@ -2,8 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 export default function WhatsAppButton() {
-  // Use VITE_WHATSAPP_NUMBER if defined, otherwise use a placeholder
-  const phoneNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '910000000000';
+  const phoneNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '917048214373';
   
   const defaultMessage = "Hello KK Tech Solutions, I visited your website and would like to know more about your services. Please contact me. Thank you.";
   const encodedMessage = encodeURIComponent(defaultMessage);
