@@ -26,7 +26,7 @@ const highlights = [
 
 export default function Microsoft365() {
   return (
-    <div className="relative min-h-[auto] lg:min-h-[75vh] bg-[#0B121F]">
+    <div className="relative w-full max-w-full min-h-[auto] lg:min-h-[75vh] bg-[#0B121F] overflow-x-clip">
       <CosmosField />
       <GlowingOrbs />
 

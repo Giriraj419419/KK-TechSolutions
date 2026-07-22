@@ -23,11 +23,12 @@ export function Reveal({
 
   const getVariants = () => {
     if (shouldReduceMotion || direction === 'fade') return { hidden: { opacity: 0 }, visible: { opacity: 1 } };
+    const isSmallScreen = typeof window !== 'undefined' && window.innerWidth < 640;
     switch (direction) {
       case 'up': return { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
       case 'down': return { hidden: { opacity: 0, y: -30 }, visible: { opacity: 1, y: 0 } };
-      case 'left': return { hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0 } };
-      case 'right': return { hidden: { opacity: 0, x: 40 }, visible: { opacity: 1, x: 0 } };
+      case 'left': return { hidden: { opacity: 0, x: isSmallScreen ? 0 : -30, y: isSmallScreen ? 20 : 0 }, visible: { opacity: 1, x: 0, y: 0 } };
+      case 'right': return { hidden: { opacity: 0, x: isSmallScreen ? 0 : 30, y: isSmallScreen ? 20 : 0 }, visible: { opacity: 1, x: 0, y: 0 } };
       case 'scale': return { hidden: { opacity: 0, scale: 0.92 }, visible: { opacity: 1, scale: 1 } };
       default: return { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
     }
@@ -80,10 +81,11 @@ export function StaggerItem({ children, className = '', direction = 'up' }: { ch
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getVariants = (): any => {
     if (shouldReduceMotion || direction === 'fade') return { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.5, ease: 'easeOut' } } };
+    const isSmallScreen = typeof window !== 'undefined' && window.innerWidth < 640;
     switch (direction) {
       case 'up': return { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } } };
-      case 'left': return { hidden: { opacity: 0, x: -20 }, visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: 'easeOut' } } };
-      case 'right': return { hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: 'easeOut' } } };
+      case 'left': return { hidden: { opacity: 0, x: isSmallScreen ? 0 : -20, y: isSmallScreen ? 15 : 0 }, visible: { opacity: 1, x: 0, y: 0, transition: { duration: 0.5, ease: 'easeOut' } } };
+      case 'right': return { hidden: { opacity: 0, x: isSmallScreen ? 0 : 20, y: isSmallScreen ? 15 : 0 }, visible: { opacity: 1, x: 0, y: 0, transition: { duration: 0.5, ease: 'easeOut' } } };
       case 'scale': return { hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: 'easeOut' } } };
       default: return { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } } };
     }
@@ -132,7 +134,7 @@ export function TextReveal({ text, className = '', delay = 0 }: { text: string, 
 
   return (
     <motion.div
-      className={`inline-flex flex-wrap justify-center ${className}`}
+      className={`inline-flex flex-wrap justify-start text-left ${className}`}
       variants={container}
       initial="hidden"
       whileInView="visible"

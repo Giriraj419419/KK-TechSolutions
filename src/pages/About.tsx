@@ -17,7 +17,7 @@ const stats = [
 
 export default function About() {
   return (
-    <div className="relative min-h-[auto] lg:min-h-[75vh] bg-transparent">
+    <div className="relative w-full max-w-full min-h-[auto] lg:min-h-[75vh] bg-transparent overflow-x-clip">
       <CosmosField />
       <GlowingOrbs />
 

@@ -49,6 +49,7 @@ html {
   background: var(--bg);
   width: 100%;
   max-width: 100%;
+  overflow-x: clip;
 }
 
 body {
@@ -60,16 +61,20 @@ body {
   text-rendering: optimizeLegibility;
   width: 100%;
   max-width: 100%;
+  overflow-x: clip;
   line-height: 1.6;
 }
 
 #root {
   width: 100%;
   max-width: 100%;
+  overflow-x: clip;
 }
 
 section {
+  width: 100%;
   max-width: 100%;
+  overflow-x: clip;
 }
 
 h1, h2, h3, h4, h5, h6 {

@@ -180,7 +180,7 @@ export default function LenovoServers() {
   const yParallax = useTransform(scrollY, [0, 1000], [0, 150]);
 
   return (
-    <div className="relative min-h-[auto] lg:min-h-[75vh] bg-[#0B121F] overflow-hidden">
+    <div className="relative w-full max-w-full min-h-[auto] lg:min-h-[75vh] bg-[#0B121F] overflow-x-clip">
       
       {/* Premium Enterprise Background with Parallax */}
       <motion.div style={{ y: yParallax }} className="absolute inset-0 pointer-events-none z-0">

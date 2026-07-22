@@ -34,7 +34,7 @@ export default function App() {
       {/* Noise texture overlay */}
       <div className="noise" />
       <Navbar />
-      <main className="relative z-10 w-full max-w-full">
+      <main className="relative z-10 w-full max-w-full overflow-x-clip">
         <Suspense fallback={<div className="min-h-screen w-full bg-[#0B121F]" />}>
           <Routes>
             <Route path="/" element={<Home />} />
