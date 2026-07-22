@@ -1,7 +1,8 @@
-﻿import React, { useRef } from 'react';
+import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, Cloud, Server, Users, Activity } from 'lucide-react';
+import { trackClarityEvent } from '../utils/clarity';
 
 interface EnterpriseCTAProps {
   title: string;
@@ -187,6 +188,7 @@ export default function EnterpriseCTA({
               >
                 <Link 
                   to={primaryButtonLink} 
+                  onClick={() => trackClarityEvent('cta_primary_click')}
                   className="relative group/btn inline-flex items-center justify-center overflow-hidden rounded-full p-[1px] shadow-[0_10px_30px_rgba(37,99,235,0.2)] hover:shadow-[0_15px_40px_rgba(34,211,238,0.3)] transition-shadow duration-300"
                 >
                   {/* Animated Border Gradient */}
@@ -207,6 +209,7 @@ export default function EnterpriseCTA({
                 {secondaryButtonText && secondaryButtonLink && (
                   <Link 
                     to={secondaryButtonLink}
+                    onClick={() => trackClarityEvent('cta_secondary_click')}
                     className="inline-flex items-center justify-center px-8 py-4 sm:px-10 sm:py-5 rounded-full text-white font-bold text-lg sm:text-xl tracking-wide border border-white/20 hover:bg-white/5 hover:border-white/40 transition-all duration-300 shadow-lg"
                   >
                     {secondaryButtonText}

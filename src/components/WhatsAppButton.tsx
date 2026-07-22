@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { trackClarityEvent } from '../utils/clarity';
 
 export default function WhatsAppButton() {
   const phoneNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '917048214373';
@@ -17,6 +18,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contact KK Tech Solutions on WhatsApp"
+      onClick={() => trackClarityEvent('whatsapp_click')}
       className="fixed bottom-24 left-6 z-40 flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-[0_4px_14px_rgba(37,211,102,0.4)] transition-shadow duration-300 hover:shadow-[0_6px_20px_rgba(37,211,102,0.6)] focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2 focus:ring-offset-[#0B121F]"
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}

@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import FlagshipContactEnvironment from '../components/FlagshipContactEnvironment';
 import { Turnstile } from '@marsidev/react-turnstile';
 import SEO from '../components/SEO';
+import { trackClarityEvent } from '../utils/clarity';
 
 const offices = [
   {
@@ -89,13 +90,16 @@ export default function Contact() {
     e.preventDefault();
     
     if (step < 4) {
-      setStep(step + 1);
+      const nextStep = step + 1;
+      setStep(nextStep);
+      trackClarityEvent(`booking_step_${nextStep}_start`);
       return;
     }
 
     // Final Submit
     setIsSubmitting(true);
     setSubmitError(null);
+    trackClarityEvent('consultation_booking_submit_attempt');
     try {
       const payload = {
         name: formData.name,
@@ -140,6 +144,7 @@ export default function Contact() {
       if (res.ok && data.success) {
         setLeadId(data.leadId);
         setIsSubmitted(true);
+        trackClarityEvent('consultation_booking_submitted');
       } else {
         console.error('Failed to submit form:', data.error);
         setSubmitError(data.error || 'Configuration error or server issue.');
@@ -533,6 +538,7 @@ export default function Contact() {
                     <input
                       type="text"
                       required
+                      data-clarity-mask="true"
                       className="spatial-input w-full bg-black/40 border-white/10 focus:border-blue-500 focus:bg-blue-500/5 transition-colors p-3.5 rounded-xl text-white text-base"
                       placeholder="John Doe"
                       value={formData.name}
@@ -544,6 +550,7 @@ export default function Contact() {
                     <input
                       type="email"
                       required
+                      data-clarity-mask="true"
                       className="spatial-input w-full bg-black/40 border-white/10 focus:border-blue-500 focus:bg-blue-500/5 transition-colors p-3.5 rounded-xl text-white text-base"
                       placeholder="john@company.com"
                       value={formData.email}
@@ -557,6 +564,7 @@ export default function Contact() {
                     <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">Phone Number</label>
                     <input
                       type="tel"
+                      data-clarity-mask="true"
                       className="spatial-input w-full bg-black/40 border-white/10 focus:border-blue-500 focus:bg-blue-500/5 transition-colors p-3.5 rounded-xl text-white text-base"
                       placeholder="+1 (555) 000-0000"
                       value={formData.phone}
@@ -567,6 +575,7 @@ export default function Contact() {
                     <label className="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider">Company Name</label>
                     <input
                       type="text"
+                      data-clarity-mask="true"
                       className="spatial-input w-full bg-black/40 border-white/10 focus:border-blue-500 focus:bg-blue-500/5 transition-colors p-3.5 rounded-xl text-white text-base"
                       placeholder="Acme Corp"
                       value={formData.company}
@@ -625,6 +634,7 @@ export default function Contact() {
                   <textarea
                     required
                     maxLength={maxChars}
+                    data-clarity-mask="true"
                     className="spatial-input w-full bg-black/40 border-white/10 focus:border-blue-500 focus:bg-blue-500/5 transition-colors p-4 rounded-xl text-white text-base min-h-[140px] resize-y mb-6"
                     placeholder="Tell us about your project...&#10;&#10;E.g., Current infrastructure, required products, number of users, existing challenges, goals..."
                     value={formData.projectNotes}

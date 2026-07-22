@@ -589,13 +589,12 @@ export default function Home() {
       <section className="relative z-10 py-24 border-t border-white/5 bg-[#060A11] overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.05)_0%,transparent_70%)]" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <StaggerContainer className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12" staggerChildren={0.08}>
+          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12" staggerChildren={0.08}>
             {[
               { value: 500, suffix: '+', label: 'Projects Delivered' },
               { value: 50, suffix: '+', label: 'Clients Served' },
               { value: 15, suffix: '+', label: 'Years of Experience' },
-              { value: 200, suffix: '+', label: 'Cloud Deployments' },
-              { value: 15, suffix: 'm', label: 'Avg Response Time' }
+              { value: 200, suffix: '+', label: 'Cloud Deployments' }
             ].map((stat, idx) => (
               <StaggerItem key={idx} direction="scale" className="text-center">
                 <div className="text-4xl md:text-5xl font-black text-white mb-3 tracking-tight drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">
